@@ -1,12 +1,21 @@
-const announcement = require('../models/announcement.model');
+const Announcement = require('../models/announcement.model');
 
 
 
 
-module.exports.findAllannouncement = (req, res) => {
-     announcement.find()
+module.exports.findAllAnnouncement = (req, res) => {
+     Announcement.find()
           .then((allannouncement) => {
-               res.json({ Announcements: allannouncement })
+               res.json({ announcements: allannouncement })
+          })
+          .catch((err) => {
+               res.json(err)
+          });
+}
+module.exports.findOneAnnouncement = (req, res) => {
+     Announcement.findOne({ _id: req.params.id })
+          .then(findOneAnnouncement => {
+               res.json({ announcement: findOneAnnouncement })
           })
           .catch((err) => {
                res.json(err)
@@ -16,9 +25,9 @@ module.exports.findAllannouncement = (req, res) => {
 
 
 module.exports.createNewannouncement = (req, res) => {
-     announcement.create(req.body)
+     Announcement.create(req.body)
           .then(newlyCreatedannouncement => {
-               res.json({ Announcement: newlyCreatedannouncement })
+               res.json({ announcement: newlyCreatedannouncement })
           })
           .catch((err) => {
                res.status(400).json(err)
@@ -26,13 +35,13 @@ module.exports.createNewannouncement = (req, res) => {
 }
 
 module.exports.updateExistingannouncement = (req, res) => {
-     announcement.findOneAndUpdate(
+     Announcement.findOneAndUpdate(
           { _id: req.params.id },
           req.body,
           { new: true, runValidators: true }
      )
           .then(updatedannouncement => {
-               res.json({ Announcement: updatedannouncement })
+               res.json({ announcement: updatedannouncement })
           })
           .catch((err) => {
                res.status(400).json(err)
@@ -40,7 +49,7 @@ module.exports.updateExistingannouncement = (req, res) => {
 }
 
 module.exports.deleteAnExistingannouncement = (req, res) => {
-     announcement.deleteOne({ _id: req.params.id })
+     Announcement.deleteOne({ _id: req.params.id })
           .then(result => {
                res.json({ result: result })
           })

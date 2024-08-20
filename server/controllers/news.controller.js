@@ -1,10 +1,10 @@
-const news = require('../models/news.model');
+const News = require('../models/news.model');
 
 
 
 
 module.exports.findAllnews = (req, res) => {
-     news.find()
+     News.find()
           .then((allnews) => {
                res.json({ news: allnews })
           })
@@ -13,7 +13,7 @@ module.exports.findAllnews = (req, res) => {
           });
 }
 module.exports.findOnenew = (req, res) => {
-     news.findOne({ _id: req.params.id })
+     News.findOne({ _id: req.params.id })
           .then(findOnenew => {
                res.json({ new: findOnenew })
           })
@@ -25,7 +25,7 @@ module.exports.findOnenew = (req, res) => {
 
 
 module.exports.createNews = (req, res) => {
-     news.create(req.body)
+     News.create(req.body)
           .then(newlyCreatednews => {
                res.json({ new: newlyCreatednews })
           })
@@ -35,7 +35,7 @@ module.exports.createNews = (req, res) => {
 }
 
 module.exports.updateExistingnew = (req, res) => {
-     news.findOneAndUpdate(
+     News.findOneAndUpdate(
           { _id: req.params.id },
           req.body,
           { new: true, runValidators: true }
@@ -49,7 +49,7 @@ module.exports.updateExistingnew = (req, res) => {
 }
 
 module.exports.deleteAnExistingnew = (req, res) => {
-     news.deleteOne({ _id: req.params.id })
+     News.deleteOne({ _id: req.params.id })
           .then(result => {
                res.json({ result: result })
           })

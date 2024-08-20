@@ -1,12 +1,21 @@
-const group = require('../models/group.model');
+const Group = require('../models/group.model');
 
 
 
 
 module.exports.findAllgroup = (req, res) => {
-     group.find()
+     Group.find()
           .then((allgroup) => {
                res.json({ Groups: allgroup })
+          })
+          .catch((err) => {
+               res.json(err)
+          });
+}
+module.exports.findOnegroup = (req, res) => {
+     Group.findOne({ _id: req.params.id })
+          .then(findOnegroup => {
+               res.json({ group: findOnegroup })
           })
           .catch((err) => {
                res.json(err)
@@ -16,7 +25,7 @@ module.exports.findAllgroup = (req, res) => {
 
 
 module.exports.createNewgroup = (req, res) => {
-     group.create(req.body)
+     Group.create(req.body)
           .then(newlyCreatedgroup => {
                res.json({ group: newlyCreatedgroup })
           })
@@ -26,7 +35,7 @@ module.exports.createNewgroup = (req, res) => {
 }
 
 module.exports.deleteAnExistinggroup = (req, res) => {
-     group.deleteOne({ _id: req.params.id })
+     Group.deleteOne({ _id: req.params.id })
           .then(result => {
                res.json({ result: result })
           })
