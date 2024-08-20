@@ -34,7 +34,7 @@ module.exports.createUser = (req, res) => {
           });
 }
 
-module.exports.updateExistingnew = (req, res) => {
+module.exports.updateExistinguser = (req, res) => {
      User.findOneAndUpdate(
           { _id: req.params.id },
           req.body,
@@ -48,7 +48,7 @@ module.exports.updateExistingnew = (req, res) => {
           });
 }
 
-module.exports.deleteAnExistingnew = (req, res) => {
+module.exports.deleteAnExistinguser = (req, res) => {
      User.deleteOne({ _id: req.params.id })
           .then(result => {
                res.json({ result: result })
