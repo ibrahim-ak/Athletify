@@ -1,3 +1,4 @@
+
 // import Companies from "./Components/Companies";
 // import Guide from "./Components/Guide";
 import Hero from "./Components/Hero";
@@ -22,8 +23,10 @@ import AboutUs from "./Components/AboutUs";
 
 
 
+
 function App() {
   return (
+
     <>
 <div style={{ backgroundColor: "#E6F0FF"}}>
 
@@ -70,6 +73,7 @@ function App() {
 
     </>
  
+
 
   );
 }
