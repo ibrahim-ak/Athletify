@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt');
 const UserSchema = new mongoose.Schema({
     firstName: {
       type: String,
@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
     role: {
       type: String,
       enum: ['student', 'admin', 'subadmin'], 
-      // default: 'student' 
+      default: 'student' 
     }
   }, { timestamps: true });
   
