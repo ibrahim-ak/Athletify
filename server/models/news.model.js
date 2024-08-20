@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require("./user.model");  
 const NewsSchema = new mongoose.Schema({
      Title: {
           type: String,
@@ -14,6 +15,11 @@ const NewsSchema = new mongoose.Schema({
      Image: {
           type: String,
           required: [true, "image is required"],
+     },
+     User: { 
+          type: mongoose.Schema.Types.ObjectId, 
+          ref: 'User',  
+          required: true  
      }
 
 }, { timestamps: true });
