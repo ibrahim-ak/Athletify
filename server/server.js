@@ -10,5 +10,14 @@ app.use(express.urlencoded({ extended: true })); // This is new
 require('./routes/announcement.route')(app);
 require('./routes/group.route')(app);
 require('./routes/new.route')(app);
-// require('./routes/user.route')(app);
+require('./routes/user.route')(app);
 app.listen(port, () => console.log(`Listening on port: ${port}`));
+
+
+
+
+
+// const PORT = process.env.PORT || 8000;
+// app.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
