@@ -9,6 +9,7 @@ import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
+import SignIn from './Components/Login/SignIn'
 
 
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         {/* Route for the Main Page */}
         <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<SignIn />} />
 
 
 
