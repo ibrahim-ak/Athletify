@@ -5,6 +5,9 @@ import MainPage from './Components/MainPage';
 import NewsForm from './Components/NewsForm';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/joy/Chip';
+
+import Wall from './Components/Wall';
+
 import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
@@ -18,23 +21,32 @@ import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 
 
+
 function App() {
   return (
     <div style={{ backgroundColor: "#E6F0FF" }}>
 
       <Routes>
+              {/* Route for the News Form */}
+          <Route path="/wall" element={<Wall />} />
+          <Route path="/" element={<MainPage />} />
+
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          {/* <Route path="/contact-us" element={<Contact />} /> */}
+        
         {/* Route for the Main Page */}
-        <Route path="/" element={<MainPage />} />
+//         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<SignIn />} />
 
 
 
         {/* Route for the News Form */}
-        <Route path="/add-news" element={<NewsForm />} />
+//         <Route path="/add-news" element={<NewsForm />} />
 
 
       {/* Route for the News Form */}
-      <Route path="/add-news" element={<NewsForm />} />
+//       <Route path="/add-news" element={<NewsForm />} />
       
           <Route path="/chat" element={<Chat />} />
           {/* <Route path="/about-us" element={<AboutUs />} /> */}
