@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -5,6 +6,13 @@ import MainPage from './Components/MainPage';
 import NewsForm from './Components/NewsForm';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/joy/Chip';
+import CallToAction from "./Components/CallToAction";
+import ContactForm from "./Components/ContactForm";
+import AboutUs from "./Components/AboutUs";
+import Chat from './Components/Chat';
+
+
+
 
 
 function App() {
@@ -14,6 +22,7 @@ function App() {
     <Routes>
       {/* Route for the Main Page */}
       <Route path="/" element={<MainPage />} />
+
 
 
       {/* Route for the News Form */}
