@@ -10,6 +10,7 @@ import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
+import AddGroupForm from './Components/group/AddGroupForm';
 
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         {/* <Route path="/about-us" element={<AboutUs />} /> */}
         <Route path="/contact-us" element={<ContactForm />} />
+        <Route path="/group" element={<AddGroupForm />} />
       
     </Routes>
     </div >
