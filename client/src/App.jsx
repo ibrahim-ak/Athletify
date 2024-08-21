@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom';
 
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -17,23 +16,23 @@ import Chat from './Components/Chat';
 
 function App() {
   return (
-    <div style={{ backgroundColor: "#E6F0FF"}}>
+    <div style={{ backgroundColor: "#E6F0FF" }}>
 
-    <Routes>
-      {/* Route for the Main Page */}
-      <Route path="/" element={<MainPage />} />
-
-
-
-      {/* Route for the News Form */}
-      <Route path="/add-news" element={<NewsForm />} />
       <Routes>
-          <Route path="/chat" element={<Chat />} />
-          {/* <Route path="/about-us" element={<AboutUs />} /> */}
-          <Route path="/contact-us" element={<Contact />} />
-        </Routes>
+        {/* Route for the Main Page */}
+        <Route path="/" element={<MainPage />} />
+
+
+
+        {/* Route for the News Form */}
+        <Route path="/add-news" element={<NewsForm />} />
+
+        <Route path="/chat" element={<Chat />} />
+        {/* <Route path="/about-us" element={<AboutUs />} /> */}
+        <Route path="/contact-us" element={<ContactForm />} />
+      
     </Routes>
-    </div>
+    </div >
 
 
 
