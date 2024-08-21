@@ -15,7 +15,7 @@ const AddGroupForm = ({ onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/groups', formData);
+      const response = await axios.post('http://localhost:8000/api/group', formData);
       onCreate(response.data.group);
       setFormData({
         groupName: '',
