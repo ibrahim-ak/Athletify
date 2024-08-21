@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function Navbar() {
   return (
@@ -17,10 +18,18 @@ function Navbar() {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Button sx={{ color: '#fff' }} href="#academies">
+          <Button
+              sx={{ color: '#fff' }}
+              component={Link}
+              to="/admin-panel"
+            >
               Academies
             </Button>
-            <Button sx={{ color: '#fff' }} href="#messages">
+            <Button
+              sx={{ color: '#fff' }}
+              component={Link}
+              to="/admin-messages"
+            >
               Messages
             </Button>
           </Box>

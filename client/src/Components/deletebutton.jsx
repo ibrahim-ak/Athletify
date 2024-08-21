@@ -14,7 +14,7 @@ const DeleteButton = ({ academyId, onDelete }) => {
   return (
     <Button 
       variant="contained" 
-      sx={{ backgroundColor: '#FF0000', color: '#FFFFFF' }} 
+      sx={{ backgroundColor: '#fa8419', color: '#FFFFFF' }} 
       onClick={deleteAcademy}
     >
       Delete

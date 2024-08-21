@@ -15,8 +15,10 @@ import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
 import AdminPanel from './Components/AdminPanel';
 import SignIn from './Components/Login/SignIn'
-import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
+import AddGroupForm from './Components/group/AddGroupForm';
+import ContactMessages from './Components/ContactMessages';
+import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 
 
@@ -40,7 +42,7 @@ function App() {
 //         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<SignIn />} />
 
-
+        <Route path="/admin-messages" element={<ContactMessages />} />
 
         {/* Route for the News Form */}
 //         <Route path="/add-news" element={<NewsForm />} />
