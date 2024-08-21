@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const AcademySchema = new mongoose.Schema({
-     Username: {
+     username: {
           type: String,
           required: [true, "User Name is required"]
      },
@@ -51,6 +51,8 @@ AcademySchema.pre('save', function (next) {
                next();
           });
 });
+
+
 
 const Academy = mongoose.model('Academy', AcademySchema);
 module.exports = Academy;

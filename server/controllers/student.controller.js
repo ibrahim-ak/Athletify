@@ -57,3 +57,11 @@ module.exports.deleteAnExistingStudent = (req, res) => {
                res.json(err)
           });
 }
+
+register: (req, res) => {
+     Student.create(req.body)
+       .then(student => {
+           res.json({ msg: "success!", student: student });
+       })
+       .catch(err => res.json(err));
+   }
