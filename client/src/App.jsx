@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom';
 
 import React from 'react';
 import MainPage from './Components/MainPage';
@@ -10,6 +9,9 @@ import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
 import AdminPanel from './Components/AdminPanel';
+import SignIn from './Components/Login/SignIn'
+import AddGroupForm from './Components/group/AddGroupForm';
+
 
 
 
@@ -17,13 +19,17 @@ import AdminPanel from './Components/AdminPanel';
 
 function App() {
   return (
-    <div style={{ backgroundColor: "#E6F0FF"}}>
+    <div style={{ backgroundColor: "#E6F0FF" }}>
 
-    <Routes>
-      {/* Route for the Main Page */}
-      <Route path="/" element={<MainPage />} />
+      <Routes>
+        {/* Route for the Main Page */}
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<SignIn />} />
 
 
+
+        {/* Route for the News Form */}
+        <Route path="/add-news" element={<NewsForm />} />
 
       {/* Route for the News Form */}
       <Route path="/add-news" element={<NewsForm />} />
@@ -33,8 +39,10 @@ function App() {
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path='/admin-panel' element={<AdminPanel/>}/>
        
+        <Route path="/group" element={<AddGroupForm />} />
+      
     </Routes>
-    </div>
+    </div >
 
 
 
