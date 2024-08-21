@@ -34,7 +34,7 @@ function Navbar() {
               Partners
             </Button>
           </Box>
-          <Button sx={{ color: '#709fb7', marginLeft: 2,  border:"2px solid #709fb7", backgroundColor:"white" }} href="#login">
+          <Button sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
             Login
           </Button>
           <IconButton
