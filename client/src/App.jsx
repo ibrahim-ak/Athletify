@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and Route
 
 import React from 'react';
 import MainPage from './Components/MainPage';
