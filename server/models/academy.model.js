@@ -52,5 +52,7 @@ AcademySchema.pre('save', function (next) {
           });
 });
 
+
+
 const Academy = mongoose.model('Academy', AcademySchema);
 module.exports = Academy;

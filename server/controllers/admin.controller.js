@@ -32,3 +32,11 @@ module.exports.deleteAnExistingAdmin = (req, res) => {
                res.json(err)
           });
 }
+
+register: (req, res) => {
+     Admin.create(req.body)
+       .then(admin => {
+           res.json({ msg: "success!", admin: admin });
+       })
+       .catch(err => res.json(err));
+   }
