@@ -6,7 +6,7 @@ const Group = require('../models/group.model');
 module.exports.findAllgroup = (req, res) => {
      Group.find()
           .then((allgroup) => {
-               res.json({ Groups: allgroup })
+               res.json({ groups: allgroup })
           })
           .catch((err) => {
                res.json(err)
