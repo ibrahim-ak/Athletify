@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 
 
 // import Companies from "./Components/Companies";
@@ -18,9 +19,7 @@ import Chip from '@mui/joy/Chip';
 import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
-
-
-
+import Chat from './Components/Chat';
 
 
 
@@ -71,15 +70,13 @@ function App() {
 </div>
 
 
-{/* <Router>
       <div className="App">
         <Routes>
           <Route path="/chat" element={<Chat />} />
           <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact-us" element={<Contact />} />
         </Routes>
       </div>
-    </Router> */}
+
 
     </>
  
