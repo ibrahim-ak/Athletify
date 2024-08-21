@@ -57,3 +57,11 @@ module.exports.deleteAnExistingAcademy = (req, res) => {
                res.json(err)
           });
 }
+
+register: (req, res) => {
+     Academy.create(req.body)
+       .then(academy => {
+           res.json({ msg: "success!", academy: academy });
+       })
+       .catch(err => res.json(err));
+   }
