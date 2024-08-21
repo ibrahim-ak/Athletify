@@ -20,6 +20,7 @@ import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
+import AdminPanel from './Components/AdminPanel';
 
 
 
@@ -74,6 +75,7 @@ function App() {
         <Routes>
           <Route path="/chat" element={<Chat />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </div>
 
