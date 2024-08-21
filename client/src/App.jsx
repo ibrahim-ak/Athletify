@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import React from 'react';
 import MainPage from './Components/MainPage';
 import NewsForm from './Components/NewsForm';
+import GroupDashboard from './Components/Groupp/GroupDashboard';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/joy/Chip';
 
@@ -46,6 +47,14 @@ function App() {
 
 
       {/* Route for the News Form */}
+      <Route path="/add-news" element={<NewsForm />} />
+      <Route path="/academy/group/1" element={<GroupDashboard />} />
+      {/* <Routes> */}
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          {/* <Route path="/contact-us" element={<Contact />} /> */}
+        {/* </Routes> */}
+
 //       <Route path="/add-news" element={<NewsForm />} />
       
           <Route path="/chat" element={<Chat />} />
@@ -55,6 +64,7 @@ function App() {
        
         <Route path="/group" element={<AllGroupsComponent />} />
       
+
     </Routes>
     </div >
 
