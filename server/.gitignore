@@ -1,2 +1,4 @@
 /config/mongoose.config.js
 .env
+**/package-lock.json
+**/package.json
