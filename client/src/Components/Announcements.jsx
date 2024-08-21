@@ -1,0 +1,114 @@
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, IconButton, List, ListItem, ListItemIcon, Divider } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import axios from 'axios';
+
+function Announcements() {
+  const [open, setOpen] = useState(true);
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    fetchAnnouncements();
+  }, []);
+
+  const fetchAnnouncements = () => {
+    axios.get('http://localhost:8000/api/announcements')
+      .then(res => {
+        setAnnouncements(res.data.announcements);
+      })
+      .catch(err => console.error(err));
+  };
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <Box sx={{ position: 'fixed', top: 0, left: 0, height: '100%', zIndex: 1300 }}>
+      {/* Drawer */}
+      <Box
+        sx={{
+          width: '250px',
+          height: '100%',
+          backgroundColor: '#1d4f67',
+          padding: '20px',
+          position: 'fixed',
+          top: 0,
+          left: open ? '0' : '-250px',
+          transition: 'left 0.3s ease',
+          boxShadow: open ? '2px 0px 5px rgba(0, 0, 0, 0.5)' : 'none',
+          overflowY: 'auto',
+          borderTopRightRadius: '8px',
+          borderBottomRightRadius: '8px',
+          marginTop: "200px"
+        }}
+      >
+        <Typography variant="h6" gutterBottom sx={{ color: '#fff' }}>
+          Announcements
+        </Typography>
+        <Divider sx={{ backgroundColor: '#fff' }} />
+        <List>
+          {announcements.length > 0 ? (
+            announcements.map((announcement, index) => (
+              <ListItem key={index} sx={{ padding: 0 }}>
+                <Box
+                  sx={{
+                    width: '100%',
+                    padding: '10px',
+                    marginBottom: '10px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <ListItemIcon>
+                    <AnnouncementIcon sx={{ color: '#1d4f67' }} />
+                  </ListItemIcon>
+                  <Typography variant="body2" sx={{ color: '#1d4f67', fontWeight: 'bold' }}>
+                    {announcement.Content}
+                  </Typography>
+                </Box>
+              </ListItem>
+            ))
+          ) : (
+            <Typography variant="body2" sx={{ color: '#fff' }}>
+              No announcements available.
+            </Typography>
+          )}
+        </List>
+      </Box>
+
+      {/* Arrow Button */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: open ? '240px' : '0',
+          transform: 'translateY(-50%)',
+          transition: 'left 0.3s ease',
+          zIndex: 1400,
+          backgroundColor: open ? '#5a768c' : '#1d4f67',
+          borderTopRightRadius: '8px',
+          borderBottomRightRadius: '8px',
+          padding: '10px',
+          cursor: 'pointer',
+          boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
+          '&:hover': {
+            backgroundColor: open ? '#2b6777' : '#5a768c',
+          },
+        }}
+        onClick={toggleDrawer}
+      >
+        <IconButton sx={{ color: '#fff' }}>
+          {open ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+        </IconButton>
+      </Box>
+    </Box>
+  );
+}
+
+export default Announcements;

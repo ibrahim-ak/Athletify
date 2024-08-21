@@ -10,19 +10,13 @@ import {
   InputAdornment
 } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import TitleIcon from '@mui/icons-material/Title';
-import DescriptionIcon from '@mui/icons-material/Description';
-import ImageIcon from '@mui/icons-material/Image';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
 import SchoolIcon from '@mui/icons-material/School';
 
-function NewsForm(props) {
+function AnnouncementForm() {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
   const [academyId, setAcademyId] = useState('');
-  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -35,30 +29,16 @@ function NewsForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({
-      Title: title, 
       Content: content, 
-      Image: imageUrl, 
       Academy: academyId 
     });  // Log the data being submitted
     props.onSubmit({ 
-      Title: title, 
       Content: content, 
-      Image: imageUrl, 
       Academy: academyId 
     });
-    setTitle('');
     setContent('');
-    setImageUrl('');
     setAcademyId('');
-    setOpen(false);  // Close the dialog after submission
   }
-  
-    
-    
-      
-
-
-
 
   return (
     <Box>
@@ -73,32 +53,14 @@ function NewsForm(props) {
         }}
         onClick={handleClickOpen}
       >
-        Add News
+        Add Announcement
       </Button>
       <Dialog open={open} onClose={handleClose} PaperProps={{ sx: { borderRadius: '15px' } }}>
         <DialogTitle sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '24px' }}>
-          Add News
+          Add Announcement
         </DialogTitle>
         <DialogContent>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
-            <TextField
-              margin="dense"
-              label="Title"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <TitleIcon />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{ mb: 2, borderRadius: '8px' }}
-            />
             <TextField
               margin="dense"
               label="Content"
@@ -113,7 +75,7 @@ function NewsForm(props) {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <DescriptionIcon />
+                    <AnnouncementIcon />
                   </InputAdornment>
                 ),
               }}
@@ -121,25 +83,7 @@ function NewsForm(props) {
             />
             <TextField
               margin="dense"
-              label="Image URL"
-              type="url"
-              fullWidth
-              variant="outlined"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              required
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <ImageIcon />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{ mb: 2, borderRadius: '8px' }}
-            />
-            <TextField
-              margin="dense"
-              label="Academy id"
+              label="Academy ID"
               fullWidth
               variant="outlined"
               value={academyId}
@@ -172,7 +116,7 @@ function NewsForm(props) {
               borderRadius: '20px'
             }}
           >
-            Add News
+            Add Announcement
           </Button>
         </DialogActions>
       </Dialog>
@@ -180,4 +124,4 @@ function NewsForm(props) {
   );
 }
 
-export default NewsForm;
+export default AnnouncementForm;
