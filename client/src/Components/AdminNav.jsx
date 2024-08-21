@@ -17,24 +17,23 @@ function Navbar() {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Button sx={{ color: '#fff' }} href="#home">
-              Home
+            <Button sx={{ color: '#fff' }} href="#academies">
+              Academies
             </Button>
-            <Button sx={{ color: '#fff' }} href="#about">
-              About
-            </Button>
-            <Button sx={{ color: '#fff' }} href="#services">
-              Services
-            </Button>
-            <Button sx={{ color: '#fff' }} href="#contact">
-              Contact
-            </Button>
-            <Button sx={{ color: '#fff' }} href="#contact">
-              Partners
+            <Button sx={{ color: '#fff' }} href="#messages">
+              Messages
             </Button>
           </Box>
-          <Button sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
-            Login
+          <Button
+            sx={{ 
+              color: 'white', 
+              marginLeft: 2,  
+              border: "2px solid rgb(250 102 25)", 
+              backgroundColor: "rgb(250 132 25)" 
+            }} 
+            href="#logout"
+          >
+            Logout
           </Button>
           <IconButton
             edge="start"

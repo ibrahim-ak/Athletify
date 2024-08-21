@@ -1,3 +1,4 @@
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -6,9 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function Navbar() {
+function StaticNavBar() {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#1d4f67' }}>
+    <AppBar   position='static' sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
           <Typography variant="h6" component="div">
@@ -50,4 +51,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default StaticNavBar;
