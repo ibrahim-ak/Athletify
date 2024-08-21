@@ -64,7 +64,8 @@ const Hero = () => {
             </Title>
 
             <CustomButton
-              backgroundColor="#1d4f67"
+              backgroundColor="rgb(242 132 25)"
+              border="2px solid rgb(250 102 25)"
               width="200px"
               height="55px"
               color="#fff"
@@ -84,11 +85,7 @@ const Hero = () => {
             <img
               src={heroImg}
               alt="heroImg"
-              style={{
-                marginBottom: "2rem",
-                marginTop: "170px",
-                width: "100%",
-                maxWidth: "800px",
+              style={{ marginBottom: "2rem", marginTop: "170px", width: "780px",
                 transform: "rotate(-5deg)",
               }}
             />

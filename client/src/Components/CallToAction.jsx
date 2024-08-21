@@ -32,13 +32,12 @@ function CallToAction() {
         }}
       />
       <Box sx={{ zIndex: 2 }}>
-        <Typography variant="h2" sx={{ fontWeight: 'bold', color:'#FF5722' }}>
-          Call To Action
-        </Typography>
-        <Typography variant="body1" sx={{ marginY: 2 }}>
+        <Typography variant="h2" sx={{ fontWeight: 'normal', color:'#FF5722', textShadow:'2px 2px #ff0000', marginBottom:'10px'}}>
+        Join us today and elevate your academy to new heights!        </Typography>
+        {/* <Typography variant="body1" sx={{ marginY: 2 }}>
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
           Exceptetur sint occaecat cupidatat non proident.
-        </Typography>
+        </Typography> */}
         <Button
           variant="outlined"
           sx={{
@@ -50,7 +49,7 @@ function CallToAction() {
             },
           }}
         >
-          Call To Action
+          Contact Us
         </Button>
       </Box>
     </Box>

@@ -25,6 +25,7 @@
     "aos": "^2.3.4",
     "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
+    "chip": "^0.0.5",
     "flowbite-react": "^0.10.1",
     "glightbox": "^3.3.0",
     "isotope-layout": "^3.0.6",

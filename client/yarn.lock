@@ -3747,6 +3747,11 @@ check-types@^11.2.3:
   resolved "https://registry.npmjs.org/check-types/-/check-types-11.2.3.tgz"
   integrity sha512-+67P1GkJRaxQD6PKK0Et9DhwQB+vGg3PM5+aavopCpZT1lj9jeqfvpgTLAWErNj8qApkkmXlu/Ug74kmhagkXg==
 
+chip@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.npmjs.org/chip/-/chip-0.0.5.tgz"
+  integrity sha512-QN+SzY46IF0bYUX1OYuwU8K9gTF9tZ+KdqAqq0b6fmB4y9gx9dhG/XwZWKbsxxcDcWn8e6vamyabOgmoClBnWw==
+
 chokidar@^3.4.2, chokidar@^3.5.3:
   version "3.6.0"
   resolved "https://registry.npmjs.org/chokidar/-/chokidar-3.6.0.tgz"
