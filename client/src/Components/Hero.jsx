@@ -64,7 +64,8 @@ const Hero = () => {
             </Title>
 
             <CustomButton
-              backgroundColor="#1d4f67"
+              backgroundColor="rgb(242 132 25)"
+              border="2px solid rgb(250 102 25)"
               width="200px"
               height="55px"
               color="#fff"
