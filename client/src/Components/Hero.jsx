@@ -84,11 +84,7 @@ const Hero = () => {
             <img
               src={heroImg}
               alt="heroImg"
-              style={{
-                marginBottom: "2rem",
-                marginTop: "170px",
-                width: "100%",
-                maxWidth: "800px",
+              style={{ marginBottom: "2rem", marginTop: "170px", width: "780px",
                 transform: "rotate(-5deg)",
               }}
             />
