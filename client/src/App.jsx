@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import MainPage from './Components/MainPage';
 import NewsForm from './Components/NewsForm';
 import Divider from '@mui/material/Divider';
@@ -9,8 +8,10 @@ import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
+import AdminPanel from './Components/AdminPanel';
 import SignIn from './Components/Login/SignIn'
 import AddGroupForm from './Components/group/AddGroupForm';
+
 
 
 
@@ -30,9 +31,14 @@ function App() {
         {/* Route for the News Form */}
         <Route path="/add-news" element={<NewsForm />} />
 
-        <Route path="/chat" element={<Chat />} />
-        {/* <Route path="/about-us" element={<AboutUs />} /> */}
-        <Route path="/contact-us" element={<ContactForm />} />
+      {/* Route for the News Form */}
+      <Route path="/add-news" element={<NewsForm />} />
+      
+          <Route path="/chat" element={<Chat />} />
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          <Route path="/contact-us" element={<ContactForm />} />
+          <Route path='/admin-panel' element={<AdminPanel/>}/>
+       
         <Route path="/group" element={<AddGroupForm />} />
       
     </Routes>
