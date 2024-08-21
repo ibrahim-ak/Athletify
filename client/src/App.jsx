@@ -11,7 +11,7 @@ import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
 import AdminPanel from './Components/AdminPanel';
 import SignIn from './Components/Login/SignIn'
-import AddGroupForm from './Components/group/AddGroupForm';
+import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 
 
@@ -32,6 +32,7 @@ function App() {
         {/* Route for the News Form */}
         <Route path="/add-news" element={<NewsForm />} />
 
+
       {/* Route for the News Form */}
       <Route path="/add-news" element={<NewsForm />} />
       
@@ -40,7 +41,7 @@ function App() {
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path='/admin-panel' element={<AdminPanel/>}/>
        
-        <Route path="/group" element={<AddGroupForm />} />
+        <Route path="/group" element={<AllGroupsComponent />} />
       
     </Routes>
     </div >
