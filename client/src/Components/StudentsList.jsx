@@ -1,5 +1,8 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import DeleteButton from './deletebutton'; // Ensure the correct path
+import Button from '@mui/material/Button';
+
+import axios from 'axios';
+
 
 const StudentsList = ({ students, setStudents, removeFromDom  }) => {
 
@@ -11,7 +14,7 @@ const StudentsList = ({ students, setStudents, removeFromDom  }) => {
             removeFromDom(id);
           })
           .catch(err => console.error(err));
-      };
+    };
 
 
 
@@ -44,7 +47,10 @@ const StudentsList = ({ students, setStudents, removeFromDom  }) => {
                 <TableCell>{student.group ? student.group.Name : 'No Group'}</TableCell>
 
                 <TableCell>
-                <button onClick={() => handleDelete(student._id)}>DELETE</button>
+                <Button 
+                variant="contained" 
+                sx={{ backgroundColor: 'rgb(250 132 25)', color: '#FFFFFF' }} 
+                onClick={() => handleDelete(student._id)}>DELETE</Button>
                 </TableCell> {/* Add Delete button */}
               </TableRow>
             ))}
