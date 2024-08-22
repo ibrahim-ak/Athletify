@@ -6,7 +6,7 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 import axios from 'axios';
 
 function Announcements() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
@@ -100,6 +100,7 @@ function Announcements() {
           '&:hover': {
             backgroundColor: open ? '#2b6777' : '#5a768c',
           },
+          animation: open ? 'none' : 'blinking 1s infinite, sizeChange 1s infinite', // Add animations
         }}
         onClick={toggleDrawer}
       >
@@ -107,6 +108,22 @@ function Announcements() {
           {open ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
         </IconButton>
       </Box>
+
+      <style>
+        {`
+          @keyframes blinking {
+            0% { background-color: #1d4f67; }
+            50% { background-color: #ff6f31; }
+            100% { background-color: #1d4f67; }
+          }
+
+          @keyframes sizeChange {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+          }
+        `}
+      </style>
     </Box>
   );
 }
