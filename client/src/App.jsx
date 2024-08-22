@@ -67,6 +67,7 @@ function App() {
           {/* <Route path="/about-us" element={<AboutUs />} /> */}
           <Route path="/contact-us" element={<ContactForm />} />
           {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
+          <Route path='/academy-panel' element={<AcademyPanel/>}/>
           {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
 
           <Route path='/admin/*' element={<AdminPanelParent/>}/>
