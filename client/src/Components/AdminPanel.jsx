@@ -27,7 +27,8 @@ const AdminPanel = () => {
 
   return (
     <Box>
-      <AdminNav />
+
+
 
       <Box 
         sx={{ 

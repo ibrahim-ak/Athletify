@@ -22,6 +22,7 @@ function NewsForm(props) {
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [academyId, setAcademyId] = useState('');
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleClickOpen = () => {
@@ -32,33 +33,41 @@ function NewsForm(props) {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const validate = () => {
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = 'Title is required';
+    if (!content.trim()) newErrors.content = 'Content is required';
+    if (!imageUrl.trim() || !/^https?:\/\//i.test(imageUrl)) newErrors.imageUrl = 'A valid Image URL is required';
+    if (!academyId.trim()) newErrors.academyId = 'Academy ID is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      Title: title, 
-      Content: content, 
-      Image: imageUrl, 
-      Academy: academyId 
-    });  // Log the data being submitted
-    props.onSubmit({ 
-      Title: title, 
-      Content: content, 
-      Image: imageUrl, 
-      Academy: academyId 
-    });
-    setTitle('');
-    setContent('');
-    setImageUrl('');
-    setAcademyId('');
-    setOpen(false);  // Close the dialog after submission
-  }
-  
-    
-    
-      
+    if (!validate()) return;
 
-
-
+    try {
+      const response = await axios.post('/api/news', {
+        title,
+        content,
+        imageUrl,
+        academyId
+      });
+      console.log('News added:', response.data);
+      props.onSubmit(response.data);  // Call the onSubmit prop with the response data
+      setTitle('');
+      setContent('');
+      setImageUrl('');
+      setAcademyId('');
+      setErrors({});
+      setOpen(false);
+      navigate('/news');  // Navigate to the news page or wherever appropriate
+    } catch (error) {
+      console.error('Error adding news:', error);
+      // Optionally set an error state to show a message to the user
+    }
+  };
 
   return (
     <Box>
@@ -90,6 +99,8 @@ function NewsForm(props) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
+              error={!!errors.title}
+              helperText={errors.title}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -110,6 +121,8 @@ function NewsForm(props) {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
+              error={!!errors.content}
+              helperText={errors.content}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -128,6 +141,8 @@ function NewsForm(props) {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               required
+              error={!!errors.imageUrl}
+              helperText={errors.imageUrl}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -139,12 +154,14 @@ function NewsForm(props) {
             />
             <TextField
               margin="dense"
-              label="Academy id"
+              label="Academy ID"
               fullWidth
               variant="outlined"
               value={academyId}
               onChange={(e) => setAcademyId(e.target.value)}
               required
+              error={!!errors.academyId}
+              helperText={errors.academyId}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -161,6 +178,7 @@ function NewsForm(props) {
             Cancel
           </Button>
           <Button 
+            type="submit"
             onClick={handleSubmit} 
             variant="contained" 
             sx={{ 
