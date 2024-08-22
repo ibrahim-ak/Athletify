@@ -3,7 +3,6 @@ import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormContr
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
-
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
@@ -13,6 +12,7 @@ const StudentForm = ({ onCreate }) => {
     age: '',
     group: '' // Initialize as an empty string
   });
+
   const [students , setStudents] = useState([])
 
   const [errors, setErrors] = useState({});
@@ -45,6 +45,7 @@ const StudentForm = ({ onCreate }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+
   const validate = () => {
     const newErrors = {};
     // Validation logic (same as before)
@@ -71,17 +72,21 @@ const StudentForm = ({ onCreate }) => {
         confirmPassword: '',
         gender: '',
         age: '',
+
         group: allgroups.length > 0 ? allgroups[0]._id : '' // Reset group to first option if available
       });
       setErrors({});
     } catch (error) {
-        console.error("Error creating student:", error);
+      console.error("Error creating student:", error);
     }
-};
+  };
+  
 
   return (
     <Paper style={{ padding: 16 }}>
+
       <Typography variant="h6" gutterBottom sx={{ color: '#1d4f67' }}>
+
         Register Student
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -94,6 +99,7 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+
               error={!!errors.username}
               helperText={errors.username}
             />
@@ -106,8 +112,6 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-              error={!!errors.phone}
-              helperText={errors.phone}
             />
           </Grid>
           <Grid item xs={12}>
@@ -119,8 +123,6 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-              error={!!errors.password}
-              helperText={errors.password}
             />
           </Grid>
           <Grid item xs={12}>
@@ -132,8 +134,6 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword}
             />
           </Grid>
           <Grid item xs={12}>
@@ -144,8 +144,6 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-              error={!!errors.gender}
-              helperText={errors.gender}
             />
           </Grid>
           <Grid item xs={12}>
@@ -157,11 +155,10 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-              error={!!errors.age}
-              helperText={errors.age}
             />
           </Grid>
           <Grid item xs={12}>
+
             <FormControl fullWidth required error={!!errors.group}>
               <InputLabel id="group-select-label">Group</InputLabel>
               <Select
@@ -190,7 +187,7 @@ const StudentForm = ({ onCreate }) => {
             <Button 
               type="submit" 
               variant="contained" 
-              sx={{ backgroundColor: '#ff6f31', color: '#fff' }} 
+              sx={{ backgroundColor: '#ff6f31', color: '#fff' }} // Apply the color here
             >
               Register Student
             </Button>

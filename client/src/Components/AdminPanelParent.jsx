@@ -1,15 +1,18 @@
-import { Routes, Route } from 'react-router-dom'; // Ensure these are imported
-import ContactMessages from './ContactMessages'; // Import ContactMessages component
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import AdminNav from './AdminNav';
+import ContactMessages from './ContactMessages';
+import AcademyPanel from './AcademyPanel';
 import AdminPanel from './AdminPanel';
-import Navbar from './AdminNav';
 
 const AdminPanelParent = () => {
   return (
     <div>
-      <Navbar /> {/* Include AdminNav component */}
+      <AdminNav />
       <Routes>
-        <Route path="/admin-messages" element={<ContactMessages />} />
-        <Route path="/admin-panel" element={<AdminPanel />} />
+        <Route path="/" element={<Navigate to="admin-panel" replace />} /> {/* Redirect /admin to /admin/admin-panel */}
+        <Route path="admin-panel" element={<AdminPanel />} />
+        <Route path="admin-messages" element={<ContactMessages />} />
       </Routes>
     </div>
   );
