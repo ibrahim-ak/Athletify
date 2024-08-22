@@ -4,7 +4,7 @@ import NewsForm from './NewsForm';
 import AnnouncementForm from './AnnouncementForm';
 import News from './News';
 import Announcements from './Announcements';
-import StaticNavbar from './StaticNavBar';
+import StaticNavBar from './StaticNavBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ function Wall() {
 
   return (
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      <StaticNavbar />
+      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
 
       <Box
         sx={{

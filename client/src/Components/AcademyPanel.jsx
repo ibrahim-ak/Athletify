@@ -33,7 +33,7 @@ const AcademyPanel = () => {
   return (
     <Box>
       {/* Navbar */}
-      <StaticNavBar tab1={'Home'} tab2={'Mambers'} tab3={'Groups'}/>
+      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
 
       <Box 
         sx={{ 
