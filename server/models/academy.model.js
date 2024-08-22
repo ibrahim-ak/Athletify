@@ -30,7 +30,12 @@ const AcademySchema = new mongoose.Schema({
      address: {
           type: String,
           required: [true, "address is required"],
-     }
+     },
+     role: {
+          type: String,
+          default: 'academy'
+      }
+      
 }, { timestamps: true });
 
 AcademySchema.virtual('confirmPassword')
