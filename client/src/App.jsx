@@ -15,6 +15,7 @@ import Chat from './Components/Chat';
 import AdminPanel from './Components/AdminPanel';
 import SignIn from './Components/Login/SignIn'
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+import AcademyPanel from './Components/AcademyPanel';
 
 
 
@@ -52,6 +53,7 @@ function App() {
           {/* <Route path="/about-us" element={<AboutUs />} /> */}
           <Route path="/contact-us" element={<ContactForm />} />
           <Route path='/admin-panel' element={<AdminPanel/>}/>
+          <Route path='/academy-panel' element={<AcademyPanel/>}/>
        
         <Route path="/group" element={<AllGroupsComponent />} />
       
