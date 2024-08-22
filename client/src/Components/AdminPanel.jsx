@@ -3,7 +3,7 @@ import axios from 'axios';
 import CreateAcademyForm from './CreateAcademyForm';
 import AcademyList from './AcademyList';
 import { Container, Grid, Typography, Box } from '@mui/material';
-import AdminNav from './AdminNav'; // Import your AdminNav component
+import Navbar from './AdminNav';
 
 const AdminPanel = () => {
   const [academies, setAcademies] = useState([]);
@@ -21,14 +21,12 @@ const AdminPanel = () => {
     }
   };
 
-  const handleCreateAcademy = (newAcademy) => {
-    setAcademies([...academies, newAcademy]);
-  };
+  const onCreate = (newStudent) => {
+    setStudents(prevStudents => [...prevStudents, newStudent]); // Add the new student to the list
+};
 
   return (
     <Box>
-      {/* Navbar */}
-      <AdminNav />
 
       <Box 
         sx={{ 
@@ -55,7 +53,7 @@ const AdminPanel = () => {
             </Grid>
             {/* Create Academy Form on the right side */}
             <Grid item xs={12} md={4}>
-              <CreateAcademyForm onCreate={handleCreateAcademy} />
+              <CreateAcademyForm onCreate={onCreate} />
             </Grid>
           </Grid>
         </Container>

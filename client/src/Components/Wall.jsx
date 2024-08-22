@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import NewsForm from './NewsForm';
 import AnnouncementForm from './AnnouncementForm';
 import News from './News';
 import Announcements from './Announcements';
-import StaticNavbar from './StaticNavBar';
+import StaticNavBar from './StaticNavBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ function Wall() {
 
   return (
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      <StaticNavbar />
+      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
 
       <Box
         sx={{
@@ -72,7 +72,7 @@ function Wall() {
             marginBottom: '20px',
           }}
         >
-          <AnnouncementForm onSubmit={createAnnouncement} errors={errors} />
+          <AnnouncementForm onSubmitt={createAnnouncement} errors={errors} />
           <h1 style={{ margin: "0 20px", color: "#1d4f67" }}>Stay Updated!</h1>
           <NewsForm onSubmit={createNews} errors={errors} />
         </Box>

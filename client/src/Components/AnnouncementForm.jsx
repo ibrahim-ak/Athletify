@@ -9,14 +9,15 @@ import {
   Box,
   InputAdornment
 } from '@mui/material';
-import axios from 'axios';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import SchoolIcon from '@mui/icons-material/School';
+import axios from 'axios';
 
-function AnnouncementForm() {
+function AnnouncementForm(props) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
   const [academyId, setAcademyId] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -26,19 +27,29 @@ function AnnouncementForm() {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
+  const validate = () => {
+    const newErrors = {};
+    if (!content.trim()) newErrors.content = 'Content is required';
+    if (!academyId.trim()) newErrors.academyId = 'Academy ID is required';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({
       Content: content, 
       Academy: academyId 
     });  // Log the data being submitted
-    props.onSubmit({ 
+    props.onSubmitt({ 
       Content: content, 
       Academy: academyId 
     });
     setContent('');
     setAcademyId('');
+    setOpen(false);
   }
+
 
   return (
     <Box>
@@ -72,6 +83,8 @@ function AnnouncementForm() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
+              error={!!errors.content}
+              helperText={errors.content}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -89,6 +102,8 @@ function AnnouncementForm() {
               value={academyId}
               onChange={(e) => setAcademyId(e.target.value)}
               required
+              error={!!errors.academyId}
+              helperText={errors.academyId}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -105,6 +120,7 @@ function AnnouncementForm() {
             Cancel
           </Button>
           <Button 
+            type="submit"
             onClick={handleSubmit} 
             variant="contained" 
             sx={{ 

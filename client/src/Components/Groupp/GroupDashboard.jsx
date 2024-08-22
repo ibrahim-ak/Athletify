@@ -1,5 +1,6 @@
 import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Paper, styled, TextField, Typography } from '@mui/material'
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
+
 import React, { useEffect, useState } from 'react'
 import Navbar from "../Navbar"
 import UpdateIcon from '@mui/icons-material/Update'
@@ -8,6 +9,9 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 // import { Button } from '@mui/material';
 // import UpdateIcon from '@mui/icons-material/Update';
+
+import StaticNavBar from "../StaticNavBar"
+
 const GroupDashboard = () => {
      const [open, setOpen] = useState(false);
      const students = ['John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White']; // Example student names
@@ -68,7 +72,7 @@ const GroupDashboard = () => {
      return (
 
           <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-               < Navbar />
+          <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
 
 
                <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>

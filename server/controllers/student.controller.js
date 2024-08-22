@@ -1,5 +1,6 @@
 const Student = require('../models/student.model');
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 
 
@@ -24,16 +25,12 @@ module.exports.findOneStudent = (req, res) => {
 }
 
 
-
 module.exports.createStudent = (req, res) => {
      Student.create(req.body)
-          .then(newlyCreatedStudent => {
-               res.json({ student: newlyCreatedStudent })
-          })
-          .catch((err) => {
-               res.status(400).json(err)
-          });
-}
+         .then(student => Student.findById(student._id).populate('group')) // Populate the group field
+         .then(populatedStudent => res.json(populatedStudent)) // Send the populated student back
+         .catch(err => res.status(400).json(err));
+ };
 
 module.exports.updateExistingStudent = (req, res) => {
      Student.findOneAndUpdate(
@@ -59,10 +56,3 @@ module.exports.deleteAnExistingStudent = (req, res) => {
           });
 }
 
-register: (req, res) => {
-     Student.create(req.body)
-       .then(student => {
-           res.json({ msg: "success!", student: student });
-       })
-       .catch(err => res.json(err));
-   }

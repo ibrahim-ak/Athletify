@@ -1,34 +1,12 @@
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Card, CardContent, CardMedia, Typography, Box, Button } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';  // Import Swiper styles
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'; // Material UI arrow icon
 import { keyframes } from '@mui/system';
+import { Link } from 'react-router-dom'; // Assuming you're using React Router
+import axios from 'axios';
 
-const newsItems = [
-  {
-    title: 'Breaking News 1',
-    description: 'This is a short description of the news article.',
-    image: 'https://via.placeholder.com/300x200',  // Updated to wider image
-  },
-  {
-    title: 'Breaking News 2',
-    description: 'This is a short description of the news article.',
-    image: 'https://via.placeholder.com/300x200',  // Updated to wider image
-  },
-  {
-    title: 'Breaking News 3',
-    description: 'This is a short description of the news article.',
-    image: 'https://via.placeholder.com/300x200',  // Updated to wider image
-  },
-  {
-    title: 'Breaking News 4',
-    description: 'This is a short description of the news article.',
-    image: 'https://via.placeholder.com/300x200',  // Updated to wider image
-  },
-];
-
-// Keyframe animation for the arrow icon (movement and color change)
 const arrowMove = keyframes`
   0% {
     transform: translateX(0);
@@ -36,7 +14,7 @@ const arrowMove = keyframes`
   }
   50% {
     transform: translateX(10px);
-    color: #FF5722;  // Example color change to a vibrant orange
+    color: #FF5722;
   }
   100% {
     transform: translateX(0);
@@ -45,11 +23,24 @@ const arrowMove = keyframes`
 `;
 
 function NewsSlider() {
-  return (
-    <Box sx={{ width: '100%', marginTop: 10,  marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2 }}>
-      {/* Header for the news section */}
-   
+  const [newsItems, setNewsItems] = useState([]);
 
+  useEffect(() => {
+    // Fetch all news items from the API
+    axios.get('http://localhost:8000/api/news')
+      .then(response => {
+        const allNews = response.data.news;
+        // Slice the last 4 news items
+        const latestNews = allNews.slice(-4).reverse(); // Reverse to get the latest first
+        setNewsItems(latestNews);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the news!", error);
+      });
+  }, []);
+
+  return (
+    <Box sx={{ width: '100%', marginTop: 10, marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2 }}>
       <Swiper
         spaceBetween={16}
         slidesPerView={1}
@@ -58,41 +49,68 @@ function NewsSlider() {
       >
         {newsItems.map((news, index) => (
           <SwiperSlide key={index}>
-            <Card 
-              sx={{ 
-                display: 'flex', 
-                height: 350, 
-                maxWidth: 900, 
-                margin: '0 auto', 
-                borderRadius: 2, 
-                boxShadow: 3, 
-                overflow: 'hidden',
-                transition: 'transform 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                }
-              }}
-            >
-              <CardMedia
-                component="img"
-                sx={{ width: 300, objectFit: 'cover' }}  // Ensure the image covers the space
-                image={news.image}
-                alt={news.title}
-              />
-              <CardContent sx={{ flex: '1 0 auto', padding: 3 }}>
-                <Typography component="div" variant="h5" sx={{ fontWeight: "bold", color: "#333" }}>
-                  {news.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {news.description}
-                </Typography>
-              </CardContent>
-            </Card>
+           <Card
+  key={index}
+  sx={{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: '16px',
+    maxWidth: '70%',
+    height: '320px',
+    boxShadow: '4px 4px 10px orange',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    backgroundColor: '#f9f9f9',
+    position: 'relative',
+    marginLeft: '250px', // Maintain margin-left if required
+  }}
+>
+  <CardMedia
+    component="img"
+    sx={{
+      width: '50%',
+      height: '100%',
+      objectFit: 'cover', // Ensure the image covers the container proportionally
+    }}
+    image={news.Image}
+    alt={news.Title}
+  />
+  <CardContent
+    sx={{
+      width: '50%', // Ensure the content takes the remaining space
+      paddingLeft: '16px',
+      paddingRight: '16px',
+      // textAlign: 'center',
+      height: '100%',
+      overflowY: 'auto', // Ensure scrollability if content overflows
+      '&::-webkit-scrollbar': {
+        width: '8px',
+      },
+      '&::-webkit-scrollbar-track': {
+        background: '#f1f1f1',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: '#888',
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        background: '#555',
+      },
+    }}
+  >
+    <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' }}>
+      {news.Title}
+    </Typography>
+    <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' }}>
+      {news.Content}
+    </Typography>
+  </CardContent>
+</Card>
+
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Drag indication with arrow icon and text */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 2 }}>
         <Typography variant="body1" sx={{ color: 'grey', marginRight: 1 }}>
           Drag to see more
