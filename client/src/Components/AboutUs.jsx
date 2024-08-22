@@ -19,7 +19,7 @@ function AboutUs() {
           <Grid item xs={12} md={6}>
             <CardContent>
               <Typography variant="h3" component="h2" gutterBottom sx={{ fontWeight: 'bold', color: '#1d4f67' }}>
-                About <span style={{ color: '#FFB300' }}>Athletify</span>
+                About <span style={{ color: '#fb841a' }}>Athletify</span>
               </Typography>
               <Typography variant="body1" paragraph sx={{ color: '#4f5d75', lineHeight: 1.8 }}>
                 Athletify is a platform designed specifically for athletic academies, offering a comprehensive solution to manage

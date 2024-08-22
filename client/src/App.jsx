@@ -19,6 +19,7 @@ import ContactMessages from './Components/ContactMessages';
 
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+
 import AdminPanel from './Components/AdminPanel';
 
 
@@ -29,13 +30,13 @@ function App() {
     <Routes>
         <Route path="/wall" element={<Wall />} />
         <Route path="/" element={<MainPage />} />
-        <Route path="/" element={<MainPage />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
         <Route path="/login" element={<SignIn />} />
         {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
         <Route path="/admin/*" element={<AdminPanelParent />} />
         <Route path="/admin-messages" element={<ContactMessages />} />
 
-        <Route path="/academy/group/1" element={<GroupDashboard />} />
+        <Route path="/academy/group/:id" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/contact-us" element={<ContactForm />} />
         {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
