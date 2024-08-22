@@ -24,7 +24,7 @@ const AcademyList = ({ academies, setAcademies }) => {
           <TableBody>
             {academies.map(academy => (
               <TableRow key={academy._id}>
-                <TableCell>{academy.Username}</TableCell>
+                <TableCell>{academy.username}</TableCell>
                 <TableCell>{academy.email}</TableCell>
                 <TableCell>{academy.phone}</TableCell>
                 <TableCell>{academy.address}</TableCell>

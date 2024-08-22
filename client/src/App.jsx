@@ -42,13 +42,13 @@ function App() {
           {/* <Route path="/contact-us" element={<Contact />} /> */}
         
         {/* Route for the Main Page */}
-//         <Route path="/" element={<MainPage />} />
+    <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<SignIn />} />
 
         <Route path="/admin-messages" element={<ContactMessages />} />
 
         {/* Route for the News Form */}
-//         <Route path="/add-news" element={<NewsForm />} />
+  <Route path="/add-news" element={<NewsForm />} />
 
 
       {/* Route for the News Form */}
@@ -60,7 +60,7 @@ function App() {
           {/* <Route path="/contact-us" element={<Contact />} /> */}
         {/* </Routes> */}
 
-//       <Route path="/add-news" element={<NewsForm />} />
+      <Route path="/add-news" element={<NewsForm />} />
       
           <Route path="/chat" element={<Chat />} />
           {/* <Route path="/about-us" element={<AboutUs />} /> */}

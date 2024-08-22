@@ -14,7 +14,10 @@ const ContactMessages = () => {
     axios.get('http://localhost:8000/api/contacts')
       .then(response => {
         console.log('API Response:', response.data);
-        setMessages(Array.isArray(response.data) ? response.data : []);
+        const sortedMessages = Array.isArray(response.data) 
+          ? response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          : [];
+        setMessages(sortedMessages);
         setLoading(false);
       })
       .catch(error => {
