@@ -16,11 +16,6 @@ const GroupDashboard = () => {
      const [times, setTimes] = useState([])
 
      useEffect(() => {
-          fetchdata();
-     }, [])
-
-
-     const fetchdata = () => {
           axios.get(`http://localhost:8000/api/group/${id}`).then((res) => {
                console.log(res.data.group.trainingTimes)
 
@@ -28,7 +23,10 @@ const GroupDashboard = () => {
           }).catch((err) => {
                console.log(err);
           })
-     }
+     }, [])
+
+
+  
 
 
 
@@ -182,7 +180,7 @@ const GroupDashboard = () => {
                                                                  >
                                                                  </Button>
                                                                  {/* Render the TrainingTimeForm with the Dialog */}
-                                                                 <TrainingTimeForm open={open} onClose={handleClose} thisid={id} />
+                                                                 <TrainingTimeForm open={open} onClose={handleClose} thisid={id} setTimes={setTimes} timess={times} />
                                                             </div>
                                                        </Grid>
                                                   </Grid>

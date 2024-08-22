@@ -21,17 +21,24 @@ const TrainingTimeForm = ({ open, onClose, ...props }) => {
           e.preventDefault();
 
           try {
-               await axios.patch(`http://localhost:8000/api/group/${props.thisid}`, {
+               const res = await axios.patch(`http://localhost:8000/api/group/${props.thisid}`, {
                     trainingTimes
-
                });
-               onClose(); // Close the dialog after submission
+
+               const updatedGroup = res.data.group;
+
+               props.setTimes(prevList =>
+                    prevList.map(group =>
+                         group._id === updatedGroup._id ? { ...group, trainingTimes: updatedGroup.trainingTimes } : group
+                    )
+               );
+
+               onClose();
           } catch (error) {
-               // console.log(props.thisid +"batata")
-               console.error("There was an error updating the training times!", error);
+               console.error("Error updating the training times:", error);
+               alert("There was an error updating the training times. Please try again.");
           }
      };
-
      return (
           <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
                <DialogTitle> Training Times</DialogTitle>
