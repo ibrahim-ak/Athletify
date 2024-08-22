@@ -27,11 +27,14 @@ function App() {
         <Route path="/login" element={<SignIn />} />
         {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
         <Route path="/admin/*" element={<AdminPanelParent />} />
+        <Route path="/admin-messages" element={<ContactMessages />} />
+
         <Route path="/academy/group/1" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/contact-us" element={<ContactForm />} />
         {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
         <Route path='/academy-panel' element={<AcademyPanel/>}/>
+
         <Route path="/group" element={<AllGroupsComponent />} />
     </Routes>
     </div >
