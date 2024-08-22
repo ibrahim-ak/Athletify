@@ -33,7 +33,7 @@ function News() {
         }}
       >
         {loaded && Array.isArray(newsItems) && newsItems.length > 0 ? (
-          newsItems.map((news, index) => (
+          [...newsItems].reverse().map((news, index) => (
             <Card
               key={index}
               sx={{
