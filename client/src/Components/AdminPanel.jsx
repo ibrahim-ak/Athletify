@@ -3,7 +3,7 @@ import axios from 'axios';
 import CreateAcademyForm from './CreateAcademyForm';
 import AcademyList from './AcademyList';
 import { Container, Grid, Typography, Box } from '@mui/material';
-import AdminNav from './AdminNav'; // Import your AdminNav component
+import Navbar from './AdminNav';
 
 const AdminPanel = () => {
   const [academies, setAcademies] = useState([]);
@@ -27,8 +27,6 @@ const AdminPanel = () => {
 
   return (
     <Box>
-      {/* Navbar */}
-      <AdminNav />
 
       <Box 
         sx={{ 

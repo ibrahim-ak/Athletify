@@ -1,54 +1,92 @@
-import { useState } from 'react';
-import { TextField, Button, Grid, Typography, Paper } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
-
   const [formData, setFormData] = useState({
-    Username: '',
+    username: '',
     phone: '',
     password: '',
     confirmPassword: '',
     gender: '',
     age: '',
-    group: '' 
+    group: '' // Initialize as an empty string
   });
+
   const [students , setStudents] = useState([])
+
+  const [errors, setErrors] = useState({});
+  const [allgroups, setAllGroups] = useState([]);
+
+  useEffect(() => {
+    const fetchGroups = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/groups');
+        const groups = response.data.groups || [];
+        setAllGroups(groups);
+
+        // Set the initial group if there are any groups fetched
+        if (groups.length > 0 && !formData.group) {
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            group: groups[0].id
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching groups:", error);
+      }
+    };
+
+    fetchGroups();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+
+  const validate = () => {
+    const newErrors = {};
+    // Validation logic (same as before)
+
+    // Validate Group
+    if (!formData.group) newErrors.group = 'Group is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
+    console.log('Form Data:', formData);
     try {
-        const response = await axios.post('http://localhost:8000/api/student', formData);
-        onCreate(response.data);  // Pass the newly created student data to onCreate
-        setFormData({
-            Username: '',
-            phone: '',
-            password: '',
-            confirmPassword: '',
-            gender: '',
-            age: '',
-            group: ''
-        });
+      const response = await axios.post('http://localhost:8000/api/student', formData);
+      console.log('Student created:', response.data);
+      onCreate(response.data.student);
+      setFormData({
+        username: '',
+        phone: '',
+        password: '',
+        confirmPassword: '',
+        gender: '',
+        age: '',
+
+        group: allgroups.length > 0 ? allgroups[0]._id : '' // Reset group to first option if available
+      });
+      setErrors({});
     } catch (error) {
-        console.error("Error creating student:", error);
+      console.error("Error creating student:", error);
     }
-};
-
-
+  };
   
 
   return (
     <Paper style={{ padding: 16 }}>
-      <Typography 
-        variant="h6" 
-        gutterBottom 
-        sx={{ color: '#1d4f67' }} // Apply the color here
-      >
+
+      <Typography variant="h6" gutterBottom sx={{ color: '#1d4f67' }}>
+
         Register Student
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -56,11 +94,14 @@ const StudentForm = ({ onCreate }) => {
           <Grid item xs={12}>
             <TextField
               label="Username"
-              name="Username"
-              value={formData.Username}
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               fullWidth
               required
+
+              error={!!errors.username}
+              helperText={errors.username}
             />
           </Grid>
           <Grid item xs={12}>
@@ -117,14 +158,30 @@ const StudentForm = ({ onCreate }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Group"
-              name="group"
-              value={formData.group}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+
+            <FormControl fullWidth required error={!!errors.group}>
+              <InputLabel id="group-select-label">Group</InputLabel>
+              <Select
+                labelId="group-select-label"
+                name="group"
+                value={formData.group}
+                onChange={handleChange}
+                label="Group"
+              >
+                {allgroups.length > 0 ? (
+                  allgroups.map((group) => (
+                    <MenuItem key={group._id} value={group._id}>
+                      {group.Name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="" disabled>
+                    No groups available
+                  </MenuItem>
+                )}
+              </Select>
+              {errors.group && <Typography color="error">{errors.group}</Typography>}
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <Button 

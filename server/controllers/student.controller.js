@@ -1,5 +1,6 @@
 const Student = require('../models/student.model');
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 
 
@@ -54,3 +55,4 @@ module.exports.deleteAnExistingStudent = (req, res) => {
                res.json(err)
           });
 }
+

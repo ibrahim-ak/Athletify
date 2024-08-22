@@ -1,6 +1,23 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Dialog, DialogActions, DialogContent, DialogTitle, Button,Box, Grid, Card, CardContent, Divider } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  Box,
+  Divider
+} from '@mui/material';
 import AdminNav from './AdminNav';
 
 const ContactMessages = () => {
@@ -14,7 +31,7 @@ const ContactMessages = () => {
     axios.get('http://localhost:8000/api/contacts')
       .then(response => {
         console.log('API Response:', response.data);
-        const sortedMessages = Array.isArray(response.data) 
+        const sortedMessages = Array.isArray(response.data)
           ? response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           : [];
         setMessages(sortedMessages);
@@ -36,6 +53,14 @@ const ContactMessages = () => {
     setSelectedMessage(null);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/contacts/${id}`);
+      setMessages(prevMessages => prevMessages.filter(msg => msg._id !== id));
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -56,14 +81,32 @@ const ContactMessages = () => {
                     <TableCell sx={{ color: 'white' }}>Name</TableCell>
                     <TableCell sx={{ color: 'white' }}>Email</TableCell>
                     <TableCell sx={{ color: 'white' }}>Phone</TableCell>
+                    <TableCell sx={{ color: 'white' }}>Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {messages.map((msg) => (
-                    <TableRow key={msg._id} onClick={() => handleClickOpen(msg)} style={{ cursor: 'pointer' }}>
+                    <TableRow key={msg._id}>
                       <TableCell>{msg.name}</TableCell>
                       <TableCell>{msg.email}</TableCell>
                       <TableCell>{msg.phone}</TableCell>
+                      <TableCell>
+                        <Button 
+                          onClick={() => handleClickOpen(msg)} 
+                          variant="contained" 
+                          color="primary" 
+                          sx={{ marginRight: 1 }}
+                        >
+                          View
+                        </Button>
+                        <Button 
+                          onClick={() => handleDelete(msg._id)} 
+                          variant="contained" 
+                          color="error"
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -7,19 +7,36 @@ const AddGroupForm = ({ onCreate }) => {
     groupName: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.groupName.trim()) {
+      newErrors.groupName = 'Group Name is required';
+    } else if (formData.groupName.length < 2) {
+      newErrors.groupName = 'Group Name must be at least 2 characters long';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
+
     try {
       const response = await axios.post('http://localhost:8000/api/group', formData);
       onCreate(response.data.group);
       setFormData({
         groupName: '',
       });
+      setErrors({});
     } catch (error) {
       console.error("Error creating group:", error);
     }
@@ -38,10 +55,16 @@ const AddGroupForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+              error={!!errors.groupName}
+              helperText={errors.groupName}
             />
           </Grid>
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" style={{ backgroundColor: '#FF6F31', color: '#fff' }}>
+            <Button
+              type="submit"
+              variant="contained"
+              style={{ backgroundColor: '#FF6F31', color: '#fff' }}
+            >
               Add
             </Button>
           </Grid>
