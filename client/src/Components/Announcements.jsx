@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, List, ListItem, ListItemIcon, Divider } fr
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 function Announcements() {
@@ -11,12 +12,20 @@ function Announcements() {
 
   useEffect(() => {
     fetchAnnouncements();
-  }, []);
+  }, [announcements]);
 
   const fetchAnnouncements = () => {
     axios.get('http://localhost:8000/api/announcements')
       .then(res => {
         setAnnouncements(res.data.announcements);
+      })
+      .catch(err => console.error(err));
+  };
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:8000/api/announcement/${id}`)
+      .then(() => {
+        setAnnouncements(announcements.filter(announcement => announcement._id !== id));
       })
       .catch(err => console.error(err));
   };
@@ -51,8 +60,8 @@ function Announcements() {
         <Divider sx={{ backgroundColor: '#fff' }} />
         <List>
           {announcements.length > 0 ? (
-            announcements.map((announcement, index) => (
-              <ListItem key={index} sx={{ padding: 0 }}>
+            [...announcements].reverse().map((announcement, index) => (
+              <ListItem key={index} sx={{ padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box
                   sx={{
                     width: '100%',
@@ -71,7 +80,11 @@ function Announcements() {
                   <Typography variant="body2" sx={{ color: '#1d4f67', fontWeight: 'bold' }}>
                     {announcement.Content}
                   </Typography>
+                  <IconButton onClick={() => handleDelete(announcement._id)} sx={{ color: '#1d4f67', marginLeft: '10px' }}>
+                  <DeleteIcon />
+                </IconButton>
                 </Box>
+               
               </ListItem>
             ))
           ) : (

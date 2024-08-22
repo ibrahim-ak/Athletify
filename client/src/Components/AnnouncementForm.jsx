@@ -13,7 +13,7 @@ import axios from 'axios';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import SchoolIcon from '@mui/icons-material/School';
 
-function AnnouncementForm() {
+function AnnouncementForm(props) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
   const [academyId, setAcademyId] = useState('');
@@ -32,12 +32,13 @@ function AnnouncementForm() {
       Content: content, 
       Academy: academyId 
     });  // Log the data being submitted
-    props.onSubmit({ 
+    props.onSubmitt({ 
       Content: content, 
       Academy: academyId 
     });
     setContent('');
     setAcademyId('');
+    setOpen(false);
   }
 
   return (
