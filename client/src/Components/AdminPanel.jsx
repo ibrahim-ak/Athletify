@@ -27,7 +27,7 @@ const AdminPanel = () => {
 
   return (
     <Box>
-
+      <Navbar />
       <Box 
         sx={{ 
           minHeight: '100vh', 
