@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Import Routes and Route
 
 import React from 'react';
 import MainPage from './Components/MainPage';
@@ -15,7 +15,8 @@ import SignIn from './Components/Login/SignIn'
 import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
 import ContactMessages from './Components/ContactMessages';
-import AllGroupsComponent from './Components/group/AllGroupsComponent';
+
+import AdminPanelParent from './Components/AdminPanelParent';
 
 function App() {
   return (

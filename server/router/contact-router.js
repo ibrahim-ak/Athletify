@@ -1,4 +1,3 @@
-// routes/contact.js
 const express = require('express');
 const router = express.Router();
 const Contact = require('../models/contact-model');
@@ -24,6 +23,21 @@ router.get('/contacts', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error fetching messages', error });
     }
 });
+
+// DELETE route to delete a contact message by ID
+router.delete('/contacts/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedContact = await Contact.findByIdAndDelete(id);
+        if (!deletedContact) {
+            return res.status(404).json({ success: false, message: 'Message not found' });
+        }
+        res.status(200).json({ success: true, message: 'Message deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error deleting message', error });
+    }
+});
+
 
 module.exports = (app) => {
     app.use('/api', router); // Prefix routes with '/api'

@@ -3,7 +3,7 @@ const Group = require("./group.model");
 
 const bcrypt = require('bcrypt');
 const StudentSchema = new mongoose.Schema({
-     Username: {
+     username: {
           type: String,
           required: [true, "User Name is required"]
      }
@@ -28,7 +28,12 @@ const StudentSchema = new mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Group',
           required: true
-     }
+     },
+     role: {
+          type: String,
+          default: 'student'
+      }
+      
 
 
 }, { timestamps: true });
