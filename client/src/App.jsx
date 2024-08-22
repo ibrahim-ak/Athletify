@@ -53,7 +53,7 @@ function App() {
 
       {/* Route for the News Form */}
       <Route path="/add-news" element={<NewsForm />} />
-      <Route path="/academy/group/1" element={<GroupDashboard />} />
+      <Route path="/academy/group/:id" element={<GroupDashboard />} />
       {/* <Routes> */}
           {/* <Route path="/chat" element={<Chat />} /> */}
           {/* <Route path="/about-us" element={<AboutUs />} /> */}

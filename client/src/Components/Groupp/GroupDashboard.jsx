@@ -1,12 +1,44 @@
 import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Paper, styled, TextField, Typography } from '@mui/material'
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from "../Navbar"
 import UpdateIcon from '@mui/icons-material/Update'
+import TrainingTimeForm from './TrainingTimeForm'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+// import { Button } from '@mui/material';
+// import UpdateIcon from '@mui/icons-material/Update';
 const GroupDashboard = () => {
+     const [open, setOpen] = useState(false);
      const students = ['John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White']; // Example student names
+     const { id } = useParams();
+
+     const [times, setTimes] = useState([])
+
+     useEffect(() => {
+          fetchdata();
+     }, [])
 
 
+     const fetchdata = () => {
+          axios.get(`http://localhost:8000/api/group/${id}`).then((res) => {
+               console.log(res.data.group.trainingTimes)
+
+               setTimes(res.data.group.trainingTimes)
+          }).catch((err) => {
+               console.log(err);
+          })
+     }
+
+
+
+     const handleOpen = () => {
+          setOpen(true);
+     };
+
+     const handleClose = () => {
+          setOpen(false);
+     }
 
      const AnimatedCard = styled(Card)(({ theme }) => ({
           height: '100%',
@@ -91,7 +123,22 @@ const GroupDashboard = () => {
                                         <FadeInBox>
                                              <AnimatedCard>
                                                   <Grid container alignItems="center" justifyContent="center" sx={{
-                                                      
+                                                       overflowY: 'auto', // Use 'auto' instead of 'scroll' to hide the scrollbar when not needed
+                                                       maxHeight: '69.74vh',
+                                                       '&::-webkit-scrollbar': {
+                                                            width: '8px', // Adjust the width of the scrollbar
+                                                       },
+                                                       '&::-webkit-scrollbar-thumb': {
+                                                            backgroundColor: '#888', // Scrollbar thumb color
+                                                            borderRadius: '4px', // Rounded corners for the scrollbar thumb
+                                                       },
+                                                       '&::-webkit-scrollbar-thumb:hover': {
+                                                            backgroundColor: '#555', // Darker color when hovering over the scrollbar thumb
+                                                       },
+                                                       '&::-webkit-scrollbar-track': {
+                                                            backgroundColor: '#f1f1f1', // Background color of the scrollbar track
+                                                       },
+                                                       maxHeight: "10vh",
                                                        padding: '10px',
                                                        boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Optional: Shadow for a raised effect
                                                   }}>
@@ -111,7 +158,11 @@ const GroupDashboard = () => {
                                                             textAlign: 'center',
                                                             padding: '0 10px',
                                                        }}>
-                                                            <Typography variant="body1">zxczxc</Typography>
+                                                            {times.map((index, key) => (
+                                                                 <li key={key}> {index.day} |  {index.start}  - {index.end} </li>
+
+                                                            ))}
+                                                            {/* <Typography variant="body1"></Typography> */}
                                                        </Grid>
 
                                                        {/* Right Side - Button with Update Icon */}
@@ -122,13 +173,17 @@ const GroupDashboard = () => {
                                                             borderLeft: '1px solid #ddd', // Optional: Add a dividing line
                                                             padding: '0 10px',
                                                        }}>
-                                                            <Button
-                                                                 variant="contained"
-                                                                 color="primary"
-                                                                 startIcon={<UpdateIcon />} // Assuming you import UpdateIcon from Material-UI icons
-                                                            >
-                                                                 Update
-                                                            </Button>
+                                                            <div>
+                                                                 <Button
+                                                                      variant="contained"
+                                                                      color="primary"
+                                                                      startIcon={<UpdateIcon />}
+                                                                      onClick={handleOpen}
+                                                                 >
+                                                                 </Button>
+                                                                 {/* Render the TrainingTimeForm with the Dialog */}
+                                                                 <TrainingTimeForm open={open} onClose={handleClose} thisid={id} />
+                                                            </div>
                                                        </Grid>
                                                   </Grid>
 
