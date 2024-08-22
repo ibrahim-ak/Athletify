@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Import Routes and Route
 
 import React from 'react';
 import MainPage from './Components/MainPage';
@@ -68,7 +68,11 @@ function App() {
           {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
           {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
 
-          <Route path='/admin/*' element={<AdminPanelParent/>}/>
+          <Route path="/admin" element={<Navigate to="/admin/admin-panel" replace />} />
+      
+      {/* Define other routes */}
+      <Route path="/admin/admin-panel" element={<AdminPanel />} />
+      <Route path="/admin/*" element={<AdminPanelParent />} />
        
         <Route path="/group" element={<AllGroupsComponent />} />
       
