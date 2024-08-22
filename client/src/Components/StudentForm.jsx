@@ -3,6 +3,7 @@ import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormContr
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
+
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
@@ -12,6 +13,7 @@ const StudentForm = ({ onCreate }) => {
     age: '',
     group: '' // Initialize as an empty string
   });
+  const [students , setStudents] = useState([])
 
   const [errors, setErrors] = useState({});
   const [allgroups, setAllGroups] = useState([]);
@@ -73,9 +75,9 @@ const StudentForm = ({ onCreate }) => {
       });
       setErrors({});
     } catch (error) {
-      console.error("Error creating student:", error);
+        console.error("Error creating student:", error);
     }
-  };
+};
 
   return (
     <Paper style={{ padding: 16 }}>

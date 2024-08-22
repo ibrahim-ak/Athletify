@@ -72,7 +72,7 @@ function Wall() {
             marginBottom: '20px',
           }}
         >
-          <AnnouncementForm onSubmit={createAnnouncement} errors={errors} />
+          <AnnouncementForm onSubmitt={createAnnouncement} errors={errors} />
           <h1 style={{ margin: "0 20px", color: "#1d4f67" }}>Stay Updated!</h1>
           <NewsForm onSubmit={createNews} errors={errors} />
         </Box>
