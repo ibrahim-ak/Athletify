@@ -21,7 +21,6 @@ import AcademyPanel from './Components/AcademyPanel';
 
 import AddGroupForm from './Components/group/AddGroupForm';
 import ContactMessages from './Components/ContactMessages';
-import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 
 

@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Paper, styled, TextField, Typography } from '@mui/material'
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
 import React from 'react'
-import Navbar from "../Navbar"
+import StaticNavBar from "../StaticNavBar"
 const GroupDashboard = () => {
      const students = ['John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White']; // Example student names
 
@@ -37,7 +37,7 @@ const GroupDashboard = () => {
      return (
 
           <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-               < Navbar />
+          <StaticNavBar tab1={'Home'} tab2={'Mambers'} tab3={'Groups'}/>
 
 
                <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>

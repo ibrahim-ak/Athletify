@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Grid, Typography, Box } from '@mui/material';
-import AdminNav from './AdminNav'; // Import your AdminNav component
+import StaticNavBar from './StaticNavBar'; // Import your AdminNav component
 import StudentsList from './StudentsList';
 import StudentForm from './StudentForm';
 
@@ -33,7 +33,7 @@ const AcademyPanel = () => {
   return (
     <Box>
       {/* Navbar */}
-      <AdminNav />
+      <StaticNavBar tab1={'Home'} tab2={'Mambers'} tab3={'Groups'}/>
 
       <Box 
         sx={{ 
@@ -51,7 +51,7 @@ const AcademyPanel = () => {
             gutterBottom 
             sx={{ color: '#1d4f67', textAlign: 'center' }}
           >
-            Admin Panel
+            All Students
           </Typography>
           <Grid container spacing={4}>
             {/* Academy List on the left side */}
