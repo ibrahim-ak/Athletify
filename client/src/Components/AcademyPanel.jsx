@@ -22,8 +22,8 @@ const AcademyPanel = () => {
   };
 
   const handleCreateStudent = (newStudent) => {
-    setStudents([...students, newStudent]);
-  };
+    setStudents(prevStudents => [...prevStudents, newStudent]); // Ensure prevStudents is iterable
+};
 
 
   const removeFromDom = id => {
