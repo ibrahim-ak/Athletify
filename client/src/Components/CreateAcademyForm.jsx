@@ -12,6 +12,28 @@ const CreateAcademyForm = ({ onCreate }) => {
     confirmPassword: ''
   });
 
+  const [errors, setErrors] = useState({}); // State to hold validation errors
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.username) newErrors.username = "Username is required";
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email address is invalid";
+    }
+    if (!formData.phone) newErrors.phone = "Phone number is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+    if (!formData.address) newErrors.address = "Address is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -19,19 +41,22 @@ const CreateAcademyForm = ({ onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:8000/api/academy', formData);
-      onCreate(response.data.academy);
-      setFormData({
-        username: '',
-        email: '',
-        phone: '',
-        password: '',
-        address: '',
-        confirmPassword: ''
-      });
-    } catch (error) {
-      console.error("Error creating academy:", error.response?.data || error.message);
+    if (validateForm()) {
+      try {
+        const response = await axios.post('http://localhost:8000/api/academy', formData);
+        onCreate(response.data.academy);
+        setFormData({
+          username: '',
+          email: '',
+          phone: '',
+          password: '',
+          address: '',
+          confirmPassword: ''
+        });
+        setErrors({});
+      } catch (error) {
+        console.error("Error creating academy:", error.response?.data || error.message);
+      }
     }
   };
 
@@ -44,12 +69,13 @@ const CreateAcademyForm = ({ onCreate }) => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              label="username"
+              label="Username"
               name="username"
               value={formData.username}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.username}
+              helperText={errors.username}
             />
           </Grid>
           <Grid item xs={12}>
@@ -60,7 +86,8 @@ const CreateAcademyForm = ({ onCreate }) => {
               value={formData.email}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.email}
+              helperText={errors.email}
             />
           </Grid>
           <Grid item xs={12}>
@@ -70,7 +97,8 @@ const CreateAcademyForm = ({ onCreate }) => {
               value={formData.phone}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.phone}
+              helperText={errors.phone}
             />
           </Grid>
           <Grid item xs={12}>
@@ -81,7 +109,8 @@ const CreateAcademyForm = ({ onCreate }) => {
               value={formData.password}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.password}
+              helperText={errors.password}
             />
           </Grid>
           <Grid item xs={12}>
@@ -92,7 +121,8 @@ const CreateAcademyForm = ({ onCreate }) => {
               value={formData.confirmPassword}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
             />
           </Grid>
           <Grid item xs={12}>
@@ -102,7 +132,8 @@ const CreateAcademyForm = ({ onCreate }) => {
               value={formData.address}
               onChange={handleChange}
               fullWidth
-              required
+              error={!!errors.address}
+              helperText={errors.address}
             />
           </Grid>
           <Grid item xs={12}>
