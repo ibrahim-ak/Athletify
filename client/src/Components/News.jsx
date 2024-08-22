@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import axios from 'axios';
 
@@ -8,27 +8,26 @@ function News() {
 
   useEffect(() => {
     getNews();
-  }, [newsItems]); // Notice the empty dependency array, this ensures the effect runs only once when the component mounts
+  }, []); // The dependency array should be empty to fetch news only once on component mount
 
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
       .then(res => {
-        // console.log(res.data); // This should print the entire object with a `news` property
-        setNewsItems(res.data.news); // Access the `news` property from the response object
+        setNewsItems(res.data.news);
         setLoaded(true);
       })
       .catch(err => console.error(err));
   };
 
   return (
-    <Box sx={{ padding: '20px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+    <Box sx={{ padding: '40px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
       <Card
         sx={{
-          padding: '20px',
+          padding: '30px',
           backgroundColor: '#fff',
-          borderRadius: '8px',
-          boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-          maxWidth: '800px',
+          borderRadius: '16px',
+          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)', // Orange shadow for the container card
+          maxWidth: '900px',
           margin: '0 auto',
         }}
       >
@@ -40,35 +39,42 @@ function News() {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginBottom: '16px',
+                marginBottom: '24px',  // Moderate spacing between cards
                 maxWidth: '100%',
-                height: '250px',
-                boxShadow: '4px 4px 10px orange',
-                borderRadius: '8px',
+                height: '320px',  // Increased height for the card
+                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',  // Prominent orange shadow
+                borderRadius: '12px',  // Border radius for smoother corners
                 overflow: 'hidden',
-                backgroundColor: '#f9f9f9',
+                backgroundColor: '#ffffff',
                 position: 'relative',
+                transition: 'transform 0.3s ease-in-out', // Smooth hover effect
+                '&:hover': {
+                  transform: 'scale(1.03)', // Slight zoom on hover to make it stand out
+                },
               }}
             >
               <CardMedia
                 component="img"
                 sx={{
-                  width: 200,
+                  width: '280px',  // Increased width for the image
                   height: '100%',
                   objectFit: 'cover',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
+                  borderRadius: '8px',  // Border radius for the image
+                  marginLeft: '16px',
                 }}
                 image={news.Image}
                 alt={news.Title}
               />
               <CardContent
                 sx={{
-                  paddingLeft: '220px',
-                  paddingRight: '16px',
+                  paddingLeft: '24px',
+                  paddingRight: '24px',
                   overflowY: 'auto',
                   height: '100%',
+                  maxHeight: '220px',  // Smaller height for content with scroll
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',  // Align content to start
                   '&::-webkit-scrollbar': {
                     width: '8px',
                   },
@@ -83,10 +89,10 @@ function News() {
                   },
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' }}>
+                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', marginBottom: '8px' }}>
                   {news.Title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' }}>
+                <Typography variant="body2" color="text.secondary">
                   {news.Content}
                 </Typography>
               </CardContent>

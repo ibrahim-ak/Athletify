@@ -1,12 +1,11 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
-import Navbar from "./NavBar";
 
 import heroImg from '../media/image copy.png';
 import CustomButton from "./CustomButton";
 
-const Hero = () => {
+const Hero = ({ contactRef }) => {
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -41,6 +40,13 @@ const Hero = () => {
     justifyContent: 'center',
   }));
 
+  const handleScrollToContact = () => {
+    if (contactRef && contactRef.current) {
+      console.log("Scrolling to Contact Section");
+      contactRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <GradientBackground>
       <Container>
@@ -69,8 +75,9 @@ const Hero = () => {
               width="200px"
               height="55px"
               color="#fff"
-              buttonText="register Now"
+              buttonText="Join Now"
               heroBtn={true}
+              onClick={handleScrollToContact}  // Add the onClick event
               sx={{
                 "&:hover": {
                   backgroundColor: "#FF5722",
@@ -85,7 +92,10 @@ const Hero = () => {
             <img
               src={heroImg}
               alt="heroImg"
-              style={{ marginBottom: "2rem", marginTop: "170px", width: "780px",
+              style={{
+                marginBottom: "2rem",
+                marginTop: "170px",
+                width: "780px",
                 transform: "rotate(-5deg)",
               }}
             />
