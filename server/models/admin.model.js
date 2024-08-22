@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const AdminSchema = new mongoose.Schema({
-  Username: {
+  username: {
       type: String,
       required: [true, " Name is required"]
     },
@@ -11,6 +11,11 @@ const AdminSchema = new mongoose.Schema({
       required: [true, "Password is required"],
       minlength: [4, "Password must be 4 characters or longer"]
     },
+    role: {
+      type: String,
+      default: 'admin'
+  }
+  
   }, { timestamps: true });
   
   AdminSchema.virtual('confirmPassword')
