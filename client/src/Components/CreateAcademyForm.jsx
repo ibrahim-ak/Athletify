@@ -1,10 +1,10 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Grid, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 
 const CreateAcademyForm = ({ onCreate }) => {
   const [formData, setFormData] = useState({
-    Username: '',
+    username: '',
     email: '',
     phone: '',
     password: '',
@@ -23,7 +23,7 @@ const CreateAcademyForm = ({ onCreate }) => {
       const response = await axios.post('http://localhost:8000/api/academy', formData);
       onCreate(response.data.academy);
       setFormData({
-        Username: '',
+        username: '',
         email: '',
         phone: '',
         password: '',
@@ -31,26 +31,22 @@ const CreateAcademyForm = ({ onCreate }) => {
         confirmPassword: ''
       });
     } catch (error) {
-      console.error("Error creating academy:", error);
+      console.error("Error creating academy:", error.response?.data || error.message);
     }
   };
 
   return (
     <Paper style={{ padding: 16 }}>
-<Typography 
-  variant="h6" 
-  gutterBottom 
-  sx={{ color: '#1d4f67' }} // Apply the color here
->
-  Create Academy
-</Typography>
+      <Typography variant="h6" gutterBottom sx={{ color: '#1d4f67' }}>
+        Create Academy
+      </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              label="Username"
-              name="Username"
-              value={formData.Username}
+              label="username"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
               fullWidth
               required
@@ -110,14 +106,13 @@ const CreateAcademyForm = ({ onCreate }) => {
             />
           </Grid>
           <Grid item xs={12}>
-          <Button 
-  type="submit" 
-  variant="contained" 
-  sx={{ backgroundColor: '#ff6f31', color: '#fff' }} // Apply the color here
->
-  Create Academy
-</Button>
-
+            <Button 
+              type="submit" 
+              variant="contained" 
+              sx={{ backgroundColor: '#ff6f31', color: '#fff' }}
+            >
+              Create Academy
+            </Button>
           </Grid>
         </Grid>
       </form>
