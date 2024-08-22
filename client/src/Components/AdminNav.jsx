@@ -21,14 +21,14 @@ function Navbar() {
           <Button
               sx={{ color: '#fff' }}
               component={Link}
-              to="/admin-panel"
+              to="/admin/admin-panel"
             >
               Academies
             </Button>
             <Button
               sx={{ color: '#fff' }}
               component={Link}
-              to="/admin-messages"
+              to="/admin/admin-messages"
             >
               Messages
             </Button>
