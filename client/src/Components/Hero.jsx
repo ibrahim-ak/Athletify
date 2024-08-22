@@ -63,7 +63,7 @@ const Hero = ({ contactRef }) => {
                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
               }}
             >
-              Welcome to Athletify ..
+              {/* Welcome to Athletify .. */}
             </Typography>
             <Title variant="h1" sx={{ fontSize: "50px", color: "#fff" }}>
               "Empowering Athletes, Simplifying Management".

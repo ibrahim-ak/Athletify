@@ -19,6 +19,7 @@ import ContactMessages from './Components/ContactMessages';
 
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+import AdminPanel from './Components/AdminPanel';
 
 
 function App() {
