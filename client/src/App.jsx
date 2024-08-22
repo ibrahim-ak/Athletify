@@ -13,8 +13,13 @@ import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
 import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
+
+import ContactMessages from './Components/ContactMessages';
+// import AllGroupsComponent from './Components/group/AllGroupsComponent';
+
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+
 
 function App() {
   return (
@@ -34,6 +39,26 @@ function App() {
         <Route path="/contact-us" element={<ContactForm />} />
         {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
         <Route path='/academy-panel' element={<AcademyPanel/>}/>
+
+
+
+      {/* Route for the News Form */}
+      <Route path="/add-news" element={<NewsForm />} />
+      <Route path="/academy/group/:id" element={<GroupDashboard />} />
+      {/* <Routes> */}
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          {/* <Route path="/contact-us" element={<Contact />} /> */}
+        {/* </Routes> */}
+
+      <Route path="/add-news" element={<NewsForm />} />
+      
+          <Route path="/chat" element={<Chat />} />
+          {/* <Route path="/about-us" element={<AboutUs />} /> */}
+          <Route path="/contact-us" element={<ContactForm />} />
+          <Route path='/admin-panel' element={<AdminPanel/>}/>
+          <Route path='/academy-panel' element={<AcademyPanel/>}/>
+       
 
         <Route path="/group" element={<AllGroupsComponent />} />
     </Routes>

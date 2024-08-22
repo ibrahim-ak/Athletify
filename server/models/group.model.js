@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 const Academy = require("./academy.model");
+
+const trainingTimeSchema = new mongoose.Schema({
+     start: {
+          type: String,
+          default: "00:00"
+     },
+     end: {
+          type: String,
+          default: "00:00"
+     },
+     day: {
+          type: String,
+          default: "Day"
+     }
+});
 const GroupSchema = new mongoose.Schema({
 
      Name: {
@@ -12,9 +27,10 @@ const GroupSchema = new mongoose.Schema({
           ref: 'Academy',
           required: true
      },
-     Trainingtimes:{
-          type: String
-     }
+     trainingTimes: {
+          type: [trainingTimeSchema],
+          default: [{ start: "00:00", end: "00:00", day: "Day" }]
+     },
 
 
 }, { timestamps: true });
