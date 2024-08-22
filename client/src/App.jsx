@@ -19,7 +19,10 @@ import ContactMessages from './Components/ContactMessages';
 
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
-import ContactMessages from './Components/ContactMessages';
+
+import AdminPanel from './Components/AdminPanel';
+
+
 function App() {
   return (
     <div style={{ backgroundColor: "#E6F0FF" }}>
