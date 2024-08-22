@@ -5,6 +5,7 @@ const Student = require('../models/student.model');
 
 module.exports.findAllStudent = (req, res) => {
      Student.find()
+     .populate('group')  // Populate the group field
           .then((allstudent) => {
                res.json({ students: allstudent })
           })
