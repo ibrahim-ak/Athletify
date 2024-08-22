@@ -40,7 +40,7 @@ const StudentsList = ({ students, setStudents, removeFromDom  }) => {
           <TableBody>
             {students.map(student => (
               <TableRow key={student._id}>
-                <TableCell>{student.Username}</TableCell>
+                <TableCell>{student.username}</TableCell>
                 <TableCell>{student.phone}</TableCell>
                 <TableCell>{student.gender}</TableCell>
                 <TableCell>{student.age}</TableCell>
