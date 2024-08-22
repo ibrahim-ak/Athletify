@@ -51,7 +51,7 @@ const AcademyPanel = () => {
             gutterBottom 
             sx={{ color: '#1d4f67', textAlign: 'center' }}
           >
-            Admin Panel
+            Academy Panel
           </Typography>
           <Grid container spacing={4}>
             {/* Academy List on the left side */}

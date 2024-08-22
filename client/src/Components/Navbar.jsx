@@ -1,3 +1,4 @@
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -12,7 +13,20 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import LoginIcon from '@mui/icons-material/Login';
 
-function Navbar() {
+function Navbar({ homeRef, aboutRef, servicesRef, contactRef, partnersRef }) {
+  const handleScroll = (ref) => {
+    const offsetTop = ref.current.offsetTop;
+    const navbarHeight = document.querySelector('header.MuiAppBar-root').offsetHeight;
+
+    // Increase the extraOffset for the Partners section
+    const extraOffset = ref === partnersRef ? 200 : 80; // Adjust as needed for other sections
+
+    window.scrollTo({
+      top: offsetTop - navbarHeight - extraOffset, // Increase the scroll offset
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -23,19 +37,19 @@ function Navbar() {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Button sx={{ color: '#fff' }} href="#home" startIcon={<HomeIcon />}>
+            <Button sx={{ color: '#fff' }} onClick={() => handleScroll(homeRef)} startIcon={<HomeIcon />}>
               Home
             </Button>
-            <Button sx={{ color: '#fff' }} href="#about" startIcon={<InfoIcon />}>
+            <Button sx={{ color: '#fff' }} onClick={() => handleScroll(aboutRef)} startIcon={<InfoIcon />}>
               About
             </Button>
-            <Button sx={{ color: '#fff' }} href="#services" startIcon={<BuildIcon />}>
+            <Button sx={{ color: '#fff' }} onClick={() => handleScroll(servicesRef)} startIcon={<BuildIcon />}>
               Services
             </Button>
-            <Button sx={{ color: '#fff' }} href="#contact" startIcon={<ContactMailIcon />}>
+            <Button sx={{ color: '#fff' }} onClick={() => handleScroll(contactRef)} startIcon={<ContactMailIcon />}>
               Contact
             </Button>
-            <Button sx={{ color: '#fff' }} href="#partners" startIcon={<GroupIcon />}>
+            <Button sx={{ color: '#fff' }} onClick={() => handleScroll(partnersRef)} startIcon={<GroupIcon />}>
               Partners
             </Button>
           </Box>
@@ -61,3 +75,4 @@ function Navbar() {
 }
 
 export default Navbar;
+
