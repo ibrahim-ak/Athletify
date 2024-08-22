@@ -15,7 +15,7 @@ import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
-
+import ContactMessages from './Components/ContactMessages';
 function App() {
   return (
     <div style={{ backgroundColor: "#E6F0FF" }}>
@@ -23,7 +23,7 @@ function App() {
     <Routes>
         <Route path="/wall" element={<Wall />} />
         <Route path="/" element={<MainPage />} />
-        <Route path="/" element={<MainPage />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
         <Route path="/login" element={<SignIn />} />
         {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
         <Route path="/admin/*" element={<AdminPanelParent />} />
