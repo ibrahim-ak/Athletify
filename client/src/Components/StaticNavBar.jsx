@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function StaticNavBar() {
+function StaticNavBar(props) {
   return (
     <AppBar   position='static' sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -19,23 +19,18 @@ function StaticNavBar() {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
             <Button sx={{ color: '#fff' }} href="#home">
-              Home
+              {props.tab1}
             </Button>
             <Button sx={{ color: '#fff' }} href="#about">
-              About
+            {props.tab2}
             </Button>
             <Button sx={{ color: '#fff' }} href="#services">
-              Services
+              {props.tab3}
             </Button>
-            <Button sx={{ color: '#fff' }} href="#contact">
-              Contact
-            </Button>
-            <Button sx={{ color: '#fff' }} href="#contact">
-              Partners
-            </Button>
+
           </Box>
           <Button sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
-            Login
+            Logout
           </Button>
           <IconButton
             edge="start"
