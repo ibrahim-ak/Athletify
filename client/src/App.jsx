@@ -15,7 +15,7 @@ import AboutUs from "./Components/AboutUs";
 import Chat from './Components/Chat';
 import AdminPanel from './Components/AdminPanel';
 import SignIn from './Components/Login/SignIn'
-import AllGroupsComponent from './Components/group/AllGroupsComponent';
+// import AllGroupsComponent from './Components/group/AllGroupsComponent';
 import AcademyPanel from './Components/AcademyPanel';
 
 

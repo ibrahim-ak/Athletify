@@ -43,7 +43,7 @@ function News() {
                 marginBottom: '16px',
                 maxWidth: '100%',
                 height: '250px',
-                boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+                boxShadow: '4px 4px 10px orange',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 backgroundColor: '#f9f9f9',
