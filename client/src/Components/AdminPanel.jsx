@@ -21,9 +21,9 @@ const AdminPanel = () => {
     }
   };
 
-  const handleCreateAcademy = (newAcademy) => {
-    setAcademies([...academies, newAcademy]);
-  };
+  const onCreate = (newStudent) => {
+    setStudents(prevStudents => [...prevStudents, newStudent]); // Add the new student to the list
+};
 
   return (
     <Box>
@@ -53,7 +53,7 @@ const AdminPanel = () => {
             </Grid>
             {/* Create Academy Form on the right side */}
             <Grid item xs={12} md={4}>
-              <CreateAcademyForm onCreate={handleCreateAcademy} />
+              <CreateAcademyForm onCreate={onCreate} />
             </Grid>
           </Grid>
         </Container>

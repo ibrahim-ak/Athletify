@@ -37,24 +37,19 @@ function AnnouncementForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    console.log({
+      Content: content, 
+      Academy: academyId 
+    });  // Log the data being submitted
+    props.onSubmitt({ 
+      Content: content, 
+      Academy: academyId 
+    });
+    setContent('');
+    setAcademyId('');
+    setOpen(false);
+  }
 
-    try {
-      const response = await axios.post('/api/announcements', {
-        content,
-        academyId
-      });
-      console.log('Announcement added:', response.data);
-      props.onSubmit(response.data);  // Call the onSubmit prop with the response data
-      setContent('');
-      setAcademyId('');
-      setErrors({});
-      setOpen(false);
-    } catch (error) {
-      console.error('Error adding announcement:', error);
-      // Optionally set an error state to show a message to the user
-    }
-  };
 
   return (
     <Box>

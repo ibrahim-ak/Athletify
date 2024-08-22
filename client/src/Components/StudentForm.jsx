@@ -3,6 +3,7 @@ import { TextField, Button, Grid, Typography, Paper } from '@mui/material';
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
+
   const [formData, setFormData] = useState({
     Username: '',
     phone: '',
@@ -12,6 +13,7 @@ const StudentForm = ({ onCreate }) => {
     age: '',
     group: '' 
   });
+  const [students , setStudents] = useState([])
 
   const [errors, setErrors] = useState({});
 
@@ -53,26 +55,22 @@ const StudentForm = ({ onCreate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
-
     try {
-      const response = await axios.post('http://localhost:8000/api/student', formData);
-      console.log('Student created:', response.data);
-      onCreate(response.data.student);
-      setFormData({
-        Username: '',
-        phone: '',
-        password: '',
-        confirmPassword: '',
-        gender: '',
-        age: '',
-        group: ''
-      });
-      setErrors({});
+        const response = await axios.post('http://localhost:8000/api/student', formData);
+        onCreate(response.data);  // Pass the newly created student data to onCreate
+        setFormData({
+            Username: '',
+            phone: '',
+            password: '',
+            confirmPassword: '',
+            gender: '',
+            age: '',
+            group: ''
+        });
     } catch (error) {
-      console.error("Error creating student:", error);
+        console.error("Error creating student:", error);
     }
-  };
+};
 
   return (
     <Paper style={{ padding: 16 }}>
