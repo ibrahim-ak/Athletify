@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const AcademySchema = new mongoose.Schema({
      username: {
           type: String,
+          unique: [true, "User Name is already used"],
+          trim: true, 
           required: [true, "User Name is required"]
      },
 

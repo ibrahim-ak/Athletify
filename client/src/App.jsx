@@ -15,6 +15,7 @@ import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+import ContactMessages from './Components/ContactMessages'
 
 function App() {
   return (
