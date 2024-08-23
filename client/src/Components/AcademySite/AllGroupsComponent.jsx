@@ -1,7 +1,7 @@
 import React from 'react';
 import StaticNavBar from '../StaticNavBar';
-import AddGroupForm from './AddGroupForm';
-import AllGroupsCards from './AllGroupsCards';
+import AddGroupForm from '../group/AddGroupForm';
+import AllGroupsCards from '../group/AllGroupsCards';
 import { Container, Grid, Typography, Paper, Box } from '@mui/material';
 
 const AllGroupsComponent = () => {

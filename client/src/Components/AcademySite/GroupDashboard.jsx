@@ -37,7 +37,7 @@ const GroupDashboard = () => {
      return (
 
           <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+          {/* <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/> */}
 
 
                <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>

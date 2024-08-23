@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import CreateAcademyForm from './CreateAcademyForm';
-import AcademyList from './AcademyList';
+import CreateAcademyForm from '../CreateAcademyForm';
+import AcademyList from '../AcademyList';
 import { Container, Grid, Typography, Box } from '@mui/material';
-import Navbar from './AdminNav';
+import Navbar from '../AdminNav';
 
 const AdminPanel = () => {
   const [academies, setAcademies] = useState([]);
