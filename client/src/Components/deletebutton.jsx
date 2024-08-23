@@ -12,13 +12,13 @@ const DeleteButton = ({ academyId, onDelete }) => {
   };
 
   return (
-    <Button 
-      variant="contained" 
-      sx={{ backgroundColor: '#fa8419', color: '#FFFFFF' }} 
-      onClick={deleteAcademy}
-    >
-      Delete
-    </Button>
+    <button 
+  onClick={deleteAcademy} 
+  className="btn btn-outline-danger"
+>
+  Delete
+</button>
+
   );
 };
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import {
   Container,
@@ -91,21 +92,21 @@ const ContactMessages = () => {
                       <TableCell>{msg.email}</TableCell>
                       <TableCell>{msg.phone}</TableCell>
                       <TableCell>
-                        <Button 
-                          onClick={() => handleClickOpen(msg)} 
-                          variant="contained" 
-                          color="primary" 
-                          sx={{ marginRight: 1 }}
-                        >
-                          View
-                        </Button>
-                        <Button 
-                          onClick={() => handleDelete(msg._id)} 
-                          variant="contained" 
-                          color="error"
-                        >
-                          Delete
-                        </Button>
+                      <button 
+  onClick={() => handleClickOpen(msg)} 
+  className="btn btn-outline-primary"
+  style={{ marginRight: '8px' }}
+>
+  View
+</button>
+
+                        <button 
+  onClick={() => handleDelete(msg._id)} 
+  className="btn btn-outline-danger"
+>
+  Delete
+</button>
+
                       </TableCell>
                     </TableRow>
                   ))}
