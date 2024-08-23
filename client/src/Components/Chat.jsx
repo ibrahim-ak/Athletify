@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 
 function Chat() {
@@ -7,39 +8,59 @@ function Chat() {
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const { id } = useParams();
 
+  // Establish socket connection
   useEffect(() => {
-    // Initialize the socket connection
-    const socketIo = io('http://localhost:8000'); // Replace with your server URL if different
+    const socketIo = io('http://localhost:8000');
     setSocket(socketIo);
-
-    // Handle receiving previous messages
-    socketIo.on('previous_messages_from_server_' + room, (msgs) => {
-      setMessages(msgs);
-    });
-
-    // Handle receiving new messages
-    socketIo.on('new_message_from_server_' + room, (data) => {
-      setMessages(prevMessages => [...prevMessages, data]);
-    });
-
-    // Cleanup on component unmount
+    
     return () => {
-      socketIo.disconnect();
+      if (socketIo) {
+        socketIo.disconnect();
+      }
     };
-  }, [room]);
+  }, []);
 
-  const handleJoinChat = () => {
+  // Handle room joining when socket, username, or room changes
+  useEffect(() => {
     if (socket && username && room) {
       socket.emit('join_chat', { username, room });
-      setMessages([]); // Clear messages when joining a new room
+      setMessages([]); // Clear messages on joining a new room
+
+      // Set up event listeners
+      socket.on('previous_messages_from_server_' + room, (msgs) => {
+        setMessages(msgs);
+      });
+
+      socket.on('new_message_from_server_' + room, (data) => {
+        setMessages(prevMessages => [...prevMessages, data]);
+      });
+
+      socket.on('welcome_new_message_from_server_' + room, (msg) => {
+        setMessages(prevMessages => [msg, ...prevMessages]);
+      });
     }
-  };
+
+    // Cleanup event listeners when component unmounts or room changes
+    return () => {
+      if (socket) {
+        socket.off('previous_messages_from_server_' + room);
+        socket.off('new_message_from_server_' + room);
+        socket.off('welcome_new_message_from_server_' + room);
+      }
+    };
+  }, [socket, username, room]);
+
+  // Update room whenever id changes
+  useEffect(() => {
+    setRoom(id);
+  }, [id]);
 
   const handleSendMessage = () => {
-    if (socket && username && room && message) {
+    if (socket && username && room && message.trim()) {
       socket.emit('new_message', { username, room, message });
-      setMessage(''); // Clear input field
+      setMessage(''); // Clear the input field
     }
   };
 
@@ -53,13 +74,6 @@ function Chat() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Room"
-          value={room}
-          onChange={(e) => setRoom(e.target.value)}
-        />
-        <button onClick={handleJoinChat}>Join Chat</button>
       </div>
       <div>
         <input

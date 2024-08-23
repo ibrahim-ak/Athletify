@@ -37,7 +37,7 @@ function App() {
         <Route path="/academy/*" element={<AcademyParentComponent />} />
 
         <Route path="/academy/group/:id" element={<GroupDashboard />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat/:id" element={<Chat />} />
 
 
 

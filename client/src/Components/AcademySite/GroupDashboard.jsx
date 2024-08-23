@@ -282,7 +282,7 @@ const GroupDashboard = () => {
                                         </CardContent>
                                    </AnimatedCard>
                               </FadeInBox>
-                         </Grid>
+                         </Grid> 
                     </Grid>
                </Box>
           </Box>
