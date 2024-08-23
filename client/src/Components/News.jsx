@@ -8,7 +8,7 @@ function News() {
 
   useEffect(() => {
     getNews();
-  }, []); // The dependency array should be empty to fetch news only once on component mount
+  }, [newsItems]); // The dependency array should be empty to fetch news only once on component mount
 
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
@@ -62,8 +62,8 @@ function News() {
                   borderRadius: '8px',  // Border radius for the image
                   marginLeft: '16px',
                 }}
-                image={news.Image}
-                alt={news.Title}
+                image={news.image}
+                alt={news.title}
               />
               <CardContent
                 sx={{
@@ -90,10 +90,10 @@ function News() {
                 }}
               >
                 <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', marginBottom: '8px' }}>
-                  {news.Title}
+                  {news.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {news.Content}
+                  {news.content}
                 </Typography>
               </CardContent>
             </Card>

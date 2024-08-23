@@ -17,7 +17,7 @@ function Wall() {
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/wall");
+        navigate("/academy/academy-wall");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -35,7 +35,7 @@ function Wall() {
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/wall");
+        navigate("/academy/academy-wall");
       })
       .catch(err => {
         console.log(err.response.data);
