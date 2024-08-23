@@ -20,8 +20,8 @@ function NewsForm(props) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [academyId, setAcademyId] = useState('');
+  const [image, setImageUrl] = useState('');
+  const [academy, setAcademyId] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -37,8 +37,8 @@ function NewsForm(props) {
     const newErrors = {};
     if (!title.trim()) newErrors.title = 'Title is required';
     if (!content.trim()) newErrors.content = 'Content is required';
-    if (!imageUrl.trim() || !/^https?:\/\//i.test(imageUrl)) newErrors.imageUrl = 'A valid Image URL is required';
-    if (!academyId.trim()) newErrors.academyId = 'Academy ID is required';
+    if (!image.trim() || !/^https?:\/\//i.test(image)) newErrors.image = 'A valid Image URL is required';
+    if (!academy.trim()) newErrors.academyId = 'Academy ID is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -48,21 +48,21 @@ function NewsForm(props) {
     if (!validate()) return;
 
     try {
-      const response = await axios.post('/api/news', {
+      // const response = await axios.post('http://localhost:8000/api/news', );
+      // console.log('News added:', response.data);
+      props.onSubmit({
         title,
         content,
-        imageUrl,
-        academyId
-      });
-      console.log('News added:', response.data);
-      props.onSubmit(response.data);  // Call the onSubmit prop with the response data
+        image,
+        academy
+      });  // Call the onSubmit prop with the response data
       setTitle('');
       setContent('');
       setImageUrl('');
       setAcademyId('');
       setErrors({});
       setOpen(false);
-      navigate('/news');  // Navigate to the news page or wherever appropriate
+      navigate('/academy/academy-wall');  // Navigate to the news page or wherever appropriate
     } catch (error) {
       console.error('Error adding news:', error);
       // Optionally set an error state to show a message to the user
@@ -138,11 +138,11 @@ function NewsForm(props) {
               type="url"
               fullWidth
               variant="outlined"
-              value={imageUrl}
+              value={image}
               onChange={(e) => setImageUrl(e.target.value)}
               required
-              error={!!errors.imageUrl}
-              helperText={errors.imageUrl}
+              error={!!errors.image}
+              helperText={errors.image}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -157,11 +157,11 @@ function NewsForm(props) {
               label="Academy ID"
               fullWidth
               variant="outlined"
-              value={academyId}
+              value={academy}
               onChange={(e) => setAcademyId(e.target.value)}
               required
-              error={!!errors.academyId}
-              helperText={errors.academyId}
+              error={!!errors.academy}
+              helperText={errors.academy}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

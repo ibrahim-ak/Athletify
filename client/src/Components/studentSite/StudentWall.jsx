@@ -5,6 +5,7 @@ import News from '../News';
 import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import StudentSiteAnnouncements from './StudentSiteAnnouncements'
 
 function StudentWall() {
   const [errors, setErrors] = useState([]);
@@ -42,7 +43,7 @@ function StudentWall() {
       </Box>
 
       <News />
-      <Announcements  />
+      <StudentSiteAnnouncements  />
     </Box>
   );
 }
