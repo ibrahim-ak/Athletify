@@ -285,8 +285,8 @@ function NewsSlider() {
                   maxHeight: '50%', // Limit the height of the image
                   objectFit: 'cover',
                 }}
-                image={selectedNews.Image}
-                alt={selectedNews.Title}
+                image={selectedNews.image}
+                alt={selectedNews.title}
               />
               <CardContent
                 sx={{
@@ -297,10 +297,10 @@ function NewsSlider() {
                 }}
               >
                 <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' }}>
-                  {selectedNews.Title}
+                  {selectedNews.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' }}>
-                  {selectedNews.Content}
+                  {selectedNews.content}
                 </Typography>
               </CardContent>
             </Card>
