@@ -2,7 +2,6 @@ import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Pap
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
 
 import React, { useEffect, useState } from 'react'
-import Navbar from "../Navbar"
 import UpdateIcon from '@mui/icons-material/Update'
 import TrainingTimeForm from './TrainingTimeForm'
 import { useParams } from 'react-router-dom'
@@ -19,24 +18,30 @@ const GroupDashboard = () => {
 
      const [times, setTimes] = useState([])
 
-     useEffect(() => {
-          axios.get(`http://localhost:8000/api/group/${id}`).then((res) => {
-               console.log(res.data.group.trainingTimes)
-
-               setTimes(res.data.group.trainingTimes)
-          }).catch((err) => {
-               console.log(err);
-          })
-     }, [])
-
-
-  
-
-
-
      const handleOpen = () => {
           setOpen(true);
      };
+
+     useEffect(() => {
+          axios.get(`http://localhost:8000/api/group/${id}`)
+              .then((res) => {
+                  if (res.data && res.data.group && Array.isArray(res.data.group.trainingTimes)) {
+                      setTimes(res.data.group.trainingTimes); // Update state with training times
+                  } 
+              })
+              .catch((err) => {
+                  console.error('Error fetching group data:', err);
+                  setTimes([]); // Fallback to empty array on error
+              });
+      }, [id]); // Dependency on 'id' to refetch when it changes
+
+
+
+
+
+
+
+
 
      const handleClose = () => {
           setOpen(false);
@@ -72,10 +77,10 @@ const GroupDashboard = () => {
      return (
 
           <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+          {/* <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/> */}
 
 
-               <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>
+               <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin:'50px' }}>
                     <Grid container spacing={3}>
                          <Grid item xs={3} >
                               <FadeInBox >
@@ -154,18 +159,16 @@ const GroupDashboard = () => {
                                                        }}>
                                                             <Typography variant="body1">Time Schedule</Typography>
                                                        </Grid>
+                                                       <Grid item xs={8} sx={{ textAlign: 'center', padding: '0 10px' }}>
+    {Array.isArray(times) && times.map((time, key) => (
+        <li key={key}>
+            {time.day} | {time.start} - {time.end}
+        </li>
+    ))}
+</Grid>
 
-                                                       {/* Center - Text */}
-                                                       <Grid item xs={8} sx={{
-                                                            textAlign: 'center',
-                                                            padding: '0 10px',
-                                                       }}>
-                                                            {times.map((index, key) => (
-                                                                 <li key={key}> {index.day} |  {index.start}  - {index.end} </li>
-
-                                                            ))}
-                                                            {/* <Typography variant="body1"></Typography> */}
-                                                       </Grid>
+ 
+                                                       
 
                                                        {/* Right Side - Button with Update Icon */}
                                                        <Grid item xs={2} sx={{
@@ -288,3 +291,6 @@ const GroupDashboard = () => {
 
 
 export default GroupDashboard
+
+
+   

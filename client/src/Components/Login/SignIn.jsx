@@ -13,24 +13,22 @@ import { createTheme, ThemeProvider, keyframes } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FF6F31', // Vibrant Orange
+      main: '#FF6F31',
     },
     secondary: {
-      main: '#ffffffe5', 
-      
+      main: '#ffffffe5',
     },
     background: {
-      default: '#F9F9F9', // Soft White
-      paper: '#1A2E70', // Dark Navy for paper background
+      default: '#F9F9F9',
+      paper: '#1A2E70',
     },
     text: {
-      primary: '#1A2E70', // Soft White
-      secondary: '#1A2E70', // Soft Yellow for secondary text
+      primary: '#1A2E70',
+      secondary: '#1A2E70',
     },
   },
 });
 
-// Define keyframe animations
 const bounce = keyframes`
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -53,13 +51,35 @@ const fadeIn = keyframes`
 `;
 
 function SportsSignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const loginData = {
       username: data.get('username'),
       password: data.get('password'),
-    });
+    };
+
+    try {
+      const response = await fetch('http://localhost:8000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        console.log('Login successful', result);
+        // Handle successful login (e.g., save token, redirect)
+      } else {
+        console.error('Login failed:', result.message);
+        // Handle failed login (e.g., display error message)
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -87,7 +107,7 @@ function SportsSignIn() {
           square
           sx={{
             bgcolor: 'secondary.main',
-            borderRadius: '20px', // Adding border radius
+            borderRadius: '20px',
             p: 4,
             animation: `${fadeIn} 1.5s ease-out`,
           }}
@@ -123,18 +143,18 @@ function SportsSignIn() {
                 autoComplete="username"
                 autoFocus
                 InputLabelProps={{
-                  style: { color: '#FF6F31' }, // Soft Yellow for labels
+                  style: { color: '#FF6F31' },
                 }}
                 InputProps={{
-                  style: { color: '#F9F9F9' }, // Soft White for input text
+                  style: { color: '#F9F9F9' },
                 }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: '#FF6F31', // Soft Yellow border
+                      borderColor: '#FF6F31',
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FF6F31', // Soft Yellow border on hover
+                      borderColor: '#FF6F31',
                     },
                   },
                   animation: `${fadeIn} 2s ease-out`,
@@ -150,18 +170,18 @@ function SportsSignIn() {
                 id="password"
                 autoComplete="current-password"
                 InputLabelProps={{
-                  style: { color: '#FF6F31' }, // Soft Yellow for labels
+                  style: { color: '#FF6F31' },
                 }}
                 InputProps={{
-                  style: { color: '#F9F9F9' }, // Soft White for input text
+                  style: { color: '#F9F9F9' },
                 }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
-                      borderColor: '#FF6F31', // Soft Yellow border
+                      borderColor: '#FF6F31',
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FF6F31', // Soft Yellow border on hover
+                      borderColor: '#FF6F31',
                     },
                   },
                   animation: `${fadeIn} 2.2s ease-out`,
@@ -179,7 +199,6 @@ function SportsSignIn() {
               >
                 Sign In
               </Button>
-             
             </Box>
           </Box>
         </Grid>
