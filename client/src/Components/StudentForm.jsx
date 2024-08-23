@@ -10,24 +10,23 @@ const StudentForm = ({ onCreate }) => {
     confirmPassword: '',
     gender: '',
     age: '',
-    group: '' // Initialize as an empty string
+    group: ''
   });
 
   const [errors, setErrors] = useState({});
   const [allGroups, setAllGroups] = useState([]);
 
-  useEffect(() => {
+  useEffect((e) => {
+    e
     const fetchGroups = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/groups');
         const groups = response.data.groups || [];
         setAllGroups(groups);
-
-        // Set the initial group if there are any groups fetched
         if (groups.length > 0 && !formData.group) {
           setFormData(prevFormData => ({
             ...prevFormData,
-            group: groups[0]._id // Ensure group ID is used
+            group: groups[0]._id
           }));
         }
       } catch (error) {
@@ -55,23 +54,32 @@ const StudentForm = ({ onCreate }) => {
 
   const validate = () => {
     const newErrors = {};
-    // Validation logic
-
-    // Validate Group
+    if (!formData.username) newErrors.username = 'Username is required';
+    if (!formData.phone) newErrors.phone = 'Phone number is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.gender) newErrors.gender = 'Gender is required';
+    if (!formData.age) newErrors.age = 'Age is required';
     if (!formData.group) newErrors.group = 'Group is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+
+    // Validate form data before making the request
     if (!validate()) return;
 
     try {
+      // Send form data to the server
       const response = await axios.post('http://localhost:8000/api/student', formData);
       console.log('Student created:', response.data);
-      onCreate(response.data.student); // Ensure this updates the parent component's state
+
+      // Update parent component's state
+      onCreate(response.data.student);
+
+      // Reset form data and errors
       setFormData({
         username: '',
         phone: '',
@@ -80,12 +88,17 @@ const StudentForm = ({ onCreate }) => {
         gender: '',
         age: '',
         group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
-
       });
       setErrors({});
     } catch (error) {
       console.error("Error creating student:", error);
-      // Handle error display if necessary
+      if (error.response) {
+        // Display server-side validation error messages
+        setErrors(error.response.data.errors || {});
+      } else {
+        // Display general error message
+        setErrors({ form: 'An unexpected error occurred. Please try again.' });
+      }
     }
   };
 
@@ -162,7 +175,6 @@ const StudentForm = ({ onCreate }) => {
                 {errors.gender}
               </Typography>
             )}
-
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -213,6 +225,7 @@ const StudentForm = ({ onCreate }) => {
           </Grid>
         </Grid>
       </form>
+      {errors.form && <Typography color="error">{errors.form}</Typography>}
     </Paper>
   );
 };
