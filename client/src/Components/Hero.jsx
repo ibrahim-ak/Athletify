@@ -77,7 +77,7 @@ const Hero = ({ contactRef }) => {
               color="#fff"
               buttonText="Join Now"
               heroBtn={true}
-              onClick={handleScrollToContact}  // Add the onClick event
+              onClick={() => handleScrollToContact}  // Add the onClick event
               sx={{
                 "&:hover": {
                   backgroundColor: "#FF5722",
