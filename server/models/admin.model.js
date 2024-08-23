@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const AdminSchema = new mongoose.Schema({
   username: {
       type: String,
+      unique: [true, "User Name is already used"],
+      trim: true,
       required: [true, " Name is required"]
     },
     
