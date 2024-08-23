@@ -21,13 +21,14 @@ import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 import AdminPanel from './Components/AdminPanel';
+import AdminDashboard from './Components/admins/AdminDashboard';
 
 
 function App() {
   return (
     <div style={{ backgroundColor: "#E6F0FF" }}>
 
-    <Routes>
+      <Routes>
         <Route path="/wall" element={<Wall />} />
         <Route path="/" element={<MainPage />} />
         {/* <Route path="/" element={<MainPage />} /> */}
@@ -40,30 +41,32 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/contact-us" element={<ContactForm />} />
         {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
-        <Route path='/academy-panel' element={<AcademyPanel/>}/>
+        <Route path='/academy-panel' element={<AcademyPanel />} />
 
 
 
-      {/* Route for the News Form */}
-      <Route path="/add-news" element={<NewsForm />} />
-      <Route path="/academy/group/:id" element={<GroupDashboard />} />
-      {/* <Routes> */}
-          {/* <Route path="/chat" element={<Chat />} /> */}
-          {/* <Route path="/about-us" element={<AboutUs />} /> */}
-          {/* <Route path="/contact-us" element={<Contact />} /> */}
+        {/* Route for the News Form */}
+        <Route path="/add-news" element={<NewsForm />} />
+        <Route path="/academy/group/:id" element={<GroupDashboard />} />
+        {/* <Routes> */}
+        {/* <Route path="/chat" element={<Chat />} /> */}
+        {/* <Route path="/about-us" element={<AboutUs />} /> */}
+        {/* <Route path="/contact-us" element={<Contact />} /> */}
         {/* </Routes> */}
 
-      <Route path="/add-news" element={<NewsForm />} />
-      
-          <Route path="/chat" element={<Chat />} />
-          {/* <Route path="/about-us" element={<AboutUs />} /> */}
-          <Route path="/contact-us" element={<ContactForm />} />
-          <Route path='/admin-panel' element={<AdminPanel/>}/>
-          <Route path='/academy-panel' element={<AcademyPanel/>}/>
-       
+        <Route path="/add-news" element={<NewsForm />} />
+
+        <Route path="/chat" element={<Chat />} />
+        {/* <Route path="/about-us" element={<AboutUs />} /> */}
+        <Route path="/contact-us" element={<ContactForm />} />
+        <Route path='/admin-panel' element={<AdminPanel />} />
+        <Route path='/academy-panel' element={<AcademyPanel />} />
+        <Route path='/admindashboard' element={<AdminDashboard />
+        } />
+
 
         <Route path="/group" element={<AllGroupsComponent />} />
-    </Routes>
+      </Routes>
     </div >
 
 
