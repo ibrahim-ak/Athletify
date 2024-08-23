@@ -2,26 +2,31 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Student = require('../models/student.model');
 const Admin = require('../models/admin.model');
-const Academy = require('../models/academy.model'); // Assuming you have this model
-
-// Define a map to easily access models based on user type
-const userModels = {
-    student: Student,
-    admin: Admin,
-    academy: Academy
-};
+const Academy = require('../models/academy.model');
 
 module.exports.login = async (req, res) => {
     try {
-        const { username, password, role } = req.body;
+        const { username, password } = req.body;
 
-        if (!userModels[role]) {
-            return res.status(400).json({ message: 'Invalid user type' });
+        // Attempt to find the user across all models
+        const userTypes = [
+            { model: Student, role: 'student' },
+            { model: Admin, role: 'admin' },
+            { model: Academy, role: 'academy' }
+        ];
+
+        let user = null;
+        let userType = null;
+
+        // Iterate through user types and try to find the user
+        for (const userTypeObject of userTypes) {
+            user = await userTypeObject.model.findOne({ username });
+            if (user) {
+                userType = userTypeObject.role;
+                break;
+            }
         }
 
-        // Find the user by username in the specified schema
-        const UserModel = userModels[role];
-        const user = await UserModel.findOne({ username });
         if (!user) {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
@@ -32,14 +37,15 @@ module.exports.login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
-        const token = jwt.sign({ id: user._id, role: user.role }, 'your_jwt_secret_key', { expiresIn: '10h' });
+        // Generate JWT token
+        const token = jwt.sign({ id: user._id, role: userType }, 'your_jwt_secret_key', { expiresIn: '10h' });
 
-        console.log(`Login successful for ${username} with role: ${user.role}`);
+        console.log(`Login successful for ${username} with role: ${userType}`);
 
         res.json({
             message: 'Login successful',
             token: token,
-            role: user.role
+            role: userType
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });

@@ -2,7 +2,6 @@ import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Pap
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
 
 import React, { useEffect, useState } from 'react'
-import Navbar from "../Navbar"
 import UpdateIcon from '@mui/icons-material/Update'
 import TrainingTimeForm from './TrainingTimeForm'
 import { useParams } from 'react-router-dom'
@@ -72,7 +71,7 @@ const GroupDashboard = () => {
      return (
 
           <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+          {/* <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/> */}
 
 
                <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>

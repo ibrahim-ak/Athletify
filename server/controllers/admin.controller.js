@@ -9,7 +9,16 @@ module.exports.findOneAdmin = (req, res) => {
                res.json(err)
           });
 }
-
+module.exports.findAllAdmin = (req, res) => {
+     Admin.find()
+     // .populate('group')  // Populate the group field
+          .then((alladmins) => {
+               res.json({ admins: alladmins })
+          })
+          .catch((err) => {
+               res.json(err)
+          });
+}
 
 
 module.exports.createAdmin = (req, res) => {
