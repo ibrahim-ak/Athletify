@@ -1,4 +1,6 @@
 const News = require('../models/news.model');
+const express = require('express');
+const router = express.Router();
 
 
 
@@ -57,3 +59,5 @@ module.exports.deleteAnExistingnew = (req, res) => {
                res.json(err)
           });
 }
+
+

@@ -22,6 +22,19 @@ module.exports.findOnegroup = (req, res) => {
           });
 }
 
+module.exports.updateExistinggroup = (req, res) => {
+     Group.findOneAndUpdate(
+          { _id: req.params.id },
+          req.body,
+          { new: true, runValidators: true }
+     )
+          .then(updatednew => {
+               res.json({ new: updatednew })
+          })
+          .catch((err) => {
+               res.status(400).json(err)
+          });
+}
 
 
 module.exports.createNewgroup = (req, res) => {
