@@ -1,12 +1,33 @@
+import React from 'react';
 import { styled, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import React from "react";
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate from react-router-dom
 
 import fbIcon from "../media/fbicon.png";
 import twitterIcon from "../media/twittericon.png";
 import linkedinIcon from "../media/linkedinicon.png";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const offsetTop = element.offsetTop;
+      const navbarHeight = document.querySelector('header.MuiAppBar-root')?.offsetHeight || 0;
+      const extraOffset = 80; // Adjust this as needed
+
+      window.scrollTo({
+        top: offsetTop - navbarHeight - extraOffset,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   const CustomContainer = styled(Container)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-around",
@@ -26,7 +47,7 @@ const Footer = () => {
     },
   }));
 
-  const FooterLink = styled("span")(({ theme }) => ({
+  const FooterLink = styled('span')(({ theme }) => ({
     fontSize: "16px",
     color: "#7A7A7E",
     fontWeight: "300",
@@ -39,108 +60,88 @@ const Footer = () => {
   return (
     <Box sx={{ py: 10 }}>
       <CustomContainer>
-        <CustomContainer>
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "20px",
-                color: "#1C1C1D",
-                fontWeight: "700",
-                mb: 2,
-              }}
-            >
-              Products
-            </Typography>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: "20px",
+              color: "#1C1C1D",
+              fontWeight: "700",
+              mb: 2,
+            }}
+          >
+            Resources
+          </Typography>
+          <FooterLink onClick={() => handleScroll('home')}>Our Homes</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleScroll('services')}>Services</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleScroll('contact')}>Contact</FooterLink>
+          <br />
+        </Box>
 
-            <FooterLink>Listing</FooterLink>
-            <br />
-            <FooterLink>Properties</FooterLink>
-            <br />
-            <FooterLink>Agents</FooterLink>
-            <br />
-            <FooterLink>Blog</FooterLink>
-          </Box>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: "20px",
+              color: "#1C1C1D",
+              fontWeight: "700",
+              mb: 2,
+            }}
+          >
+            Students
+          </Typography>
+          <FooterLink onClick={() => handleNavigation('/student/student-wall')}>Student Wall</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleNavigation('/student/student-group')}>Student Group</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleNavigation('/student/student-announce')}>Student Announce</FooterLink>
+        </Box>
 
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "20px",
-                color: "#1C1C1D",
-                fontWeight: "700",
-                mb: 2,
-              }}
-            >
-              Resources
-            </Typography>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: "20px",
+              color: "#1C1C1D",
+              fontWeight: "700",
+              mb: 2,
+            }}
+          >
+            Relationship
+          </Typography>
+          <FooterLink onClick={() => handleScroll('partners')}>Partners</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleScroll('about')}>About Us</FooterLink>
+          <br />
+          <FooterLink onClick={() => handleScroll('contact')}>Contact Us</FooterLink>
+        </Box>
 
-            <FooterLink>Our Homes</FooterLink>
-            <br />
-            <FooterLink>Stories</FooterLink>
-            <br />
-            <FooterLink>Video</FooterLink>
-            <br />
-            <FooterLink>Free Trial</FooterLink>
-          </Box>
-
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "20px",
-                color: "#1C1C1D",
-                fontWeight: "700",
-                mb: 2,
-              }}
-            >
-              Company
-            </Typography>
-
-            <FooterLink>Partnerships</FooterLink>
-            <br />
-            <FooterLink>Terms of use</FooterLink>
-            <br />
-            <FooterLink>Privacy</FooterLink>
-            <br />
-            <FooterLink>Sitemap</FooterLink>
-          </Box>
-
-          <Box>
-            <Typography
-              sx={{
-                fontSize: "20px",
-                color: "#1C1C1D",
-                fontWeight: "700",
-                mb: 2,
-              }}
-            >
-              Get in touch
-            </Typography>
-
-            <Typography
-              sx={{
-                fontSize: "16px",
-                color: "#7A7A7E",
-                fontWeight: "500",
-                mb: 2,
-              }}
-            >
-              You’ll find your next home, in any style you prefer.
-            </Typography>
-
-            <IconBox>
-              <img src={fbIcon} alt="fbIcon" style={{ cursor: "pointer" }} />
-              <img
-                src={twitterIcon}
-                alt="twitterIcon"
-                style={{ cursor: "pointer" }}
-              />
-              <img
-                src={linkedinIcon}
-                alt="linkedinIcon"
-                style={{ cursor: "pointer" }}
-              />
-            </IconBox>
-          </Box>
-        </CustomContainer>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: "20px",
+              color: "#1C1C1D",
+              fontWeight: "700",
+              mb: 2,
+            }}
+          >
+            Get in touch
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "16px",
+              color: "#7A7A7E",
+              fontWeight: "500",
+              mb: 2,
+            }}
+          >
+            You’ll find your next home, in any style you prefer.
+          </Typography>
+          <IconBox>
+            <img src={fbIcon} alt="Facebook Icon" style={{ cursor: "pointer" }} />
+            <img src={twitterIcon} alt="Twitter Icon" style={{ cursor: "pointer" }} />
+            <img src={linkedinIcon} alt="LinkedIn Icon" style={{ cursor: "pointer" }} />
+          </IconBox>
+        </Box>
       </CustomContainer>
     </Box>
   );

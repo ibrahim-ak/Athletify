@@ -1,7 +1,6 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete'; // Material-UI delete icon
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const StudentsList = ({ students = [], removeFromDom }) => {
 
@@ -38,13 +37,17 @@ const StudentsList = ({ students = [], removeFromDom }) => {
                                     <TableCell>{student.age || 'N/A'}</TableCell>
                                     <TableCell>{student.group ? student.group.Name : 'No Group'}</TableCell>
                                     <TableCell>
-                                    <button
-  className="btn btn-outline-danger"
-  onClick={() => handleDelete(student._id)}
->
-  DELETE
-</button>
-
+                                        <IconButton
+                                            onClick={() => handleDelete(student._id)}
+                                            sx={{
+                                                color: '#1d4f67',
+                                                '&:hover': {
+                                                    color: '#ff6f31'
+                                                }
+                                            }}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ) : null

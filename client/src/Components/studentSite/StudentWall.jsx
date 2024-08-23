@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-
+import Footer from '../Footer';
 import News from '../News';
 import Announcements from '../Announcements';
 import axios from 'axios';
@@ -13,6 +13,7 @@ function StudentWall() {
 
 
   return (
+    <>
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
       
 
@@ -44,7 +45,11 @@ function StudentWall() {
 
       <News />
       <StudentSiteAnnouncements  />
+      
     </Box>
+    <Footer />
+
+    </>
   );
 }
 
