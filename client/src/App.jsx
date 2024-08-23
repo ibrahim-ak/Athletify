@@ -15,6 +15,8 @@ import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
 import AdminPanelParent from './Components/AdminPanelParent';
 import AllGroupsComponent from './Components/group/AllGroupsComponent';
+import ContactMessages from './Components/ContactMessages';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route path="/admin/*" element={<AdminPanelParent />} />
         <Route path="/admin-messages" element={<ContactMessages />} />
 
+        
         <Route path="/academy/group/1" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/contact-us" element={<ContactForm />} />

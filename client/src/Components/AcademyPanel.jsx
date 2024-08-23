@@ -56,7 +56,7 @@ const AcademyPanel = () => {
           <Grid container spacing={4}>
             {/* Academy List on the left side */}
             <Grid item xs={12} md={8}>
-              <StudentsList students={students} setStudents={setStudents} removeFromDom={removeFromDom} />
+              <StudentsList students={students} removeFromDom={removeFromDom} />
             </Grid>
             <Grid item xs={12} md={4}>
               <StudentForm onCreate={handleCreateStudent} />

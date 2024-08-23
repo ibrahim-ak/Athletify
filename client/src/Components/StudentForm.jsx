@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
@@ -13,10 +13,8 @@ const StudentForm = ({ onCreate }) => {
     group: '' // Initialize as an empty string
   });
 
-  const [students , setStudents] = useState([])
-
   const [errors, setErrors] = useState({});
-  const [allgroups, setAllGroups] = useState([]);
+  const [allGroups, setAllGroups] = useState([]);
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -27,9 +25,9 @@ const StudentForm = ({ onCreate }) => {
 
         // Set the initial group if there are any groups fetched
         if (groups.length > 0 && !formData.group) {
-          setFormData((prevFormData) => ({
+          setFormData(prevFormData => ({
             ...prevFormData,
-            group: groups[0].id
+            group: groups[0]._id // Ensure group ID is used
           }));
         }
       } catch (error) {
@@ -42,13 +40,22 @@ const StudentForm = ({ onCreate }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
   };
 
+  const handleRadioChange = (e) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      gender: e.target.value
+    }));
+  };
 
   const validate = () => {
     const newErrors = {};
-    // Validation logic (same as before)
+    // Validation logic
 
     // Validate Group
     if (!formData.group) newErrors.group = 'Group is required';
@@ -60,11 +67,11 @@ const StudentForm = ({ onCreate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-    console.log('Form Data:', formData);
+
     try {
       const response = await axios.post('http://localhost:8000/api/student', formData);
       console.log('Student created:', response.data);
-      onCreate(response.data.student);
+      onCreate(response.data.student); // Ensure this updates the parent component's state
       setFormData({
         username: '',
         phone: '',
@@ -72,21 +79,18 @@ const StudentForm = ({ onCreate }) => {
         confirmPassword: '',
         gender: '',
         age: '',
-
-        group: allgroups.length > 0 ? allgroups[0]._id : '' // Reset group to first option if available
+        group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
       });
       setErrors({});
     } catch (error) {
       console.error("Error creating student:", error);
+      // Handle error display if necessary
     }
   };
-  
 
   return (
     <Paper style={{ padding: 16 }}>
-
       <Typography variant="h6" gutterBottom sx={{ color: '#1d4f67' }}>
-
         Register Student
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -99,7 +103,6 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
-
               error={!!errors.username}
               helperText={errors.username}
             />
@@ -112,6 +115,8 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+              error={!!errors.phone}
+              helperText={errors.phone}
             />
           </Grid>
           <Grid item xs={12}>
@@ -123,6 +128,8 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+              error={!!errors.password}
+              helperText={errors.password}
             />
           </Grid>
           <Grid item xs={12}>
@@ -134,17 +141,26 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Gender"
+            <Typography variant="body1">Gender</Typography>
+            <RadioGroup
               name="gender"
               value={formData.gender}
-              onChange={handleChange}
-              fullWidth
-              required
-            />
+              onChange={handleRadioChange}
+              row
+            >
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+            </RadioGroup>
+            {errors.gender && (
+              <Typography variant="body2" color="error">
+                {errors.gender}
+              </Typography>
+            )}
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -155,10 +171,11 @@ const StudentForm = ({ onCreate }) => {
               onChange={handleChange}
               fullWidth
               required
+              error={!!errors.age}
+              helperText={errors.age}
             />
           </Grid>
           <Grid item xs={12}>
-
             <FormControl fullWidth required error={!!errors.group}>
               <InputLabel id="group-select-label">Group</InputLabel>
               <Select
@@ -168,8 +185,8 @@ const StudentForm = ({ onCreate }) => {
                 onChange={handleChange}
                 label="Group"
               >
-                {allgroups.length > 0 ? (
-                  allgroups.map((group) => (
+                {allGroups.length > 0 ? (
+                  allGroups.map(group => (
                     <MenuItem key={group._id} value={group._id}>
                       {group.Name}
                     </MenuItem>
@@ -187,7 +204,7 @@ const StudentForm = ({ onCreate }) => {
             <Button 
               type="submit" 
               variant="contained" 
-              sx={{ backgroundColor: '#ff6f31', color: '#fff' }} // Apply the color here
+              sx={{ backgroundColor: '#ff6f31', color: '#fff' }} 
             >
               Register Student
             </Button>
