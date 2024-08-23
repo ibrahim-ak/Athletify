@@ -13,17 +13,22 @@ import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
 import AcademyPanel from './Components/AcademySite/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
+
+import AdminDashboard from './Components/admins/AdminDashboard';
 import AdminPanelParent from './Components/AdminSite/AdminPanelParent';
 import AllGroupsComponent from './Components/AcademySite/AllGroupsComponent';
 import ContactMessages from './Components/AdminSite/ContactMessages'
 import StudentParentComponent from './Components/studentSite/studentParentComponent';
 import AcademyParentComponent from './Components/AcademySite/AcademyParentComponent'
 
+
 function App() {
   return (
     <div style={{ backgroundColor: "#E6F0FF" }}>
 
+
     <Routes>
+
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<SignIn />} />
         {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
@@ -34,7 +39,10 @@ function App() {
         <Route path="/academy/group/:id" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
 
+
+
     </Routes>
+
     </div >
 
 
