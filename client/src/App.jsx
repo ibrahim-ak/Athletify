@@ -14,6 +14,7 @@ import SignIn from './Components/Login/SignIn'
 import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
 // import AdminPanel from './Components/AdminPanel';
+import ContactMessages from './Components/ContactMessages';
 
 
 // import AllGroupsComponent from './Components/group/AllGroupsComponent';

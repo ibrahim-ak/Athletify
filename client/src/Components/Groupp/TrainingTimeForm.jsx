@@ -1,100 +1,108 @@
 import React, { useState } from 'react';
-import { Button, TextField, MenuItem, Box, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import UpdateIcon from '@mui/icons-material/Update';
+import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Grid, Typography, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 
-const TrainingTimeForm = ({ open, onClose, ...props }) => {
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-     const [trainingTimes, setTrainingTimes] = useState([{ start: "", end: "", day: "" }]);
+const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess }) => {
+  // Define state for form inputs
+  const [trainingTimes, setTrainingTimes] = useState(timess || [{ day: '', start: '', end: '' }]);
 
-     const handleAddTrainingTime = () => {
-          setTrainingTimes([...trainingTimes, { start: "", end: "", day: "" }]);
-     };
+  // Handle changes to form inputs
+  const handleInputChange = (index, event) => {
+    const newTrainingTimes = [...trainingTimes];
+    newTrainingTimes[index][event.target.name] = event.target.value;
+    setTrainingTimes(newTrainingTimes);
+  };
 
-     const handleChange = (index, field, value) => {
-          const newTrainingTimes = [...trainingTimes];
-          newTrainingTimes[index][field] = value;
-          setTrainingTimes(newTrainingTimes);
-     };
+  const handleDayChange = (event, index) => {
+    const newTrainingTimes = [...trainingTimes];
+    newTrainingTimes[index].day = event.target.value;
+    setTrainingTimes(newTrainingTimes);
+  };
 
-     const handleSubmit = async (e) => {
-          e.preventDefault();
+  // Add a new time slot
+  const handleAddTimeSlot = () => {
+    setTrainingTimes([...trainingTimes, { day: '', start: '', end: '' }]);
+  };
 
-          try {
-               const res = await axios.patch(`http://localhost:8000/api/group/${props.thisid}`, {
-                    trainingTimes
-               });
+  // Handle form submission
+  const handleSubmit = () => {
+    axios
+      .patch(`http://localhost:8000/api/group/${thisid}`, { trainingTimes })
+      .then((response) => {
+        setTimes(response.data.trainingTimes); // Update the times in the parent component
+        onClose(); // Close the dialog
+      })
+      .catch((error) => {
+        console.error('There was an error updating the training times!', error);
+      });
+  };
 
-               const updatedGroup = res.data.group;
-
-               props.setTimes(prevList =>
-                    prevList.map(group =>
-                         group._id === updatedGroup._id ? { ...group, trainingTimes: updatedGroup.trainingTimes } : group
-                    )
-               );
-
-               onClose();
-          } catch (error) {
-               console.error("Error updating the training times:", error);
-               alert("There was an error updating the training times. Please try again.");
-          }
-     };
-     return (
-          <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-               <DialogTitle> Training Times</DialogTitle>
-               <DialogContent>
-                    {trainingTimes.map((time, index) => (
-                         <Box key={index} display="flex" alignItems="center" mb={2}>
-                              <TextField
-                                   type="time"
-                                   value={time.start}
-                                   onChange={(e) => handleChange(index, 'start', e.target.value)}
-                                   label="Start Time"
-                                   fullWidth
-                              />
-                              <TextField
-                                   type="time"
-                                   value={time.end}
-                                   onChange={(e) => handleChange(index, 'end', e.target.value)}
-                                   label="End Time"
-                                   fullWidth
-                                   sx={{ ml: 2 }}
-                              />
-                              <TextField
-                                   select
-                                   label="Day"
-                                   value={time.day}
-                                   onChange={(e) => handleChange(index, 'day', e.target.value)}
-                                   fullWidth
-                                   sx={{ ml: 2 }}
-                              >
-                                   {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                                        <MenuItem key={day} value={day}>
-                                             {day}
-                                        </MenuItem>
-                                   ))}
-                              </TextField>
-                         </Box>
-                    ))}
-                    <Button onClick={handleAddTrainingTime} variant="contained" color="primary">
-                         Add Training Time
-                    </Button>
-               </DialogContent>
-               <DialogActions>
-                    <Button onClick={onClose} color="secondary">
-                         Cancel
-                    </Button>
-                    <Button
-                         onClick={handleSubmit}
-                         variant="contained"
-                         color="primary"
-                         startIcon={<UpdateIcon />}
-                    >
-                         Update
-                    </Button>
-               </DialogActions>
-          </Dialog>
-     );
+  return (
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+      <DialogTitle>Update Training Times</DialogTitle>
+      <DialogContent>
+        <Typography variant="body1" gutterBottom>
+          Update the training times for this group:
+        </Typography>
+        {trainingTimes.map((time, index) => (
+          <Grid container spacing={2} key={index} alignItems="center">
+            <Grid item xs={4}>
+              <Select
+                value={time.day}
+                onChange={(event) => handleDayChange(event, index)}
+                fullWidth
+                displayEmpty
+                variant="outlined"
+              >
+                {daysOfWeek.map((day) => (
+                  <MenuItem key={day} value={day}>
+                    {day}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                label="Start Time"
+                name="start"
+                value={time.start}
+                onChange={(event) => handleInputChange(index, event)}
+                type="time"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                label="End Time"
+                name="end"
+                value={time.end}
+                onChange={(event) => handleInputChange(index, event)}
+                type="time"
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+        ))}
+        <Button onClick={handleAddTimeSlot} color="primary" variant="contained" style={{ marginTop: '10px' }}>
+          Add Time Slot
+        </Button>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="secondary">
+          Cancel
+        </Button>
+        <Button onClick={handleSubmit} color="primary" variant="contained">
+          Save Changes
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 };
 
 export default TrainingTimeForm;
+
+
+
+
