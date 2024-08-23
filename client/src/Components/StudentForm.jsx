@@ -80,6 +80,7 @@ const StudentForm = ({ onCreate }) => {
         gender: '',
         age: '',
         group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
+
       });
       setErrors({});
     } catch (error) {
@@ -161,6 +162,7 @@ const StudentForm = ({ onCreate }) => {
                 {errors.gender}
               </Typography>
             )}
+
           </Grid>
           <Grid item xs={12}>
             <TextField

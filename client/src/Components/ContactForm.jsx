@@ -92,19 +92,19 @@ function ContactForm() {
           <RoomIcon sx={{ mr: 1, color: '#007BFF' }} /> Address
         </Typography>
         <Typography sx={{ mb: 2, color: '#5D6D7E' }}>
-          A108 Adam Street, New York, NY 535022
+        Ougarit Building، 1st Floor، Ramallah, Al-Bireh
         </Typography>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: '#2C3E50' }}>
           <PhoneIcon sx={{ mr: 1, color: '#007BFF' }} /> Call Us
         </Typography>
         <Typography sx={{ mb: 2, color: '#5D6D7E' }}>
-          +1 5589 55488 55
+          +970-59741-1261
         </Typography>
         <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold', color: '#2C3E50' }}>
           <EmailIcon sx={{ mr: 1, color: '#007BFF' }} /> Email Us
         </Typography>
         <Typography sx={{ mb: 2, color: '#5D6D7E' }}>
-          info@example.com
+          info@Athletify.com
         </Typography>
         <div style={{ width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)' }}>
           <iframe

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Grid, Typography, Box } from '@mui/material';
-import StaticNavBar from './StaticNavBar'; // Import your AdminNav component
-import StudentsList from './StudentsList';
-import StudentForm from './StudentForm';
+import StaticNavBar from '../StaticNavBar'; // Import your AdminNav component
+import StudentsList from '../StudentsList';
+import StudentForm from '../StudentForm';
 
 const AcademyPanel = () => {
   const [students, setStudents] = useState([]);
@@ -33,7 +33,7 @@ const AcademyPanel = () => {
   return (
     <Box>
       {/* Navbar */}
-      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+      {/* <StaticNavBar tab1={'Home'} tab2={'Students'} tab3={'Groups'}/> */}
 
       <Box 
         sx={{ 

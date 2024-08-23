@@ -22,7 +22,38 @@ module.exports.findOnegroup = (req, res) => {
           });
 }
 
+// module.exports.updateExistinggroup = (req, res) => {
+//      Group.findOneAndUpdate(
+//           { _id: req.params.id },
+//           req.body,
+//           { new: true, runValidators: true }
+//      )
+//           .then(updatednew => {
+//                res.json({ new: updatednew })
+//           })
+//           .catch((err) => {
+//                res.status(400).json(err)
+//           });
+// }
 
+module.exports.updateExistingGroup = (req, res) => {
+     const groupId = req.params.id;
+     const updateData = req.body;
+ 
+     // Validate trainingTimes if it exists in the request
+     if (updateData.trainingTimes && !Array.isArray(updateData.trainingTimes)) {
+         return res.status(400).json({ error: 'Invalid training times format, must be an array' });
+     }
+ 
+     Group.findOneAndUpdate(
+         { _id: groupId },
+         updateData,
+         { new: true, runValidators: true, context: 'query' } // Added context for proper Mongoose validation
+     )
+     .then(updatedGroup => {
+         res.json({ updatedGroup }); // Directly return the updated group
+     });
+ };
 
 module.exports.createNewgroup = (req, res) => {
      Group.create(req.body)

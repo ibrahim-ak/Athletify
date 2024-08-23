@@ -1,28 +1,33 @@
 const mongoose = require('mongoose');
 const Group = require("./group.model");  
-
 const bcrypt = require('bcrypt');
+
 const StudentSchema = new mongoose.Schema({
      username: {
           type: String,
-          required: [true, "User Name is required"]
-     }
-     ,
+          required: [true, "User Name is required"],
+          unique: [true, "User Name is already used"],
+          trim: true,    // Optional: Remove whitespace from both ends
+          minlength: [3, "Username must be at least 3 characters long"], // Optional: Set minimum length
+          maxlength: [50, "Username must be less than 50 characters"] // Optional: Set maximum length
+     },
      phone: {
           type: String,
-          required: [true, "phone is required"],
-          minlength: [8, "Password must be 8 characters or longer"]
+          required: [true, "Phone number is required"],
+          minlength: [8, "Phone number must be 8 characters or longer"]
      },
      password: {
           type: String,
           required: [true, "Password is required"],
           minlength: [8, "Password must be 8 characters or longer"]
-     }, gender: {
+     },
+     gender: {
           type: String,
-          required: [true, "gender is required"],
-     }, age: {
+          required: [true, "Gender is required"]
+     },
+     age: {
           type: Number,
-          required: [true, "age is required"],
+          required: [true, "Age is required"]
      },
      group: {
           type: mongoose.Schema.Types.ObjectId,
@@ -32,15 +37,12 @@ const StudentSchema = new mongoose.Schema({
      role: {
           type: String,
           default: 'student'
-      }
-      
-
-
+     }
 }, { timestamps: true });
 
 StudentSchema.virtual('confirmPassword')
-     .get(() => this._confirmPassword)
-     .set(value => this._confirmPassword = value);
+     .get(function () { return this._confirmPassword; })
+     .set(function (value) { this._confirmPassword = value; });
 
 StudentSchema.pre('validate', function (next) {
      if (this.password !== this.confirmPassword) {
@@ -50,11 +52,13 @@ StudentSchema.pre('validate', function (next) {
 });
 
 StudentSchema.pre('save', function (next) {
+     if (!this.isModified('password')) return next();
      bcrypt.hash(this.password, 10)
           .then(hash => {
                this.password = hash;
                next();
-          });
+          })
+          .catch(err => next(err));
 });
 
 const Student = mongoose.model('Student', StudentSchema);

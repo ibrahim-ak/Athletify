@@ -2,7 +2,8 @@ import { Box, Button, Card, CardContent, Grid, List, ListItem, ListItemText, Pap
 import { Container, height, margin, maxHeight, minHeight } from '@mui/system'
 import React from 'react'
 import StaticNavBar from "../StaticNavBar"
-const GroupDashboard = () => {
+
+const StudentGroupDashboard = () => {
      const students = ['John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'John Doe', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White', 'Jane Smith', 'Michael Brown', 'Emily White']; // Example student names
 
 
@@ -36,11 +37,11 @@ const GroupDashboard = () => {
      });
      return (
 
-          <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-          <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+          <Box style={{ height: '100vh', display: 'flex', flexDirection: 'column',  marginTop: '1rem' }}>
+          {/* <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/> */}
 
 
-               <Box style={{ flexGrow: 1, display: 'flex', marginTop: '90px', marginRight: '200px', margin: '100px' }}>
+               <Box style={{ flexGrow: 1, display: 'flex', marginRight: '200px', margin: '100px' }}>
                     <Grid container spacing={3}>
                          {/* Left side: Student list */}
                          <Grid item xs={3} >
@@ -182,4 +183,4 @@ const GroupDashboard = () => {
 };
 
 
-export default GroupDashboard
+export default StudentGroupDashboard

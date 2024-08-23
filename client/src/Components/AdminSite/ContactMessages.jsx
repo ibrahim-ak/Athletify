@@ -19,7 +19,7 @@ import {
   Box,
   Divider
 } from '@mui/material';
-import AdminNav from './AdminNav';
+import AdminNav from '../AdminNav';
 
 const ContactMessages = () => {
   const [messages, setMessages] = useState([]);
