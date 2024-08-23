@@ -13,8 +13,9 @@ import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
 import AcademyPanel from './Components/AcademyPanel';
 import AddGroupForm from './Components/group/AddGroupForm';
+// import AdminPanel from './Components/AdminPanel';
 
-import ContactMessages from './Components/ContactMessages';
+
 // import AllGroupsComponent from './Components/group/AllGroupsComponent';
 
 import AdminPanelParent from './Components/AdminPanelParent';
@@ -55,7 +56,7 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           {/* <Route path="/about-us" element={<AboutUs />} /> */}
           <Route path="/contact-us" element={<ContactForm />} />
-          <Route path='/admin-panel' element={<AdminPanel/>}/>
+          {/* <Route path='/admin-panel' element={<AdminPanel/>}/> */}
           <Route path='/academy-panel' element={<AcademyPanel/>}/>
        
 
