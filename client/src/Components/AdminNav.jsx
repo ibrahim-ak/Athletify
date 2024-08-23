@@ -5,9 +5,19 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
+
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  function logout() {
+    console.log("helloooo logged out")
+    localStorage.removeItem('authToken');
+  
+    
+    navigate('/login');
+  }
   return (
     <AppBar position="fixed" sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -40,7 +50,7 @@ function Navbar() {
               border: "2px solid rgb(250 102 25)", 
               backgroundColor: "rgb(250 132 25)" 
             }} 
-            href="#logout"
+            onClick={logout}
           >
             Logout
           </Button>

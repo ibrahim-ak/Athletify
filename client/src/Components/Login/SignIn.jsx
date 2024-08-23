@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -49,36 +51,29 @@ const fadeIn = keyframes`
     opacity: 2;
   }
 `;
-
 function SportsSignIn() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const loginData = {
-      username: data.get('username'),
-      password: data.get('password'),
-    };
 
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
+      const response = await axios.post('http://localhost:8000/api/login', { username, password });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        console.log('Login successful', result);
-        // Handle successful login (e.g., save token, redirect)
+      if (response.data.role === 'student') {
+        navigate('/student/student-wall');
+      } else if (response.data.role === 'academy') {
+        navigate('/academy/academy-wall');
+      } else if (response.data.role === 'admin') {
+        navigate('/admin/admin-panel');
       } else {
-        console.error('Login failed:', result.message);
-        // Handle failed login (e.g., display error message)
+        alert('Invalid role');
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Login failed:', error);
+      alert('Invalid username or password');
     }
   };
 
@@ -142,6 +137,8 @@ function SportsSignIn() {
                 name="username"
                 autoComplete="username"
                 autoFocus
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 InputLabelProps={{
                   style: { color: '#FF6F31' },
                 }}
@@ -169,6 +166,8 @@ function SportsSignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 InputLabelProps={{
                   style: { color: '#FF6F31' },
                 }}
@@ -198,6 +197,18 @@ function SportsSignIn() {
                 }}
               >
                 Sign In
+              </Button>
+              <Button
+                onClick={()=>navigate("/")}
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  animation: `${fadeIn} 2.4s ease-out`,
+                }}
+              >
+                Back to Main Page
               </Button>
             </Box>
           </Box>
