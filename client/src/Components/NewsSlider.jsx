@@ -172,7 +172,7 @@ function NewsSlider() {
                   marginBottom: '16px',
                   maxWidth: '70%',
                   height: '320px',
-                  boxShadow: '0px 3px 0px 0px #f6cb99',
+                  boxShadow: '1px 1px 1px 1px #1d4f67',
                   borderRadius: '8px',
                   overflow: 'hidden',
                   backgroundColor: '#f9f9f9',
@@ -193,7 +193,7 @@ function NewsSlider() {
                 <CardContent
                   sx={{
                     width: '50%',
-                    padding: '70px',
+                    padding: '40px',
                     height: '100%',
                     overflow: 'hidden', // Keep overflow hidden
                   }}
@@ -297,10 +297,10 @@ function NewsSlider() {
                   height: 'auto', // Content height adjusts as needed
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' }}>
+                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' , fontSize:'28px'}}>
                   {selectedNews.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' }}>
+                <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' , fontSize:'18px',  color: '#1d4f67', textAlign: 'justify'}}>
                   {selectedNews.content}
                 </Typography>
               </CardContent>
