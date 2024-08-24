@@ -5,11 +5,16 @@ require('dotenv').config();
 const port = process.env.PORT || 8000;
 const Message = require('./models/message.model');
 const Student = require('./models/student.model');
-const Group = require('./models/group.model'); // Ensure the correct models are imported
+const Group = require('./models/group.model');
 
 require('./config/mongoose.config'); // Ensure your Mongoose configuration is correct
 
-app.use(cors());
+// Configure CORS to allow external connections
+app.use(cors({
+     origin: ['http://192.168.28.165:3000', 'http://localhost:3000'],
+     credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,22 +25,20 @@ require('./routes/news.route')(app);
 require('./routes/admin.route')(app);
 require('./routes/academy.route')(app);
 require('./routes/student.route')(app);
-require('./router/contact-router')(app); // Fixed the route file name
+require('./router/contact-router')(app); // Ensure correct path and naming
 
-// Serve the chat page (or send JSON data if using a SPA like React)
+// Serve the chat page or handle JSON response
 app.get('/chat/:id', (req, res) => {
      const chatRoomId = req.params.id;
-     // If serving an HTML file, use:
-     // res.sendFile(path.join(__dirname, 'path_to_your_chat_page.html'));
-
-     // If using React or another frontend framework, you might send the ID to the frontend:
      res.json({ chatRoomId });
 });
 
-const server = app.listen(port, '0.0.0.0', () =>
-     console.log(`The server is all fired up on port ${port}`)
-);
+// Start the server and listen on all network interfaces (0.0.0.0) to allow external access
+const server = app.listen(port, '0.0.0.0', () => {
+     console.log(`The server is all fired up on port ${port}`);
+});
 
+// Set up Socket.io with proper CORS settings
 const io = require('socket.io')(server, {
      cors: {
           origin: ['http://192.168.28.165:3000', 'http://localhost:3000'],
@@ -46,12 +49,11 @@ const io = require('socket.io')(server, {
 io.on('connection', socket => {
      console.log('New client connected');
 
-     // Handle joining a chat room
      socket.on('join_chat', async data => {
           const { username, room } = data;
           console.log(`${username} joined room: ${room}`);
 
-          socket.join(room); // User joins the specified room
+          socket.join(room);
 
           try {
                let roomFromDB = await Message.findOne({ group: room }).populate('messages.student', 'username');
@@ -65,10 +67,8 @@ io.on('connection', socket => {
                     message: msg.message
                }));
 
-               // Send previous messages to the user
                socket.emit('previous_messages_from_server_' + room, previousMessages);
 
-               // Notify others in the room that a new user joined
                io.to(room).emit('new_message_from_server_' + room, { username: 'Server', message: `${username} joined the chat` });
 
           } catch (err) {
@@ -76,12 +76,10 @@ io.on('connection', socket => {
           }
      });
 
-     // Handle new messages
      socket.on('new_message', async data => {
           const { username, room, message } = data;
           console.log(`${username} sent a message to room ${room}: ${message}`);
 
-          // Broadcast the message to everyone in the room
           io.to(room).emit('new_message_from_server_' + room, { username, message });
 
           try {
@@ -103,7 +101,6 @@ io.on('connection', socket => {
           }
      });
 
-     // Handle disconnection
      socket.on('disconnect', () => {
           console.log('Client disconnected');
      });
