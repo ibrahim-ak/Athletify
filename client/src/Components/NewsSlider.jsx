@@ -187,8 +187,8 @@ function NewsSlider() {
                     height: '100%',
                     objectFit: 'cover',
                   }}
-                  image={news.Image}
-                  alt={news.Title}
+                  image={news.image}
+                  alt={news.title}
                 />
                 <CardContent
                   sx={{
@@ -199,14 +199,14 @@ function NewsSlider() {
                   }}
                 >
                   <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', fontSize: '1.2rem' }}>
-                    {news.Title}
+                    {news.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{ marginTop: '8px', fontSize: '1rem' }}>
-                    {news.Content ? news.Content.substring(0, 150) : 'No content available'}...  {/* Shorten the content */}
-                    <Link href="#" sx={{ marginLeft: '8px', color: '#1d4f67', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '2rem' }}>
-                      Read more
-                    </Link>
-                  </Typography>
+  {news.content ? news.content.substring(0, 150) : 'No content available'}...  {/* Shorten the content */}
+  <Link href="#" sx={{ marginLeft: '8px', color: '#1d4f67', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '2rem' }}>
+    Read more
+  </Link>
+</Typography>
 
                 </CardContent>
               </Card>

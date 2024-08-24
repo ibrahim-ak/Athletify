@@ -11,9 +11,22 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; /* Set the desired global font */
+  color: #333; /* Optional: Set a global text color */
+  line-height: 1.6; /* Optional: Set a global line height for readability */
+  background-color: #e6f0ff; /* Optional: Set a global background color */
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700; /* Ensure headings use a bold font weight */
+}
+p, a, span, div, button, input, textarea {
+  font-family: 'Roboto', sans-serif; /* Ensure other elements inherit the font */
 }
