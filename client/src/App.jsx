@@ -11,13 +11,10 @@ import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
 import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
-import AcademyPanel from './Components/AcademySite/AcademyPanel';
-import AddGroupForm from './Components/group/AddGroupForm';
 import AdminPanelParent from './Components/AdminSite/AdminPanelParent';
-import AllGroupsComponent from './Components/AcademySite/AllGroupsComponent';
-import ContactMessages from './Components/AdminSite/ContactMessages'
 import StudentParentComponent from './Components/studentSite/studentParentComponent';
 import AcademyParentComponent from './Components/AcademySite/AcademyParentComponent'
+import AcademyDetailsPage from './Components/AcademyDetails/AcademyDetailsPage';
 
 function App() {
   return (
@@ -33,6 +30,7 @@ function App() {
 
         <Route path="/academy/group/:id" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/academy/details" element={<AcademyDetailsPage/>}></Route>
 
     </Routes>
     </div >

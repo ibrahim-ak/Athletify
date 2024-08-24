@@ -77,7 +77,7 @@ function Wall() {
         </Box>
       </Box>
 
-      <News />
+      <News width="1000px" /> 
       <Announcements  />
     </Box>
   );
