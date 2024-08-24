@@ -207,6 +207,7 @@ function NewsSlider() {
     Read more
   </Link>
 </Typography>
+
                 </CardContent>
               </Card>
             </div>

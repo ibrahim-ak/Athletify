@@ -21,13 +21,12 @@ const AdminPanel = () => {
     }
   };
 
-  const onCreate = (newStudent) => {
-    setStudents(prevStudents => [...prevStudents, newStudent]); // Add the new student to the list
-};
+  const onCreate = (newAcademy) => {
+    setAcademies(prevAcademies => [...prevAcademies, newAcademy]); // Add the new academy to the list
+  };
 
   return (
     <Box>
-
       <Box 
         sx={{ 
           minHeight: '100vh', 

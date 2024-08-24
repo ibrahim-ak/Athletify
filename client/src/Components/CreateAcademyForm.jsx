@@ -43,8 +43,14 @@ const CreateAcademyForm = ({ onCreate }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await axios.post('http://localhost:8000/api/academy', formData);
+        const response = await axios.post('http://localhost:8000/api/academy', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
         onCreate(response.data.academy);
+
+        // Reset form fields
         setFormData({
           username: '',
           email: '',
@@ -53,9 +59,16 @@ const CreateAcademyForm = ({ onCreate }) => {
           address: '',
           confirmPassword: ''
         });
+
+        // Clear any previous errors
         setErrors({});
       } catch (error) {
-        console.error("Error creating academy:", error.response?.data || error.message);
+        if (error.response) {
+          console.error("Server responded with error:", error.response.data);
+          setErrors(error.response.data.errors || {});
+        } else {
+          console.error("An unexpected error occurred:", error);
+        }
       }
     }
   };

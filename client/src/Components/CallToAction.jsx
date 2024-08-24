@@ -32,7 +32,7 @@ function CallToAction() {
         }}
       />
       <Box sx={{ zIndex: 2 }}>
-        <Typography variant="h2" sx={{ fontWeight: 'normal', color:'#FF5722', textShadow:'2px 2px #ff0000', marginBottom:'10px'}}>
+        <Typography variant="h2" sx={{ fontWeight: 'normal', color:'white', textShadow:'2px 2px #ff0000', marginBottom:'10px'}}>
         Join us today and elevate your academy to new heights!        </Typography>
         {/* <Typography variant="body1" sx={{ marginY: 2 }}>
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 

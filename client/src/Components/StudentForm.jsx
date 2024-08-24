@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import axios from 'axios';
 
 const StudentForm = ({ onCreate }) => {
@@ -10,24 +10,23 @@ const StudentForm = ({ onCreate }) => {
     confirmPassword: '',
     gender: '',
     age: '',
-    group: '' // Initialize as an empty string
+    group: ''
   });
 
   const [errors, setErrors] = useState({});
-  const [allgroups, setAllGroups] = useState([]);
+  const [allGroups, setAllGroups] = useState([]);
 
-  useEffect(() => {
+  useEffect((e) => {
+    e
     const fetchGroups = async () => {
       try {
         const response = await axios.get('http://localhost:8000/api/groups');
         const groups = response.data.groups || [];
         setAllGroups(groups);
-
-        // Set the initial group if there are any groups fetched
         if (groups.length > 0 && !formData.group) {
-          setFormData((prevFormData) => ({
+          setFormData(prevFormData => ({
             ...prevFormData,
-            group: groups[0].id
+            group: groups[0]._id
           }));
         }
       } catch (error) {
@@ -40,28 +39,47 @@ const StudentForm = ({ onCreate }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+
+  const handleRadioChange = (e) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      gender: e.target.value
+    }));
   };
 
   const validate = () => {
     const newErrors = {};
-    // Validation logic (same as before)
-
-    // Validate Group
+    if (!formData.username) newErrors.username = 'Username is required';
+    if (!formData.phone) newErrors.phone = 'Phone number is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.gender) newErrors.gender = 'Gender is required';
+    if (!formData.age) newErrors.age = 'Age is required';
     if (!formData.group) newErrors.group = 'Group is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+
+    // Validate form data before making the request
     if (!validate()) return;
-    console.log('Form Data:', formData);
+
     try {
+      // Send form data to the server
       const response = await axios.post('http://localhost:8000/api/student', formData);
       console.log('Student created:', response.data);
+
+      // Update parent component's state
       onCreate(response.data.student);
+
+      // Reset form data and errors
       setFormData({
         username: '',
         phone: '',
@@ -69,11 +87,18 @@ const StudentForm = ({ onCreate }) => {
         confirmPassword: '',
         gender: '',
         age: '',
-        group: allgroups.length > 0 ? allgroups[0]._id : '' // Reset group to first option if available
+        group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
       });
       setErrors({});
     } catch (error) {
       console.error("Error creating student:", error);
+      if (error.response) {
+        // Display server-side validation error messages
+        setErrors(error.response.data.errors || {});
+      } else {
+        // Display general error message
+        setErrors({ form: 'An unexpected error occurred. Please try again.' });
+      }
     }
   };
 
@@ -135,16 +160,21 @@ const StudentForm = ({ onCreate }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Gender"
+            <Typography variant="body1">Gender</Typography>
+            <RadioGroup
               name="gender"
               value={formData.gender}
-              onChange={handleChange}
-              fullWidth
-              required
-              error={!!errors.gender}
-              helperText={errors.gender}
-            />
+              onChange={handleRadioChange}
+              row
+            >
+              <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel value="female" control={<Radio />} label="Female" />
+            </RadioGroup>
+            {errors.gender && (
+              <Typography variant="body2" color="error">
+                {errors.gender}
+              </Typography>
+            )}
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -169,8 +199,8 @@ const StudentForm = ({ onCreate }) => {
                 onChange={handleChange}
                 label="Group"
               >
-                {allgroups.length > 0 ? (
-                  allgroups.map((group) => (
+                {allGroups.length > 0 ? (
+                  allGroups.map(group => (
                     <MenuItem key={group._id} value={group._id}>
                       {group.Name}
                     </MenuItem>
@@ -195,6 +225,7 @@ const StudentForm = ({ onCreate }) => {
           </Grid>
         </Grid>
       </form>
+      {errors.form && <Typography color="error">{errors.form}</Typography>}
     </Paper>
   );
 };

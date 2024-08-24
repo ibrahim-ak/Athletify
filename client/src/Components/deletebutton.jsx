@@ -1,5 +1,12 @@
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { styled } from '@mui/material/styles';
+
+// Create a styled icon component with dark navy color
+const DarkNavyTrashIcon = styled('i')({
+  color: '#1d4f67', // Dark navy color
+});
 
 const DeleteButton = ({ academyId, onDelete }) => {
   const deleteAcademy = async () => {
@@ -13,11 +20,10 @@ const DeleteButton = ({ academyId, onDelete }) => {
 
   return (
     <Button 
-      variant="contained" 
-      sx={{ backgroundColor: '#fa8419', color: '#FFFFFF' }} 
-      onClick={deleteAcademy}
+      onClick={deleteAcademy} 
+      className="btn btn-outline-danger"
+      startIcon={<DarkNavyTrashIcon className="fas fa-trash" />} // Apply dark navy color to the icon
     >
-      Delete
     </Button>
   );
 };
