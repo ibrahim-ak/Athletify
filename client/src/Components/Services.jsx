@@ -17,25 +17,25 @@ function ServiceCards() {
       icon: <EventNoteIcon sx={{ fontSize: 40, color: '#1d4f67' }} />,
     },
     {
-      title: 'Payment',
-      description: 'Monitor student payments, view history, and track upcoming payment deadlines with ease.',
+      title: 'Announce Management',
+      description: 'Post and manage announcements for students, including notifications and updates on their dashboards.',
       icon: <PaymentIcon sx={{ fontSize: 40, color: '#1d4f67' }} />,
     },
   ];
 
   return (
     <Box 
-    sx={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      gap: 3, 
-      flexWrap: 'wrap', 
-      marginTop: '50px',
-      marginBottom: '50px', // Increased bottom margin
-      textAlign: 'center', 
-    }}
-  >
+      sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        gap: 3, 
+        flexWrap: 'wrap', 
+        marginTop: '50px',
+        marginBottom: '50px', // Increased bottom margin
+        textAlign: 'center', 
+      }}
+    >
       {services.map((service, index) => (
         <Card
           key={index}
@@ -44,10 +44,16 @@ function ServiceCards() {
             padding: '20px',
             position: 'relative',
             overflow: 'hidden',
-            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out',
+            backgroundColor: '#fff', // Default background color
             '&:hover': {
+              backgroundColor: '#1d4f67', // Navy background color on hover
               transform: 'translateY(-10px)',
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+              color: '#fff', // Text color on hover
+              '.MuiSvgIcon-root': {
+                color: '#fff', // Change icon color to white on hover
+              },
             },
           }}
         >
@@ -58,7 +64,7 @@ function ServiceCards() {
             <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
               {service.title}
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={{ color: 'inherit' }}> {/* Use inherit to match the text color with the background */}
               {service.description}
             </Typography>
           </CardContent>
