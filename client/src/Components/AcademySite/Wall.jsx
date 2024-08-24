@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import NewsForm from '../NewsForm';
 import AnnouncementForm from '../AnnouncementForm';
@@ -10,10 +10,24 @@ import { useNavigate } from 'react-router-dom';
 
 function Wall() {
   const [errors, setErrors] = useState([]);
+  const [academy, setThisAcademy] = useState('');
   const navigate = useNavigate();
 
-  const createNews = (newNews) => {
-    axios.post('http://localhost:8000/api/news', newNews)
+  useEffect(() => {
+    const academyId = localStorage.getItem('id');
+    setThisAcademy(academyId);
+    console.log("Academy ID:", academyId); // Add this line
+  }, []);
+
+
+  const createNews = (title, content, image) => {
+    axios.post('http://localhost:8000/api/news', {
+      title,
+      content,
+      image,
+      academy
+    }
+    )
       .then(res => {
         console.log(res.data);
         setErrors([]);
@@ -30,8 +44,11 @@ function Wall() {
       });
   };
 
-  const createAnnouncement = (newAnnouncement) => {
-    axios.post('http://localhost:8000/api/announcement', newAnnouncement)
+  const createAnnouncement = (content) => {
+    axios.post('http://localhost:8000/api/announcement', {
+      Content: content,
+      Academy: academy
+    })
       .then(res => {
         console.log(res.data);
         setErrors([]);
@@ -50,7 +67,6 @@ function Wall() {
 
   return (
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-
       <Box
         sx={{
           display: 'flex',
@@ -77,8 +93,8 @@ function Wall() {
         </Box>
       </Box>
 
-      <News width="1000px" /> 
-      <Announcements  />
+      {academy && <News width="1000px" academy={academy} />}
+      {academy && <Announcements academy={academy} />}
     </Box>
   );
 }

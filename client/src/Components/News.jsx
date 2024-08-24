@@ -2,22 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import axios from 'axios';
 
-function News({ width = '100%' }) {
+function News({ width = '100%', academy}) {
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("Fetching news for academy:", academy); // Add this line
     getNews();
   }, []); // Fixed: empty dependency array to fetch news only once on component mount
 
   const getNews = () => {
-    axios.get('http://localhost:8000/api/news')
+    axios.get(`http://localhost:8000/api/news/academy/${academy}`)
       .then(res => {
         setNewsItems(res.data.news);
         setLoaded(true);
       })
       .catch(err => console.error(err));
   };
+  
 
   return (
     <Box sx={{ width: '100%', padding: '40px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>

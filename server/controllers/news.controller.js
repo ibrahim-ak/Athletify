@@ -14,6 +14,7 @@ module.exports.findAllnews = (req, res) => {
                res.json(err)
           });
 }
+
 module.exports.findOnenew = (req, res) => {
      News.findOne({ _id: req.params.id })
           .then(findOnenew => {
@@ -24,7 +25,15 @@ module.exports.findOnenew = (req, res) => {
           });
 }
 
-
+module.exports.findNewsByAcademy = (req, res) => {
+     News.find({ academy: req.params.academy })
+          .then(news => {
+               res.json({ news: news })
+          })
+          .catch((err) => {
+               res.json(err)
+          });
+}
 
 module.exports.createNews = (req, res) => {
      News.create(req.body)

@@ -47,7 +47,9 @@ module.exports.login = async (req, res) => {
             message: 'Login successful',
             token: token,
             role: userType,
-            userId: user._id,  // Send the user ID
+            userId: user._id,
+            userusername: user.username,
+            
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
