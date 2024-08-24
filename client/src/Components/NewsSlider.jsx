@@ -172,7 +172,7 @@ function NewsSlider() {
                   marginBottom: '16px',
                   maxWidth: '70%',
                   height: '320px',
-                  boxShadow: '0px 3px 0px 0px #f6cb99',
+                  boxShadow: '1px 1px 1px 1px #1d4f67',
                   borderRadius: '8px',
                   overflow: 'hidden',
                   backgroundColor: '#f9f9f9',
@@ -193,17 +193,20 @@ function NewsSlider() {
                 <CardContent
                   sx={{
                     width: '50%',
-                    padding: '70px',
+                    padding: '40px',
                     height: '100%',
                     overflow: 'hidden', // Keep overflow hidden
                   }}
                 >
-                  <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', fontSize: '1.2rem' }}>
+                  <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', fontSize: '24px'  }}>
                     {news.title}
                   </Typography>
+                  <Typography variant="body1" color="text.secondary" sx={{ marginTop: '8px', fontSize: '1.1rem' , textAlign: 'justify', color:'#1d4f67'}}>
+  {news.content ? news.content.substring(0, 270) : 'No content available'}...  {/* Shorten the content */}
+
                   <Typography variant="body1" color="text.secondary" sx={{ marginTop: '8px', fontSize: '1rem' }}>
 
-  {news.content ? news.content.substring(0, 150) : 'No content available'}...  {/* Shorten the content */}
+
   <Link href="#" sx={{ marginLeft: '8px', color: '#1d4f67', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '2rem' }}>
     Read more
   </Link>
@@ -298,10 +301,10 @@ function NewsSlider() {
                   height: 'auto', // Content height adjusts as needed
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' }}>
+                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67' , fontSize:'28px'}}>
                   {selectedNews.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' }}>
+                <Typography variant="body2" color="text.secondary" sx={{ marginTop: '8px' , fontSize:'18px',  color: '#1d4f67', textAlign: 'justify'}}>
                   {selectedNews.content}
                 </Typography>
               </CardContent>

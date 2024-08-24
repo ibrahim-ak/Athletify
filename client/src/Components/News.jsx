@@ -3,14 +3,16 @@ import { Box, Typography, Card, CardMedia, CardContent, IconButton } from '@mui/
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-function News({ width = '100%' }) {
+function News() {
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     getNews();
+  }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
 
-  }, []); // Fixed: empty dependency array to fetch news only once on component mount
+
+
 
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
@@ -44,8 +46,8 @@ function News({ width = '100%' }) {
           padding: '30px',
           backgroundColor: '#fff',
           borderRadius: '16px',
-          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)',
-          width: width,  // Apply the width prop here
+          boxShadow: '0px 8px 24px #1d4f67',
+          width: '1100px',  // Apply the width prop here
           margin: '0 auto',
         }}
       >
@@ -60,7 +62,7 @@ function News({ width = '100%' }) {
                 marginBottom: '24px',
                 maxWidth: '100%',
                 height: '320px',
-                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',
+                boxShadow: '0px 5px 20px #1d4f67',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 backgroundColor: '#ffffff',
@@ -107,10 +109,10 @@ function News({ width = '100%' }) {
                   },
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', marginBottom: '8px' }}>
+                <Typography component="h5" variant="h4" sx={{ color: '#1d4f67', marginBottom: '8px', textAlign:'center', textShadow: '1px 1px 2px', fontSize:'28px'}}>
                   {news.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={{fontWeight:'500' , color: '#1d4f67', textAlign: 'justify', fontSize:'18px', padding:'20px' }}>
                   {news.content}
                 </Typography>
               </CardContent>
