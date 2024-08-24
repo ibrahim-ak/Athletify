@@ -19,7 +19,9 @@ import AdminPanelParent from './Components/AdminSite/AdminPanelParent';
 import AllGroupsComponent from './Components/AcademySite/AllGroupsComponent';
 import ContactMessages from './Components/AdminSite/ContactMessages'
 import StudentParentComponent from './Components/studentSite/studentParentComponent';
-import AcademyParentComponent from './Components/AcademySite/AcademyParentComponent'
+import AcademyParentComponent from './Components/AcademySite/AcademyParentComponent';
+import ProtectedRoute from './Components/ProtectedRoutes';
+import UnProtectedRoutes from './Components/UnProtectedRoutes';
 
 
 function App() {
@@ -28,10 +30,27 @@ function App() {
 
 
     <Routes>
+    <Route
+        path="/"
+        element={
+          <UnProtectedRoutes >
+            <MainPage/>
+          </UnProtectedRoutes>
+        }
+      />
 
-        <Route path="/" element={<MainPage />} />
-        <Route path="/login" element={<SignIn />} />
+    <Route
+        path="/login"
+        element={
+          <UnProtectedRoutes >
+            <SignIn/>
+          </UnProtectedRoutes>
+        }
+      />
+
+
         {/* <Route path="/admin-messages" element={<ContactMessages />} /> */}
+        
         <Route path="/admin/*" element={<AdminPanelParent />} />
         <Route path="/student/*" element={<StudentParentComponent />} />
         <Route path="/academy/*" element={<AcademyParentComponent />} />

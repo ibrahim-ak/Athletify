@@ -6,8 +6,20 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 function StaticNavBar(props) {
+
+  const navigate = useNavigate();
+
+function logout() {
+  console.log("helloooo logged out")
+
+  localStorage.removeItem('authToken');
+
+  navigate('/login');
+}
+
   return (
     <AppBar   position='static' sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -29,7 +41,7 @@ function StaticNavBar(props) {
             </Button>
 
           </Box>
-          <Button sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
+          <Button onClick={logout} sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
             Logout
           </Button>
           <IconButton
