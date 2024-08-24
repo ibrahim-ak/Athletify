@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import axios from 'axios';
 
-function News({ width = '100%' }) {
+function News() {
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
@@ -26,8 +26,8 @@ function News({ width = '100%' }) {
           padding: '30px',
           backgroundColor: '#fff',
           borderRadius: '16px',
-          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)',
-          width: width,  // Apply the width prop here
+          boxShadow: '0px 8px 24px #1d4f67',
+          width: '1100px',  // Apply the width prop here
           margin: '0 auto',
         }}
       >
@@ -42,7 +42,7 @@ function News({ width = '100%' }) {
                 marginBottom: '24px',
                 maxWidth: '100%',
                 height: '320px',
-                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',
+                boxShadow: '0px 5px 20px #1d4f67',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 backgroundColor: '#ffffff',

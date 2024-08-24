@@ -11,8 +11,8 @@ function AcademyDetailsPage() {
             <Navbar />
             <AcademyLandingPage />
             <Divider />
-            <h1 style={{ textAlign: 'center' }}>What's new in 'AcademyName'</h1>
-            <News width="100%" />
+            <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: '#1d4f67'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
+            <News/>
 
         </div>
     );
