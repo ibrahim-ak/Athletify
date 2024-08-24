@@ -1,11 +1,14 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 import heroImg from '../media/image copy.png';
 import CustomButton from "./CustomButton";
 
 const Hero = ({ contactRef }) => {
+  const navigate = useNavigate();
+
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -41,7 +44,11 @@ const Hero = ({ contactRef }) => {
   }));
 
   const handleScrollToContact = () => {
-    if (contactRef && contactRef.current) {
+    console.log("botato")
+    
+      navigate('#contact')
+      if (contactRef && contactRef.current) {
+      navigate('#contact')
       console.log("Scrolling to Contact Section");
       contactRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -76,8 +83,9 @@ const Hero = ({ contactRef }) => {
               height="55px"
               color="#fff"
               buttonText="Join Now"
+              // component={Link} to="/#contact"
               heroBtn={true}
-              onClick={() => handleScrollToContact}  // Add the onClick event
+              onClick={()=>handleScrollToContact}  // Add the onClick event
               sx={{
                 "&:hover": {
                   backgroundColor: "#FF5722",

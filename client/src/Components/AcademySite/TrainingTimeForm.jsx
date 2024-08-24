@@ -4,9 +4,9 @@ import axios from 'axios';
 
 const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess }) => {
+const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess = [] }) => {
   // Define state for form inputs
-  const [trainingTimes, setTrainingTimes] = useState(timess || [{ day: '', start: '', end: '' }]);
+  const [trainingTimes, setTrainingTimes] = useState(timess.length > 0 ? timess : [{ day: '', start: '', end: '' }]);
 
   // Handle changes to form inputs
   const handleInputChange = (index, event) => {
@@ -56,6 +56,9 @@ const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess }) => {
                 displayEmpty
                 variant="outlined"
               >
+                <MenuItem value="" disabled>
+                  Select Day
+                </MenuItem>
                 {daysOfWeek.map((day) => (
                   <MenuItem key={day} value={day}>
                     {day}
@@ -85,7 +88,7 @@ const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess }) => {
             </Grid>
           </Grid>
         ))}
-        <Button onClick={handleAddTimeSlot} color="primary" variant="contained" style={{ marginTop: '10px' }}>
+        <Button onClick={handleAddTimeSlot} sx={{ marginTop: 2 }} variant="contained">
           Add Time Slot
         </Button>
       </DialogContent>
@@ -102,7 +105,3 @@ const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess }) => {
 };
 
 export default TrainingTimeForm;
-
-
-
-

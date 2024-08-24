@@ -3,17 +3,20 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import StaticNavBar from '../StaticNavBar';
 import StudentWall from './StudentWall';
 import StudentGroupDashboard from './StudentGroupDashboard';
+import ProtectedRoute from '../ProtectedRoutes';
 
 const StudentParentComponent = () => {
   return (
-    <div>
+    <ProtectedRoute roleRequired="student">
+      <div>
         <StaticNavBar tab2={'Home'} tab3={'Groups'}/>      
         <Routes>
-        <Route path="/" element={<Navigate to="student-panel" replace />} /> {/* Redirect /admin to /admin/admin-panel */}
-        <Route path="student-wall" element={<StudentWall />} />
-        <Route path="student-group" element={<StudentGroupDashboard />} />
-      </Routes>
-    </div>
+          <Route path="/" element={<Navigate to="student-wall" replace />} />
+          <Route path="student-wall" element={<StudentWall />} />
+          <Route path="student-group" element={<StudentGroupDashboard />} />
+        </Routes>
+      </div>
+    </ProtectedRoute>
   );
 }
 

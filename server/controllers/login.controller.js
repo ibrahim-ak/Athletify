@@ -4,6 +4,7 @@ const Student = require('../models/student.model');
 const Admin = require('../models/admin.model');
 const Academy = require('../models/academy.model');
 
+
 module.exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -45,7 +46,8 @@ module.exports.login = async (req, res) => {
         res.json({
             message: 'Login successful',
             token: token,
-            role: userType
+            role: userType,
+            userId: user._id,  // Send the user ID
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });

@@ -3,13 +3,14 @@ import { Box, Typography, Card, CardMedia, CardContent, IconButton } from '@mui/
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-function News() {
+function News({ width = '100%' }) {
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     getNews();
-  }, []);
+
+  }, []); // Fixed: empty dependency array to fetch news only once on component mount
 
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
@@ -37,14 +38,14 @@ function News() {
   };
 
   return (
-    <Box sx={{ padding: '40px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+    <Box sx={{ width: '100%', padding: '40px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
       <Card
         sx={{
           padding: '30px',
           backgroundColor: '#fff',
           borderRadius: '16px',
-          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)', // Orange shadow for the container card
-          maxWidth: '900px',
+          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)',
+          width: width,  // Apply the width prop here
           margin: '0 auto',
         }}
       >
@@ -56,27 +57,27 @@ function News() {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginBottom: '24px',  // Moderate spacing between cards
+                marginBottom: '24px',
                 maxWidth: '100%',
-                height: '320px',  // Increased height for the card
-                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',  // Prominent orange shadow
-                borderRadius: '12px',  // Border radius for smoother corners
+                height: '320px',
+                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',
+                borderRadius: '12px',
                 overflow: 'hidden',
                 backgroundColor: '#ffffff',
                 position: 'relative',
-                transition: 'transform 0.3s ease-in-out', // Smooth hover effect
+                transition: 'transform 0.3s ease-in-out',
                 '&:hover': {
-                  transform: 'scale(1.03)', // Slight zoom on hover to make it stand out
+                  transform: 'scale(1.03)',
                 },
               }}
             >
               <CardMedia
                 component="img"
                 sx={{
-                  width: '280px',  // Increased width for the image
+                  width: '280px',
                   height: '100%',
                   objectFit: 'cover',
-                  borderRadius: '8px',  // Border radius for the image
+                  borderRadius: '8px',
                   marginLeft: '16px',
                 }}
                 image={news.image}
@@ -88,10 +89,10 @@ function News() {
                   paddingRight: '24px',
                   overflowY: 'auto',
                   height: '100%',
-                  maxHeight: '220px',  // Smaller height for content with scroll
+                  maxHeight: '220px',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'flex-start',  // Align content to start
+                  justifyContent: 'flex-start',
                   '&::-webkit-scrollbar': {
                     width: '8px',
                   },
