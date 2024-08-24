@@ -1,10 +1,10 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
-import { Grid, Box, TextField, Button, List, ListItem, Typography, Paper, IconButton } from '@mui/material';
+import { Grid, Box, TextField, Button, List, ListItem, Typography, Paper } from '@mui/material';
 import StaticNavBar from './StaticNavBar';
 import UpdateIcon from '@mui/icons-material/Update'; // Import the Update icon
+import IconButton from '@mui/icons-material/Update'; // Import the Update icon
 import TrainingTimeForm from './AcademySite/TrainingTimeForm'; // Import the TrainingTimeForm component
 import axios from 'axios';
 
@@ -34,16 +34,15 @@ function Chat() {
   };
 
   useEffect(() => {
-  getTime()
-  // setTrainingTimes(trainingTimess)
+    getTime();
   }, [trainingTimes]);
-const getTime=()=>{
-  axios.get('http://localhost:8000/api/group/' + id)
-  .then(res => {
-    // console.log(res.data.group.trainingTimes)
-    setTrainingTimess(res.data.group.trainingTimes)
-  })
-}
+
+  const getTime = () => {
+    axios.get('http://localhost:8000/api/group/' + id)
+      .then(res => {
+        setTrainingTimess(res.data.group.trainingTimes);
+      });
+  };
 
   useEffect(() => {
     // Initialize the socket connection
@@ -111,47 +110,43 @@ const getTime=()=>{
   return (
     <>
       <StaticNavBar />
-      <Grid container spacing={2} sx={{ padding: 2 }}>
-        {/* Left Column - User Input and List */}
-        <Grid item xs={3}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
+      <Grid container spacing={8} sx={{ padding: 2, height: '90vh', width: '200vh' }}>
+        {/* Left Column - User Input and Students List */}
+        <Grid item xs={3} sx={{ height: '100%', }}>
+          <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column', marginLeft: '60px' }}>
             <TextField
               fullWidth
               variant="outlined"
               label="Your Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              sx={{ marginBottom: 2 }}
             />
-            <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h6">Students List</Typography>
-              <List>
-                {['student1', 'student2', 'student3', 'student4', 'student5', 'student6', 'student7'].map((student, index) => (
-                  <ListItem key={index}>{student}</ListItem>
-                ))}
-              </List>
-              <Typography variant="body1" sx={{ marginRight: 2 }}>
-                  {trainingTimess.map((time, index) => (
-                    <span key={index}>{`${time.day} | ${time.start} - ${time.end}`}{index < trainingTimes ? ', ' : ' | '}<br /></span>
-                    
-                  ))}
-                </Typography>
-            </Box>
+            <Typography variant="h6">Students List</Typography>
+            <List sx={{ flexGrow: 1, overflowY: 'auto' }}>
+              {['student1', 'student2', 'student3', 'student4', 'student5', 'student6', 'student7'].map((student, index) => (
+                <ListItem key={index}>{student}</ListItem>
+              ))}
+            </List>
           </Paper>
         </Grid>
 
-        {/* Right Column - Chat Box */}
-        <Grid item xs={9}>
-          <Paper elevation={3} sx={{ padding: 2, height: '500px', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography variant="h6">Group Name</Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                
-                <IconButton onClick={handleOpenDialog}>
-                  <UpdateIcon />
-                </IconButton>
-              </Box>
-            </Box>
-            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: 1, borderRadius: 2 }}>
+        {/* Middle Column - Group Name and Chat Box */}
+        <Grid item xs={6} sx={{ height: '100%' }}>
+          <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column' }}>
+
+           
+
+              <Typography variant="h6" sx={{ marginBottom: 2 }}>
+                Group Name
+
+              </Typography>
+
+              
+
+        
+
+            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: 1, borderRadius: 2, border: '1px solid #ccc' }}>
               <List>
                 {messages.map((msg, index) => (
                   <ListItem
@@ -193,20 +188,37 @@ const getTime=()=>{
               >
                 Send
               </Button>
-              
+            </Box>
+          </Paper>
+        </Grid>
+
+        {/* Right Column - Time Schedule */}
+        <Grid item xs={3} sx={{ height: '100%' }}>
+          <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ padding: 2}}>
+
+            <Typography variant="h6">Time Schedule<IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft:'35px' }} onClick={handleOpenDialog}>
+                <UpdateIcon />
+              </IconButton>
+              </Typography>
             </Box>
             
+            <Typography variant="body1" sx={{ marginTop: 2, overflowY: 'auto', flexGrow: 1 }}>
+              {trainingTimess.map((time, index) => (
+                <span key={index}>{`${time.day} | ${time.start} - ${time.end}`}<br /></span>
+              ))}
+            </Typography>
           </Paper>
         </Grid>
       </Grid>
-      
+
       {/* Add TrainingTimeForm Component */}
       <TrainingTimeForm
         open={isDialogOpen}
         onClose={handleCloseDialog}
         thisid={id}
         setTimes={setTrainingTimes}
-        timess={trainingTimess }
+        timess={trainingTimess}
       />
     </>
   );
