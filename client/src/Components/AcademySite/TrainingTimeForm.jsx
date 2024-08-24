@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Grid, Typography, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
 
@@ -6,7 +6,16 @@ const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 
 const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess = [] }) => {
   // Define state for form inputs
-  const [trainingTimes, setTrainingTimes] = useState(timess.length > 0 ? timess : [{ day: '', start: '', end: '' }]);
+  const [trainingTimes, setTrainingTimes] = useState([{ day: '', start: '', end: '' }]);
+
+  // UseEffect to update state when timess changes
+  useEffect(() => {
+    if (timess.length > 0) {
+      setTrainingTimes(timess);
+    } else {
+      setTrainingTimes([{ day: '', start: '', end: '' }]); // Default to one empty time slot
+    }
+  }, [timess]);
 
   // Handle changes to form inputs
   const handleInputChange = (index, event) => {
@@ -31,8 +40,21 @@ const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess = [] }) => {
     axios
       .patch(`http://localhost:8000/api/group/${thisid}`, { trainingTimes })
       .then((response) => {
-        setTimes(response.data.trainingTimes); // Update the times in the parent component
-        onClose(); // Close the dialog
+        // Update the times in the parent component (if applicable)
+        setTimes(response.data.trainingTimes);
+
+        // Close the dialog
+        onClose();
+
+        // Optionally update local state if needed
+        // Assuming you have a state that holds the list of training times
+        // and want to update it with the response data
+        // const updatedTimes = response.data.trainingTimes;
+        // setTimes(prevList =>
+        //   prevList.map(t =>
+        //     t._id === updatedTimes._id ? updatedTimes : t
+        //   )
+        // );
       })
       .catch((error) => {
         console.error('There was an error updating the training times!', error);
