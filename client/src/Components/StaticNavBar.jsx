@@ -9,14 +9,14 @@ import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 
 function StaticNavBar(props) {
-  
+
   const navigate = useNavigate();
 
 function logout() {
   console.log("helloooo logged out")
+
   localStorage.removeItem('authToken');
 
-  
   navigate('/login');
 }
 

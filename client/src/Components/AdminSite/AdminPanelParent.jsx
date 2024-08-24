@@ -4,9 +4,12 @@ import AdminNav from '../AdminNav';
 import ContactMessages from './ContactMessages';
 import AcademyPanel from '../AcademySite/AcademyPanel';
 import AdminPanel from './AdminPanel';
+import ProtectedRoutes from '../ProtectedRoutes';
 
 const AdminPanelParent = () => {
   return (
+    <ProtectedRoutes roleRequired="admin">
+
     <div>
       <AdminNav />
       <Routes>
@@ -15,6 +18,7 @@ const AdminPanelParent = () => {
         <Route path="admin-messages" element={<ContactMessages />} />
       </Routes>
     </div>
+    </ProtectedRoutes>
   );
 }
 

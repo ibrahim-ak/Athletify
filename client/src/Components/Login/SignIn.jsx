@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { createTheme, ThemeProvider, keyframes } from '@mui/material/styles';
 
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -56,11 +57,22 @@ function SportsSignIn() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:8000/api/login', { username, password });
+      if (response.data.token) {
+
+        localStorage.setItem('authToken', response.data.token);
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('role', response.data.role);
+        localStorage.setItem('id', response.data.userId);
+      }
+
+      console.log(localStorage.getItem('id'))
+      console.log(localStorage.getItem('role'))
 
       if (response.data.role === 'student') {
         navigate('/student/student-wall');
@@ -199,7 +211,7 @@ function SportsSignIn() {
                 Sign In
               </Button>
               <Button
-                onClick={()=>navigate("/")}
+                onClick={() => navigate("/")}
                 fullWidth
                 variant="contained"
                 sx={{
