@@ -27,7 +27,7 @@ function App() {
         <Route path="/admin/*" element={<AdminPanelParent />} />
         <Route path="/student/*" element={<StudentParentComponent />} />
         <Route path="/academy/*" element={<AcademyParentComponent />} />
-
+        <Route path="/academy/details" element={<AcademyDetailsPage />} />
         <Route path="/academy/group/:id" element={<GroupDashboard />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/academy/details" element={<AcademyDetailsPage/>}></Route>
