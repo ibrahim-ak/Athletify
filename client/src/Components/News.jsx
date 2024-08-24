@@ -8,7 +8,7 @@ function News() {
 
   useEffect(() => {
     getNews();
-  }, []); // Fixed: empty dependency array to fetch news only once on component mount
+  }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
 
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
@@ -89,10 +89,10 @@ function News() {
                   },
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', marginBottom: '8px' }}>
+                <Typography component="h5" variant="h4" sx={{ color: '#1d4f67', marginBottom: '8px', textAlign:'center', textShadow: '1px 1px 2px', fontSize:'28px'}}>
                   {news.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={{fontWeight:'500' , color: '#1d4f67', textAlign: 'justify', fontSize:'18px', padding:'20px' }}>
                   {news.content}
                 </Typography>
               </CardContent>
