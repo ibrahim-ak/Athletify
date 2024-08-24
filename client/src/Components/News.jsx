@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import { Box, Typography, Card, CardMedia, CardContent, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 function News() {
@@ -10,13 +11,32 @@ function News() {
     getNews();
   }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
 
+
+
+
   const getNews = () => {
     axios.get('http://localhost:8000/api/news')
       .then(res => {
         setNewsItems(res.data.news);
         setLoaded(true);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error('Error fetching news:', err));
+  };
+
+  const handleDelete = (id) => {
+    // Optimistic UI Update
+    const updatedNewsItems = newsItems.filter(news => news._id !== id);
+    setNewsItems(updatedNewsItems);
+
+    axios.delete(`http://localhost:8000/api/news/${id}`)
+      .then(res => {
+        // Confirm successful deletion
+      })
+      .catch(err => {
+        console.error('Error deleting news:', err);
+        // Revert optimistic UI update in case of an error
+        setNewsItems(newsItems);
+      });
   };
 
   return (
@@ -96,6 +116,21 @@ function News() {
                   {news.content}
                 </Typography>
               </CardContent>
+              <IconButton
+                onClick={() => handleDelete(news._id)}
+                sx={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  backgroundColor: 'rgba(255, 0, 0, 0.7)',  // Red background
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 0, 0, 0.9)', // Darker red on hover
+                  },
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
             </Card>
           ))
         ) : (

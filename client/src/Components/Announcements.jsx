@@ -80,7 +80,7 @@ function Announcements() {
                   <Typography variant="body2" sx={{ color: '#1d4f67', fontWeight: 'bold' }}>
                     {announcement.Content}
                   </Typography>
-                  <IconButton onClick={() => handleDelete(announcement._id)} sx={{ color: '#1d4f67', marginLeft: '10px' }}>
+                  <IconButton onClick={() => handleDelete(announcement._id)} sx={{ color: '#1d4f67', marginLeft: '65px' }}>
                   <DeleteIcon />
                 </IconButton>
                 </Box>
