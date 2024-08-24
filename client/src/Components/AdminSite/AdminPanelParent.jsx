@@ -1,8 +1,7 @@
-import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminNav from '../AdminNav';
 import ContactMessages from './ContactMessages';
-import AcademyPanel from '../AcademySite/AcademyPanel';
+
 import AdminPanel from './AdminPanel';
 import ProtectedRoutes from '../ProtectedRoutes';
 

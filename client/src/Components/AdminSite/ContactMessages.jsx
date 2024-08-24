@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import {
   Container,
@@ -19,6 +21,14 @@ import {
   Divider
 } from '@mui/material';
 import AdminNav from '../AdminNav';
+
+// Styled component for dark navy icons
+const DarkNavyIcon = styled('i')({
+  color: '#1d4f67', // Dark navy color
+  fontSize: '18px', // Adjust icon size if needed
+  cursor: 'pointer',
+  marginRight: '16px',
+});
 
 const ContactMessages = () => {
   const [messages, setMessages] = useState([]);
@@ -91,21 +101,16 @@ const ContactMessages = () => {
                       <TableCell>{msg.email}</TableCell>
                       <TableCell>{msg.phone}</TableCell>
                       <TableCell>
-                        <Button 
+                        <DarkNavyIcon 
+                          className="fas fa-eye" 
                           onClick={() => handleClickOpen(msg)} 
-                          variant="contained" 
-                          color="primary" 
-                          sx={{ marginRight: 1 }}
-                        >
-                          View
-                        </Button>
-                        <Button 
+                          title="View"
+                        /> {/* Font Awesome eye icon */}
+                        <DarkNavyIcon 
+                          className="fas fa-trash" 
                           onClick={() => handleDelete(msg._id)} 
-                          variant="contained" 
-                          color="error"
-                        >
-                          Delete
-                        </Button>
+                          title="Delete"
+                        /> {/* Font Awesome trash icon */}
                       </TableCell>
                     </TableRow>
                   ))}
