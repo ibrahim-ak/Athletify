@@ -41,7 +41,7 @@ function logout() {
             </Button>
 
           </Box>
-          <Button onClick={logout} sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} href="#login">
+          <Button onClick={logout} sx={{ color: 'white', marginLeft: 2,  border:"2px solid rgb(250 102 25)", backgroundColor:"rgb(250 132 25)" }} >
             Logout
           </Button>
           <IconButton
