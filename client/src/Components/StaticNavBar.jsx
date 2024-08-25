@@ -14,7 +14,6 @@ function StaticNavBar(props) {
 
 function logout() {
   console.log("helloooo logged out")
-
   localStorage.removeItem('authToken');
 
   navigate('/login');
@@ -30,13 +29,13 @@ function logout() {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
-            <Button sx={{ color: '#fff' }} href="#home">
+            <Button sx={{ color: '#fff' }} href={props.link1}>
               {props.tab1}
             </Button>
-            <Button sx={{ color: '#fff' }} href="#about">
+            <Button sx={{ color: '#fff' }} href={props.link2}>
             {props.tab2}
             </Button>
-            <Button sx={{ color: '#fff' }} href="#services">
+            <Button sx={{ color: '#fff' }} href={props.link3}>
               {props.tab3}
             </Button>
 

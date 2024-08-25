@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import { Grid, Box, TextField, Button, List, ListItem, Typography, Paper } from '@mui/material';
 // import StaticNavBar from './StaticNavBar';
 import UpdateIcon from '@mui/icons-material/Update'; // Import the Update icon
 import IconButton from '@mui/icons-material/Update'; // Import the Update icon
-import TrainingTimeForm from './TrainingTimeForm'; // Import the TrainingTimeForm component
+import TrainingTimeForm from '../AcademySite/TrainingTimeForm'; // Import the TrainingTimeForm component
 import axios from 'axios';
 
-function AcademyChat() {
+function StudentChat() {
   const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState(localStorage.getItem('username'));
   const [room, setRoom] = useState('');
@@ -17,6 +17,7 @@ function AcademyChat() {
   const [studentsList, setStudentsList] = useState([]);
   const { id } = useParams(); // Extract the room ID from the URL
   const messagesEndRef = useRef(null);
+  const navigate = useNavigate();
 
   // State to handle the TrainingTimeForm dialog visibility
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -58,8 +59,19 @@ function AcademyChat() {
   };
   
  
+  useEffect(() => {
+    StudentChatWrapper();
+  },[] );
 
-  
+  const StudentChatWrapper = () => {
+    const groupId = localStorage.getItem('group');
+    console.log("this is the id from params " + id)
+    console.log("this is the id from localstorage " + groupId)
+    if (groupId !== id) {
+      console.log("they r not equal")
+      navigate("/student/student-wall")
+    }
+  };
 
   useEffect(() => {
     // Initialize the socket connection
@@ -214,21 +226,15 @@ function AcademyChat() {
           <Paper elevation={3} sx={{ padding: 4, height: '100%', display: 'flex', flexDirection: 'column'}}>
             <Box sx={{ marginBottom:4 }}>
 
-            <Typography variant="h6">Time Schedule<IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft:'35px', cursor:'pointer'}} onClick={handleOpenDialog}>
-                <UpdateIcon />
-              </IconButton>
+            <Typography variant="h6">Time Schedule
               </Typography>
             </Box>
             
             <Typography variant="body1" sx={{ marginTop: 2, overflowY: 'auto', flexGrow: 1 }}>
-  {trainingTimess.map((time, index) => (
-    <span key={index}>
-      <strong>{time.day}</strong> {/* Bold the day for emphasis */}
-      <div>{`${time.start} - ${time.end}`}</div> {/* Place the time range on a new line */}
-      <br />
-    </span>
-  ))}
-</Typography>
+              {trainingTimess.map((time, index) => (
+                <span key={index}>{`${time.day} | ${time.start} - ${time.end}`}<br /></span>
+              ))}
+            </Typography>
           </Paper>
         </Grid>
       </Grid>
@@ -245,4 +251,4 @@ function AcademyChat() {
   );
 }
 
-export default AcademyChat;
+export default StudentChat;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardContent, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AllGroupsCards = () => {
   const [groups, setGroups] = useState([]);
@@ -27,7 +28,9 @@ const AllGroupsCards = () => {
     <div>
       <Grid container spacing={3}>
         {groups.map((group) => (
+          
           <Grid item xs={12} sm={6} md={4} key={group._id}>
+            <Link to={`/academy/academy-chat/${group._id}`} style={{ textDecoration: 'none' }}>
             <Card>
               <CardContent>
                 <Typography variant="h6" component="div" align='center'>
@@ -35,6 +38,7 @@ const AllGroupsCards = () => {
                 </Typography>
               </CardContent>
             </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>
