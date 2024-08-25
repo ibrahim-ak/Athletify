@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+
 import Footer from '../Footer';
 import News from '../AcademySite/News';
 import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StudentSiteAnnouncements from './StudentSiteAnnouncements'
-import {Grid, Typography, Paper, Container, Divider } from '@mui/material';
+import {Grid, Typography, Paper, Container, Divider , Box} from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
