@@ -12,7 +12,7 @@ function Announcements({academy}) {
 
   useEffect(() => {
     fetchAnnouncements();
-  }, [announcements]);
+  }, []);  // Fetch announcements only once, don't depend on announcements state.
 
   const fetchAnnouncements = () => {
     // console.log("announcements of " + academy)
@@ -61,32 +61,50 @@ function Announcements({academy}) {
         </Typography>
         <Divider sx={{ backgroundColor: '#fff' }} />
         <List>
+
           {Array.isArray(announcements) && announcements.length > 0 ? (
             [...announcements].reverse().map((announcement, index) => (
-              <ListItem key={index} sx={{ padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <ListItem key={index} sx={{ padding: 0, display: 'flex', alignItems: 'flex-start', marginBottom: '10px' }}>
                 <Box
                   sx={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
                     width: '100%',
                     padding: '10px',
-                    marginBottom: '10px',
                     backgroundColor: '#fff',
                     borderRadius: '8px',
                     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
                   }}
                 >
-                  <ListItemIcon>
+                  <ListItemIcon sx={{ minWidth: '40px' }}>
                     <AnnouncementIcon sx={{ color: '#1d4f67' }} />
                   </ListItemIcon>
-                  <Typography variant="body2" sx={{ color: '#1d4f67', fontWeight: 'bold' }}>
-                    {announcement.Content}
-                  </Typography>
-                  <IconButton onClick={() => handleDelete(announcement._id)} sx={{ color: '#1d4f67', marginLeft: '65px' }}>
-                  <DeleteIcon />
-                </IconButton>
+                  <Box sx={{ flexGrow: 1, overflow: 'hidden' }}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: '#1d4f67',
+                        fontWeight: 'bold',
+                        whiteSpace: 'normal', // Allows wrapping
+                        overflowWrap: 'break-word', // Helps in breaking the word if necessary
+                        wordWrap: 'break-word', // Ensures the words can wrap
+                        hyphens: 'auto', // Adds hyphenation to long words
+                      }}
+                    >
+                      {announcement.Content}
+                    </Typography>
+                  </Box>
+                  <IconButton
+                    onClick={() => handleDelete(announcement._id)}
+                    sx={{
+                      color: '#1d4f67',
+                      marginLeft: '10px',
+                      alignSelf: 'flex-start',
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </Box>
-               
               </ListItem>
             ))
           ) : (

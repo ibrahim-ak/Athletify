@@ -84,7 +84,7 @@ function StudentWall() {
                   <h4 style={{marginLeft:'25px', color:'rgb(250 132 25)', fontWeight:'400'}}>Contact Us:</h4>
                 <Box
                     sx={{
-                        // color: '#f8e4d7', // Beige text color
+                        color: 'white', // Beige text color
                         padding: '30px',
                         borderRadius: '8px',
                         textAlign: 'left',
