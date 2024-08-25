@@ -13,10 +13,6 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { createTheme, ThemeProvider, keyframes } from '@mui/material/styles';
 import imageCopy3 from '/src/media/image copy 3.png'; // Adjust the path relative to your component file
 
-
- 
-
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -53,14 +49,14 @@ const fadeIn = keyframes`
     opacity: 0;
   }
   to {
-    opacity: 2;
+    opacity: 1;
   }
 `;
+
 function SportsSignIn() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -68,7 +64,6 @@ function SportsSignIn() {
     try {
       const response = await axios.post('http://localhost:8000/api/login', { username, password });
       if (response.data.token) {
-
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('username', response.data.userusername);
         localStorage.setItem('role', response.data.role);
@@ -76,12 +71,10 @@ function SportsSignIn() {
         localStorage.setItem('group', response.data.group);
       }
 
-      console.log(localStorage.getItem('id'))
-      console.log(localStorage.getItem('role'))
-      console.log(localStorage.getItem('username'))
-      console.log(localStorage.getItem('group'))
-      
-      
+      console.log(localStorage.getItem('id'));
+      console.log(localStorage.getItem('role'));
+      console.log(localStorage.getItem('username'));
+      console.log(localStorage.getItem('group'));
 
       if (response.data.role === 'student') {
         navigate('/student/student-wall');
@@ -110,9 +103,21 @@ function SportsSignIn() {
           backgroundPosition: 'center',
           justifyContent: 'center',
           alignItems: 'center',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <CssBaseline />
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#1d4f6799', // Dark navy with opacity
+            zIndex: 0, // Ensure this is behind the form
+          }}
+        />
         <Grid
           item
           xs={12}
@@ -125,9 +130,12 @@ function SportsSignIn() {
             bgcolor: 'secondary.main',
             borderRadius: '20px',
             p: 4,
+            position: 'relative', // Ensure it is above the overlay
+            zIndex: 1,
             animation: `${fadeIn} 1.5s ease-out`,
           }}
         >
+          <CssBaseline />
           <Box
             sx={{
               display: 'flex',

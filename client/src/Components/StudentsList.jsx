@@ -135,13 +135,13 @@ const StudentsList = ({ students = [], removeFromDom }) => {
   const [filteredStudents, setFilteredStudents] = useState(students);
 
 
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:8000/api/student/${id}`)
-            .then(res => {
-                removeFromDom(id);
-            })
-            .catch(err => console.error(err));
-    };
+    // const handleDelete = (id) => {
+    //     axios.delete(`http://localhost:8000/api/student/${id}`)
+    //         .then(res => {
+    //             removeFromDom(id);
+    //         })
+    //         .catch(err => console.error(err));
+    // };
 
   // Fetch groups associated with this academy
   useEffect(() => {
