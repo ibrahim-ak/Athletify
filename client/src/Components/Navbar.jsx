@@ -98,19 +98,21 @@ function Navbar() {
             <Button component={Link} to="/#about" sx={{ color: '#fff' }} startIcon={<InfoIcon />}>
               About
             </Button>
+            <Button component={Link} to="/#partners" sx={{ color: '#fff' }} startIcon={<GroupIcon />}>
+              Partners
+            </Button>
+
             <Button component={Link} to="/#services" sx={{ color: '#fff' }} startIcon={<BuildIcon />}>
               Services
             </Button>
             <Button component={Link} to="/#contact" sx={{ color: '#fff' }} startIcon={<ContactMailIcon />}>
               Contact
             </Button>
-            <Button component={Link} to="/#partners" sx={{ color: '#fff' }} startIcon={<GroupIcon />}>
-              Partners
-            </Button>
+
           </Box>
           <Button
             sx={{ color: 'white', marginLeft: 2, border: '2px solid rgb(250 102 25)', backgroundColor: 'rgb(250 132 25)' }}
-            href="#login"
+            component={Link} to="/login"
             startIcon={<LoginIcon />}
           >
             Login

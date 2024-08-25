@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import React from 'react';
 import MainPage from './Components/MainPage';
 import NewsForm from './Components/NewsForm';
-import GroupDashboard from './Components/AcademySite/GroupDashboard';
+// import GroupDashboard from './Components/AcademySite/GroupDashboard';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/joy/Chip';
 import Wall from './Components/AcademySite/Wall';
 import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
-import Chat from './Components/Chat';
+// import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
 
 import AdminPanelParent from './Components/AdminSite/AdminPanelParent';
@@ -52,10 +52,10 @@ function App() {
         <Route path="/student/*" element={<StudentParentComponent />} />
         <Route path="/academy/*" element={<AcademyParentComponent />} />
         <Route path="/academy/details" element={<AcademyDetailsPage />} />
-        <Route path="/academy/group/:id" element={<GroupDashboard />} />
-        <Route path="/chat" element={<Chat />} />
+        {/* <Route path="/academy/group/:id" element={<GroupDashboard />} /> */}
+        {/* <Route path="/chat" element={<Chat />} /> */}
         <Route path="/academy/details" element={<AcademyDetailsPage/>}></Route>
-        <Route path="/chat/:id" element={<Chat />} />
+        {/* <Route path="/chat/:id" element={<Chat />} /> */}
 
 
 

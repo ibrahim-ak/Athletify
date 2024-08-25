@@ -160,7 +160,7 @@ function SportsSignIn() {
                   style: { color: '#FF6F31' },
                 }}
                 InputProps={{
-                  style: { color: '#F9F9F9' },
+                  style: { color: '#1d4f67' },
                 }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
@@ -189,7 +189,7 @@ function SportsSignIn() {
                   style: { color: '#FF6F31' },
                 }}
                 InputProps={{
-                  style: { color: '#F9F9F9' },
+                  style: { color: '#1d4f67' },
                 }}
                 sx={{
                   '& .MuiOutlinedInput-root': {

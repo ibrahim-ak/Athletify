@@ -51,7 +51,6 @@ function MainPage() {
         <Chip label="Latest News" variant="outlined" color="primary" />
       </Divider>
       <NewsSlider />
-      <Divider />
       <Box ref={aboutRef} id="about">
         <AboutUs />
       </Box>

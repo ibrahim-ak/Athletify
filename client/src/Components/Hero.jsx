@@ -1,11 +1,14 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 import heroImg from '../media/image copy.png';
 import CustomButton from "./CustomButton";
 
 const Hero = ({ contactRef }) => {
+  const navigate = useNavigate();
+
   const CustomBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -41,7 +44,11 @@ const Hero = ({ contactRef }) => {
   }));
 
   const handleScrollToContact = () => {
-    if (contactRef && contactRef.current) {
+    console.log("botato")
+    
+      navigate('#contact')
+      if (contactRef && contactRef.current) {
+      navigate('#contact')
       console.log("Scrolling to Contact Section");
       contactRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -69,23 +76,29 @@ const Hero = ({ contactRef }) => {
               "Empowering Athletes, Simplifying Management".
             </Title>
 
-            <CustomButton
-              backgroundColor="rgb(242 132 25)"
-              border="2px solid rgb(250 102 25)"
-              width="200px"
-              height="55px"
-              color="#fff"
-              buttonText="Join Now"
-              heroBtn={true}
-              onClick={() => handleScrollToContact}  // Add the onClick event
-              sx={{
-                "&:hover": {
-                  backgroundColor: "#FF5722",
-                  transform: "scale(1.05)",
-                },
-                transition: "all 0.3s ease-in-out",
-              }}
-            />
+            <Button
+      variant="contained"
+      component={Link}
+      to="/#contact"
+      onClick={handleScrollToContact}
+      sx={{
+        backgroundColor: 'rgb(242, 132, 25)', // Vibrant orange background color
+        border: '2px solid rgb(250, 102, 25)', // Border color
+        width: '150px', // Set width
+        height: '55px', // Set height
+        color: '#fff',
+        fontSize: '1.2rem',
+        textTransform: 'none', // Prevent text from transforming to uppercase
+        '&:hover': {
+          backgroundColor: '#FF5722', // Darker shade of orange for hover
+          borderColor: '#FF5722',
+          transform: 'scale(1.05)', // Slightly increase size on hover
+          transition: 'all 0.3s ease-in-out', // Smooth transition
+        },
+      }}
+    >
+      Join Now
+    </Button>
           </Box>
 
           <Box sx={{ flex: "1.25", zIndex: 2 }}>

@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import { Box, Typography, Card, CardMedia, CardContent, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 function News({ width = '100%', academy}) {
+
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     console.log("Fetching news for academy:", academy); // Add this line
     getNews();
-  }, []); // Fixed: empty dependency array to fetch news only once on component mount
+  }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
+
+
+
 
   const getNews = () => {
     axios.get(`http://localhost:8000/api/news/academy/${academy}`)
@@ -17,7 +22,23 @@ function News({ width = '100%', academy}) {
         setNewsItems(res.data.news);
         setLoaded(true);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error('Error fetching news:', err));
+  };
+
+  const handleDelete = (id) => {
+    // Optimistic UI Update
+    const updatedNewsItems = newsItems.filter(news => news._id !== id);
+    setNewsItems(updatedNewsItems);
+
+    axios.delete(`http://localhost:8000/api/news/${id}`)
+      .then(res => {
+        // Confirm successful deletion
+      })
+      .catch(err => {
+        console.error('Error deleting news:', err);
+        // Revert optimistic UI update in case of an error
+        setNewsItems(newsItems);
+      });
   };
   
 
@@ -28,8 +49,8 @@ function News({ width = '100%', academy}) {
           padding: '30px',
           backgroundColor: '#fff',
           borderRadius: '16px',
-          boxShadow: '0px 8px 24px rgba(255, 165, 0, 0.4)',
-          width: width,  // Apply the width prop here
+          boxShadow: '0px 8px 24px #1d4f67',
+          width: '1100px',  // Apply the width prop here
           margin: '0 auto',
         }}
       >
@@ -44,7 +65,7 @@ function News({ width = '100%', academy}) {
                 marginBottom: '24px',
                 maxWidth: '100%',
                 height: '320px',
-                boxShadow: '0px 10px 20px rgba(255, 165, 0, 0.6)',
+                boxShadow: '0px 5px 20px #1d4f67',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 backgroundColor: '#ffffff',
@@ -91,13 +112,28 @@ function News({ width = '100%', academy}) {
                   },
                 }}
               >
-                <Typography component="h5" variant="h6" sx={{ color: '#1d4f67', marginBottom: '8px' }}>
+                <Typography component="h5" variant="h4" sx={{ color: '#1d4f67', marginBottom: '8px', textAlign:'center', textShadow: '1px 1px 2px', fontSize:'28px'}}>
                   {news.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" style={{fontWeight:'500' , color: '#1d4f67', textAlign: 'justify', fontSize:'18px', padding:'20px' }}>
                   {news.content}
                 </Typography>
               </CardContent>
+              <IconButton
+                onClick={() => handleDelete(news._id)}
+                sx={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  backgroundColor: 'rgba(255, 0, 0, 0.7)',  // Red background
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 0, 0, 0.9)', // Darker red on hover
+                  },
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
             </Card>
           ))
         ) : (

@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import { Grid, Box, TextField, Button, List, ListItem, Typography, Paper } from '@mui/material';
-import StaticNavBar from './StaticNavBar';
+// import StaticNavBar from './StaticNavBar';
 import UpdateIcon from '@mui/icons-material/Update'; // Import the Update icon
 import IconButton from '@mui/icons-material/Update'; // Import the Update icon
-import TrainingTimeForm from './AcademySite/TrainingTimeForm'; // Import the TrainingTimeForm component
+import TrainingTimeForm from './TrainingTimeForm'; // Import the TrainingTimeForm component
 import axios from 'axios';
 
-function Chat() {
+function AcademyChat() {
   const [socket, setSocket] = useState(null);
   const [username, setUsername] = useState('');
   const [room, setRoom] = useState('');
@@ -197,10 +197,9 @@ function Chat() {
           <Paper elevation={3} sx={{ padding: 4, height: '100%', display: 'flex', flexDirection: 'column'}}>
             <Box sx={{ marginBottom:4 }}>
 
-            <Typography variant="h6">Time Schedule
-              {/* <IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft:'35px', cursor:'pointer'}} onClick={handleOpenDialog}>
+            <Typography variant="h6">Time Schedule<IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft:'35px', cursor:'pointer'}} onClick={handleOpenDialog}>
                 <UpdateIcon />
-              </IconButton> */}
+              </IconButton>
               </Typography>
             </Box>
             
@@ -225,4 +224,4 @@ function Chat() {
   );
 }
 
-export default Chat;
+export default AcademyChat;

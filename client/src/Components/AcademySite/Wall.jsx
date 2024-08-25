@@ -88,7 +88,9 @@ function Wall() {
           }}
         >
           <AnnouncementForm onSubmitt={createAnnouncement} errors={errors} />
-          <h1 style={{ margin: "0 20px", color: "#1d4f67" }}>Stay Updated!</h1>
+          
+          <h1 style={{ margin: "0 20px", color: "#1d4f67" ,fontWeight:'500'}}>Add News & Announcments.</h1>
+        
           <NewsForm onSubmit={createNews} errors={errors} />
         </Box>
       </Box>

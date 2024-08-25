@@ -1,11 +1,12 @@
-import React from 'react';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AcademyPanel from '../AcademySite/AcademyPanel';
 import Wall from './Wall';
 import AllGroupsComponent from './AllGroupsComponent';
 import StaticNavBar from '../StaticNavBar';
-import GroupDashboard from './GroupDashboard';
+// import GroupDashboard from './GroupDashboard';
 import ProtectedRoutes from '../ProtectedRoutes';
+import AcademyChat from './AcademyChat';
 
 const AdminPanelParent = () => {
   return (
@@ -18,7 +19,9 @@ const AdminPanelParent = () => {
         <Route path="academy-wall" element={<Wall/>} />
         <Route path="academy-students" element={<AcademyPanel/>} />
         <Route path="academy-groups" element={<AllGroupsComponent />} />
-        <Route path="academy-groups/:id" element={<GroupDashboard />} />
+        <Route path="academy-chat/:id" element={<AcademyChat />} />
+        
+        {/* <Route path="academy-groups/:id" element={<GroupDashboard />} /> */}
       </Routes>
     </div>
     </ProtectedRoutes>

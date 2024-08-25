@@ -5,10 +5,11 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn'; // Import LinkedIn icon
+import { fontWeight } from '@mui/system';
 
 const AcademyLandingPage = () => {
     return (
-        <Box sx={{ width: '100%', margin: 0, padding: 0 , marginTop:'40px'}}>
+        <Box sx={{ width: '100%', margin: 0, padding: 0 , marginTop:'50px'}}>
             {/* Full-width banner with vibrant background */}
             <Box
                 sx={{
@@ -26,7 +27,7 @@ const AcademyLandingPage = () => {
             >
                 <Box
                     component="img"
-                    src="https://via.placeholder.com/300x300.png?text=Academy+Logo"
+                    src="/src/media/pngtree-volleyball-club-badge--logo-png-image_5138391.jpg"
                     alt="Academy Logo"
                     sx={{
                         width: '250px',
@@ -44,7 +45,7 @@ const AcademyLandingPage = () => {
                 />
                 <Box
                     sx={{
-                        color: '#f8e4d7', // Beige text color
+                        // color: '#f8e4d7', // Beige text color
                         padding: '30px',
                         borderRadius: '8px',
                         textAlign: 'left',
@@ -52,12 +53,11 @@ const AcademyLandingPage = () => {
                         marginLeft: '20px'
                     }}
                 >
-                    <Typography variant="h2" sx={{ fontWeight: 'bold', marginBottom: '20px' }}>
+                    <Typography variant="h2" sx={{ fontWeight: 'bold', marginBottom: '20px', color:'rgb(250 132 25)'}}>
                         About Academy
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: '18px', lineHeight: '1.6' }}>
-                        Athletify is a platform designed specifically for athletic academies, offering a comprehensive solution to manage all aspects of academy administration. Our platform simplifies tasks such as student information management, training schedules, announcements, and payments, making it easier for owners and sub-admins to keep everything running smoothly.
-                    </Typography>
+                    <Typography variant="body1" sx={{ fontSize: '20px' , color:'white', textAlign: 'justify'}}>
+                    <span style={{fontWeight:'600' , color:'rgb(250 132 25)'}}> Champions Academy </span> is a premier sports training center dedicated to nurturing young athletes and helping them reach their full potential. Our state-of-the-art facilities and expert coaches provide a supportive environment where athletes can hone their skills, improve their performance, and develop both physically and mentally. At Champions Academy, we offer a wide range of programs in various sports, including soccer, basketball, tennis, and swimming, catering to athletes of all ages and skill levels.  </Typography>
                 </Box>
             </Box>
 
@@ -74,13 +74,15 @@ const AcademyLandingPage = () => {
                 <Grid container spacing={4}>
                     {/* Left Column: Awards Section */}
                     <Grid item xs={12} md={8}>
-                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1d4f67', marginBottom: '20px' }}>
+                        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1d4f67', marginBottom: '20px'}}>
                             <EmojiEventsIcon sx={{ color: '#fa8419', marginRight: '10px' }} /> Awards & Achievements
                         </Typography>
-                        <Typography variant="body1" sx={{ fontSize: '18px', color: '#555' }}>
+                        <Typography variant="body1" sx={{ fontSize: '22px', color: '#1d4f67', lineHeight:'2' }}>
                             - Best Sports Academy 2023 <br />
                             - Excellence in Training Award 2022 <br />
-                            - Top Innovator in Athletic Management 2021
+                            - Top Innovator in Athletic Management 2021<br/>
+                            - Most Innovative Use of Technology in Sports 2020 <br/>
+                            - Outstanding Community Engagement Award 2019
                         </Typography>
                     </Grid>
                     
