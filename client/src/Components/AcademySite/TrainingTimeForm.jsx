@@ -69,7 +69,7 @@ const TrainingTimeForm = ({ open, onClose, thisid, setTimes, timess = [] }) => {
           Update the training times for this group:
         </Typography>
         {trainingTimes.map((time, index) => (
-          <Grid container spacing={2} key={index} alignItems="center">
+          <Grid container spacing={2} key={index} alignItems="center" sx={{ marginBottom:'25px' }}>
             <Grid item xs={4}>
               <Select
                 value={time.day}
