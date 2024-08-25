@@ -54,7 +54,7 @@ const AcademyLandingPage = () => {
                     }}
                 >
                     <Typography variant="h2" sx={{ fontWeight: 'bold', marginBottom: '20px', color:'rgb(250 132 25)'}}>
-                        About Academy
+                        About Champions
                     </Typography>
                     <Typography variant="body1" sx={{ fontSize: '20px' , color:'white', textAlign: 'justify'}}>
                     <span style={{fontWeight:'600' , color:'rgb(250 132 25)'}}> Champions Academy </span> is a premier sports training center dedicated to nurturing young athletes and helping them reach their full potential. Our state-of-the-art facilities and expert coaches provide a supportive environment where athletes can hone their skills, improve their performance, and develop both physically and mentally. At Champions Academy, we offer a wide range of programs in various sports, including soccer, basketball, tennis, and swimming, catering to athletes of all ages and skill levels.  </Typography>

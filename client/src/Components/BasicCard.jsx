@@ -58,7 +58,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 1
+                  Champions
                 </Typography>
               </Box>
             </Box>
@@ -113,7 +113,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 2
+                  George Best
                 </Typography>
               </Box>
             </Box>
@@ -167,7 +167,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 3
+                  Big House
                 </Typography>
               </Box>
             </Box>
@@ -221,7 +221,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 4
+                  Soprts
                 </Typography>
               </Box>
             </Box>
@@ -276,7 +276,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 5
+                  MKA
                 </Typography>
               </Box>
             </Box>
@@ -330,7 +330,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 6
+                  Our Team
                 </Typography>
               </Box>
             </Box>
@@ -384,7 +384,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 7
+                  Aquatic Sport
                 </Typography>
               </Box>
             </Box>
@@ -438,7 +438,7 @@ function PartnersDisplay() {
                 }}
               >
                 <Typography variant="h6" sx={{ color: '#fff' }}>
-                  Academy 8
+                Climbing Academy 
                 </Typography>
               </Box>
             </Box>

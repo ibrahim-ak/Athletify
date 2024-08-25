@@ -1,107 +1,162 @@
-import React from 'react';
-import { Box, Grid, Paper, Typography } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
-import { Pie } from 'react-chartjs-2';
-import Chart from 'chart.js/auto';
-import StaticNavBar from '../StaticNavBar';
+import React, { useEffect, useState } from 'react';
+import { Grid, Card, Typography } from '@mui/material';
+import { Bar, Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
+import axios from 'axios';
 
 const AdminDashboard = () => {
+  const [academies, setAcademies] = useState([]);
+  const [studentCounts, setStudentCounts] = useState([]);
 
-     // Mock data for pie charts
-     const studentsData = {
-          labels: ['Academy A', 'Academy B', 'Academy C'],
-          datasets: [
-               {
-                    label: 'Number of Students',
-                    data: [150, 200, 100],
-                    backgroundColor: [
-                         'rgba(75,192,192,1)',
-                         'rgba(54, 162, 235, 1)',
-                         'rgba(255, 206, 86, 1)',
-                    ],
-                    hoverBackgroundColor: [
-                         'rgba(75,192,192,0.8)',
-                         'rgba(54, 162, 235, 0.8)',
-                         'rgba(255, 206, 86, 0.8)',
-                    ],
-               },
-          ],
-     };
+  // Fetch academies data
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/academies")
+      .then((res) => {
+        setAcademies(res.data.Academies);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-     const newsData = {
-          labels: ['Academy A', 'Academy B', 'Academy C'],
-          datasets: [
-               {
-                    label: 'Number of News Items',
-                    data: [20, 15, 30],
-                    backgroundColor: [
-                         'rgba(153, 102, 255, 1)',
-                         'rgba(255, 159, 64, 1)',
-                         'rgba(255, 99, 132, 1)',
-                    ],
-                    hoverBackgroundColor: [
-                         'rgba(153, 102, 255, 0.8)',
-                         'rgba(255, 159, 64, 0.8)',
-                         'rgba(255, 99, 132, 0.8)',
-                    ],
-               },
-          ],
-     };
+  // Extract labels and ids
+  const labels = academies.map((academy) => academy.username);
+  const academieslist = academies.map((academy) => academy._id);
 
-     // Mock data for DataGrid (students' data)
-     const columns = [
-          { field: 'id', headerName: 'ID', width: 70 },
-          { field: 'name', headerName: 'Name', width: 130 },
-          { field: 'academy', headerName: 'Academy', width: 130 },
-          { field: 'group', headerName: 'Group', width: 130 },
-     ];
+  // Define fetchStudents function
+  const fetchStudents = async () => {
+    try {
+      const counts = await Promise.all(
+        academieslist.map(async (ac) => {
+          try {
+            const response = await axios.get(`http://localhost:8000/api/group/academy/${ac}`);
+            const studentPromises = response.data.groups.map(async (group) => {
+              const groupResponse = await axios.get(`http://localhost:8000/api/student/group/${group._id}`);
+              return groupResponse.data.student;
+            });
 
-     const rows = [
-          { id: 1, name: 'John Doe', academy: 'Academy A', group: 'Group 1' },
-          { id: 2, name: 'Jane Smith', academy: 'Academy B', group: 'Group 2' },
-          { id: 3, name: 'Sam Johnson', academy: 'Academy C', group: 'Group 3' },
-     ];
+            const allStudents = await Promise.all(studentPromises);
+            const mergedStudents = allStudents.flat(); // Flatten the array of arrays
+            return mergedStudents.length; // Return the count of students
+          } catch (error) {
+            console.error(`Error fetching students for academy ${ac}:`, error);
+            return 0; // Return 0 if there's an error for a particular academy
+          }
+        })
+      );
 
-     return (
+      // Update state with counts
+      setStudentCounts(counts);
 
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  };
 
-          <>
-          <StaticNavBar/>
-          <Box sx={{ flexGrow: 1, padding: 2 }}>
-               <Grid container spacing={3}>
-                    {/* Pie chart for students */}
-                    <Grid item xs={3} md={2}>
-                         <Paper elevation={3} sx={{ padding: 2 }}>
-                              <Typography variant="h6" gutterBottom>
-                                   Number of Students per Academy
-                              </Typography>
-                              <Pie data={studentsData} />
-                         </Paper>
-                    </Grid>
+  // Fetch students when academies are loaded
+  useEffect(() => {
+    if (academieslist.length > 0) {
+      fetchStudents();
+    }
+  }, [academieslist]);
 
-                    {/* Pie chart for news */}
-                    <Grid item xs={5} md={2}>
-                         <Paper elevation={3} sx={{ padding: 2 }}>
-                              <Typography variant="h6" gutterBottom>
-                                   Number of News Items per Academy
-                              </Typography>
-                              <Pie data={newsData} />
-                         </Paper>
-                    </Grid>
+  // Chart data
+  const academyNewsData = {
+    labels,
+    datasets: [
+      {
+        label: 'Number of News',
+        data: [40, 50, 30], // Replace with real data
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#FFCE11',
+          '#FFCE22',
+        ],
+      },
+    ],
+  };
 
-                    {/* DataGrid for students */}
-                    <Grid item xs={12}>
-                         <Paper elevation={3} sx={{ height: 400, padding: 2 }}>
-                              <Typography variant="h6" gutterBottom>
-                                   Students List
-                              </Typography>
-                              <DataGrid rows={rows} columns={columns} pageSize={5} />
-                         </Paper>
-                    </Grid>
-               </Grid>
-          </Box>
-          </>
-     );
+  const academyStudentData = {
+    labels,
+    datasets: [
+      {
+        label: 'Total Number of Students',
+        data: studentCounts, // Use studentCounts state here
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          'Green',
+          '#FFCE11',
+          '#FFCE56',
+        ],
+        hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          'Green',
+          '#FFCE11',
+          '#FFCE56',
+        ],
+      },
+    ],
+  };
+
+  // Common styles for the charts
+  const chartContainerStyles = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '300px',
+  };
+
+  return (
+    <Grid container spacing={4} style={{ padding: '20px', marginTop: '20px' }}>
+      {/* Chart for Number of News by Academy */}
+      <Grid item xs={12} md={6}>
+        <Card style={{ padding: '20px', backgroundColor: '#f0f4f7', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+          <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold', color: '#333' }}>
+            News by Academy
+          </Typography>
+          <div style={chartContainerStyles}>
+            <Bar data={academyNewsData} />
+          </div>
+        </Card>
+      </Grid>
+
+      {/* Pie Chart for Total Number of Students by Academy */}
+      <Grid item xs={12} md={6}>
+        <Card style={{ padding: '20px', backgroundColor: '#f0f4f7', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+          <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold', color: '#333' }}>
+            Total Number of Students by Academy
+          </Typography>
+          <div style={chartContainerStyles}>
+            <Pie data={academyStudentData} />
+          </div>
+        </Card>
+      </Grid>
+
+      {/* Card 1 */}
+      <Grid item xs={12} md={6}>
+        <Card style={{ padding: '20px', backgroundColor: '#ffffff', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>Card 1</Typography>
+          <Typography variant="body1" style={{ color: '#555' }}>
+            Content for the first card goes here. You can use this space to display additional information.
+          </Typography>
+        </Card>
+      </Grid>
+
+      {/* Card 2 */}
+      <Grid item xs={12} md={6}>
+        <Card style={{ padding: '20px', backgroundColor: '#ffffff', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>Card 2</Typography>
+          <Typography variant="body1" style={{ color: '#555' }}>
+            Content for the second card goes here. This card can also be used for any relevant details.
+          </Typography>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 };
 
 export default AdminDashboard;

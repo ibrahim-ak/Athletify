@@ -77,3 +77,10 @@ const AcademyPanel = () => {
 };
 
 export default AcademyPanel;
+
+
+
+
+
+
+
