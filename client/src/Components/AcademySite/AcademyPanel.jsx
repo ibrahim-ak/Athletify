@@ -18,6 +18,7 @@ const AcademyPanel = () => {
       const response = await axios.get(`http://localhost:8000/api/group/academy/${academy}`);
       const studentPromises = response.data.groups.map(async (group) => {
         const groupResponse = await axios.get(`http://localhost:8000/api/student/group/${group._id}`);
+        console.log('Fetched students with groups:', groupResponse.data.student); // Debug line
         return groupResponse.data.student;
       });
       

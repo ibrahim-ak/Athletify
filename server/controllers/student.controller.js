@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports.findAllStudent = (req, res) => {
      Student.find()
-     .populate('group')  // Populate the group field
+     .populate('group', 'Name')  // Populate the group field
           .then((allstudent) => {
                res.json({ students: allstudent })
           })
@@ -14,6 +14,10 @@ module.exports.findAllStudent = (req, res) => {
                res.json(err)
           });
 }
+
+
+
+
 module.exports.findOneStudent = (req, res) => {
      Student.findOne({ _id: req.params.id })
           .then(findOneStudent => {
@@ -58,6 +62,7 @@ module.exports.deleteAnExistingStudent = (req, res) => {
 
 module.exports.findStudentsbyGroup = (req, res) => {
      Student.find({ group: req.params.group })
+     .populate('group', 'Name') // Ensure population here as well
          .then(student => res.json({ student }))
          .catch(err => res.status(500).json(err));
  };
