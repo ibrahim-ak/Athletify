@@ -10,10 +10,11 @@ import axios from 'axios';
 
 function AcademyChat() {
   const [socket, setSocket] = useState(null);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(localStorage.getItem('username'));
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [studentsList, setStudentsList] = useState([]);
   const { id } = useParams(); // Extract the room ID from the URL
   const messagesEndRef = useRef(null);
 
@@ -43,6 +44,22 @@ function AcademyChat() {
         setTrainingTimess(res.data.group.trainingTimes);
       });
   };
+
+  useEffect(() => {
+    getStudents();
+  },[] );
+
+  const getStudents = () => {
+    axios.get('http://localhost:8000/api/student/group/' + id)
+      .then(res => {
+        setStudentsList(res.data.student);
+        console.log(res.data.student);
+      });
+  };
+  
+ 
+
+  
 
   useEffect(() => {
     // Initialize the socket connection
@@ -114,18 +131,18 @@ function AcademyChat() {
         {/* Left Column - User Input and Students List */}
         <Grid item xs={3} sx={{ height: '100%', }}>
           <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column', marginLeft: '60px' }}>
-            <TextField
+            {/* <TextField
               fullWidth
               variant="outlined"
               label="Your Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               sx={{ marginBottom: 2 }}
-            />
+            /> */}
             <Typography variant="h6">Students List</Typography>
             <List sx={{ flexGrow: 1, overflowY: 'auto' }}>
-              {['student1', 'student2', 'student3', 'student4', 'student5', 'student6', 'student7'].map((student, index) => (
-                <ListItem key={index}>{student}</ListItem>
+              {studentsList.map((student) => (
+                <ListItem key={student._id}>{student.username}</ListItem>
               ))}
             </List>
           </Paper>

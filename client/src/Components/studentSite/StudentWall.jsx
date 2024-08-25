@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
-
 import Footer from '../Footer';
 import News from '../News';
 import Announcements from '../Announcements';
