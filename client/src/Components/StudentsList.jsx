@@ -1,8 +1,13 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete'; // Material-UI delete icon
+import EditIcon from '@mui/icons-material/Edit'; // Material-UI edit icon
 import axios from 'axios';
+import UpdateStudentForm from './UpdateStudentForm'; // Import your UpdateStudentForm component
 
 const StudentsList = ({ students = [], removeFromDom }) => {
+    const [openDialog, setOpenDialog] = useState(false);
+    const [selectedStudent, setSelectedStudent] = useState(null);
 
     const handleDelete = (id) => {
         axios.delete(`http://localhost:8000/api/student/${id}`)
@@ -10,6 +15,21 @@ const StudentsList = ({ students = [], removeFromDom }) => {
                 removeFromDom(id);
             })
             .catch(err => console.error(err));
+    };
+
+    const handleEditClick = (student) => {
+        setSelectedStudent(student);
+        setOpenDialog(true);
+    };
+
+    const handleDialogClose = () => {
+        setOpenDialog(false);
+        setSelectedStudent(null); // Reset selected student
+    };
+
+    const handleUpdate = (updatedStudent) => {
+        // Logic to update the student in the list if needed
+        handleDialogClose();
     };
 
     return (
@@ -48,6 +68,17 @@ const StudentsList = ({ students = [], removeFromDom }) => {
                                         >
                                             <DeleteIcon />
                                         </IconButton>
+                                        <IconButton
+                                            onClick={() => handleEditClick(student)}
+                                            sx={{
+                                                color: '#1d4f67',
+                                                '&:hover': {
+                                                    color: '#ff6f31'
+                                                }
+                                            }}
+                                        >
+                                            <EditIcon />
+                                        </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ) : null
@@ -55,6 +86,16 @@ const StudentsList = ({ students = [], removeFromDom }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            {/* Dialog for updating student */}
+            <Dialog open={openDialog} onClose={handleDialogClose} fullWidth maxWidth="md">
+                <DialogTitle>Update Student Information</DialogTitle>
+                <DialogContent>
+                    {selectedStudent && (
+                        <UpdateStudentForm studentId={selectedStudent._id} onUpdate={handleUpdate} />
+                    )}
+                </DialogContent>
+            </Dialog>
         </Paper>
     );
 };
