@@ -9,7 +9,7 @@ function News({ width = '100%', academy}) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("Fetching news for academy:", academy); // Add this line
+    // console.log("Fetching news for academy:", academy); // Add this line
     getNews();
   }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
 
