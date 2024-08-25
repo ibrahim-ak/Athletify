@@ -12,7 +12,7 @@ function Announcements({academy}) {
 
   useEffect(() => {
     fetchAnnouncements();
-  }, []);  // Fetch announcements only once, don't depend on announcements state.
+  }, [announcements]);  // Fetch announcements only once, don't depend on announcements state.
 
   const fetchAnnouncements = () => {
     // console.log("announcements of " + academy)
