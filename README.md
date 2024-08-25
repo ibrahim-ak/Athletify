@@ -4,6 +4,12 @@
 Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
 
 ---
+## Screenshots
+
+Include screenshots of your project. You can add the ones you just uploaded like this:
+
+![Screenshot1](path_to_image/screenshot-1724584601776.png)
+![Screenshot2](path_to_image/screenshot-1724584662880.png)
 
 ## 📚 Background
 
