@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 
 import Footer from '../Footer';
-import News from '../News';
+import News from '../AcademySite/News';
 import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StudentSiteAnnouncements from './StudentSiteAnnouncements'
-import { Box, Grid, Typography, Paper, Container, Divider } from '@mui/material';
+import {Grid, Typography, Paper, Container, Divider } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn'; // Import LinkedIn icon
+import StudentsNews from './StudentNews';
 
 function StudentWall() {
   const [errors, setErrors] = useState([]);
@@ -82,7 +83,7 @@ function StudentWall() {
                   <h4 style={{marginLeft:'25px', color:'rgb(250 132 25)', fontWeight:'400'}}>Contact Us:</h4>
                 <Box
                     sx={{
-                        // color: '#f8e4d7', // Beige text color
+                        color: 'white', // Beige text color
                         padding: '30px',
                         borderRadius: '8px',
                         textAlign: 'left',
@@ -109,12 +110,16 @@ function StudentWall() {
 
             {/* Main content section */}
         </Box>
-        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: 'rgb(250 132 25)'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
+        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: '#33678f', fontWeight:'450'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
 
-        {academy && <News academy={academy}/>}
+
+
+        {academy && <StudentsNews academy={academy}/>}
         {academy && <StudentSiteAnnouncements academy={academy}/>}
+
       
     </Box>
+    <Divider></Divider>
     <Footer />
 
 
