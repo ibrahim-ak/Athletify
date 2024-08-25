@@ -7,7 +7,7 @@ import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StudentSiteAnnouncements from './StudentSiteAnnouncements'
-import { Box, Grid, Typography, Paper, Container, Divider } from '@mui/material';
+import {Grid, Typography, Paper, Container, Divider } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
