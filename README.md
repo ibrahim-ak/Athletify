@@ -6,7 +6,10 @@ Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
 ---
 ## Screenshots
 
+
 Include screenshots of your project. You can add the ones you just uploaded like this:
+### Screenshot 1
+![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584498676.png)
 
 ## 📚 Background
 
