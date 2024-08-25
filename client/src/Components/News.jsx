@@ -3,11 +3,13 @@ import { Box, Typography, Card, CardMedia, CardContent, IconButton } from '@mui/
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-function News() {
+function News({ width = '100%', academy}) {
+
   const [newsItems, setNewsItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    console.log("Fetching news for academy:", academy); // Add this line
     getNews();
   }, [newsItems]); // Fixed: empty dependency array to fetch news only once on component mount
 
@@ -15,7 +17,7 @@ function News() {
 
 
   const getNews = () => {
-    axios.get('http://localhost:8000/api/news')
+    axios.get(`http://localhost:8000/api/news/academy/${academy}`)
       .then(res => {
         setNewsItems(res.data.news);
         setLoaded(true);
@@ -38,6 +40,7 @@ function News() {
         setNewsItems(newsItems);
       });
   };
+  
 
   return (
     <Box sx={{ width: '100%', padding: '40px', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>

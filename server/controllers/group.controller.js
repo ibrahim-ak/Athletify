@@ -74,3 +74,8 @@ module.exports.deleteAnExistinggroup = (req, res) => {
                res.json(err)
           });
 }
+module.exports.findGroupsByAcademy = (req, res) => {
+     Group.find({ Academy: req.params.academy })
+         .then(groups => res.json({ groups }))
+         .catch(err => res.status(500).json(err));
+ };

@@ -6,5 +6,6 @@ module.exports = app => {
      app.patch('/api/news/:id', Newscontroller.updateExistingnew);
      app.post('/api/news', Newscontroller.createNews);
      app.delete('/api/news/:id', Newscontroller.deleteAnExistingnew);
+     app.get('/api/news/academy/:academy', Newscontroller.findNewsByAcademy);
 
 }

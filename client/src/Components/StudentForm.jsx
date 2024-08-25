@@ -18,9 +18,10 @@ const StudentForm = ({ onCreate }) => {
 
   useEffect((e) => {
     e
+    const academy = localStorage.getItem('id')
     const fetchGroups = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/groups');
+        const response = await axios.get(`http://localhost:8000/api/group/academy/${academy}`);
         const groups = response.data.groups || [];
         setAllGroups(groups);
         if (groups.length > 0 && !formData.group) {
