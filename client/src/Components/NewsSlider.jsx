@@ -49,7 +49,7 @@ function NewsSlider() {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ width: '100%', marginTop: 10, marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2,  }}>
+    <Box sx={{ width: '100%', marginTop: 10, marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2 }}>
       <Swiper
         spaceBetween={16}
         slidesPerView={1}
@@ -73,6 +73,7 @@ function NewsSlider() {
                   overflow: 'hidden',
                   backgroundColor: '#f9f9f9',
                   position: 'relative',
+                  marginLeft:'230px'
                 }}
               >
                 <CardMedia
