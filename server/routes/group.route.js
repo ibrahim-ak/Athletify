@@ -6,5 +6,6 @@ module.exports = app => {
      app.post('/api/group', Groupcontroller.createNewgroup);
      app.patch('/api/group/:id', Groupcontroller.updateExistingGroup);
      app.delete('/api/group/:id', Groupcontroller.deleteAnExistinggroup);
+     app.get('/api/group/academy/:academy', Groupcontroller.findGroupsByAcademy);
 
 }

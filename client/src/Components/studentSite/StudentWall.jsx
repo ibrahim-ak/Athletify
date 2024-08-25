@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+
 import Footer from '../Footer';
 import News from '../AcademySite/News';
 import Announcements from '../Announcements';
@@ -15,11 +17,28 @@ import StudentsNews from './StudentNews';
 
 function StudentWall() {
   const [errors, setErrors] = useState([]);
+  const [academy, setThisAcademy] = useState()
   const navigate = useNavigate();
+  const studentgroup = localStorage.getItem('group');
 
+  useEffect(() => {
+    fetchgroup()
+    // console.log("the academy id " + academy)
+  }, []);
+  const fetchgroup = () => {
+    // console.log("announcements of " + studentgroup)
+    axios.get(`http://localhost:8000/api/group/${studentgroup}`)
+      .then(res => {
+        setThisAcademy(res.data.group.Academy);
+        // console.log(res.data.group.Academy)
+      })
+      .catch(err => console.error(err));
+  };
 
   return (
     <>
+
+
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
 
 
@@ -94,13 +113,16 @@ function StudentWall() {
         </Box>
         <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: '#33678f', fontWeight:'450'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
 
-      <StudentsNews />
 
-      <StudentSiteAnnouncements  />
+
+        {academy && <StudentsNews academy={academy}/>}
+        {academy && <StudentSiteAnnouncements academy={academy}/>}
+
       
     </Box>
     <Divider></Divider>
     <Footer />
+
 
     </>
   );

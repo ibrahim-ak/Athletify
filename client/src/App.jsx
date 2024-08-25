@@ -9,7 +9,7 @@ import Chip from '@mui/joy/Chip';
 import Wall from './Components/AcademySite/Wall';
 import CallToAction from "./Components/CallToAction";
 import ContactForm from "./Components/ContactForm";
-import Chat from './Components/Chat';
+// import Chat from './Components/Chat';
 import SignIn from './Components/Login/SignIn'
 
 import AdminPanelParent from './Components/AdminSite/AdminPanelParent';
@@ -55,7 +55,7 @@ function App() {
         {/* <Route path="/academy/group/:id" element={<GroupDashboard />} /> */}
         {/* <Route path="/chat" element={<Chat />} /> */}
         <Route path="/academy/details" element={<AcademyDetailsPage/>}></Route>
-        <Route path="/chat/:id" element={<Chat />} />
+        {/* <Route path="/chat/:id" element={<Chat />} /> */}
 
 
 
