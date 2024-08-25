@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit'; // Material-UI edit icon
 import axios from 'axios';
 import UpdateStudentForm from './UpdateStudentForm'; // Import your UpdateStudentForm component
 
-const StudentsList = ({ students = [], removeFromDom }) => {
+const StudentsList = ({ students, removeFromDom }) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
 
