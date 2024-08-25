@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 function PartnersDisplay() {
   return (
     <div style={{ marginTop: '50px', marginBottom: '100px' }}>
-    <Typography variant="h4" align="center" gutterBottom>
-      Our Partners
-    </Typography>
     <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
       <Grid container spacing={4} justifyContent="center" alignItems="center">
         {/* First Row */}
