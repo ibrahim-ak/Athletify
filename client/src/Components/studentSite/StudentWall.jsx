@@ -11,6 +11,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn'; // Import LinkedIn icon
+import StudentsNews from './StudentNews';
 
 function StudentWall() {
   const [errors, setErrors] = useState([]);
@@ -93,7 +94,7 @@ function StudentWall() {
         </Box>
         <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: 'rgb(250 132 25)'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
 
-      <News />
+      <StudentsNews />
 
       <StudentSiteAnnouncements  />
       
