@@ -49,7 +49,7 @@ function NewsSlider() {
   const handleClose = () => setOpen(false);
 
   return (
-    <Box sx={{ width: '100%', marginTop: 10, marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2 }}>
+    <Box sx={{ width: '100%', marginTop: 10, marginBottom: 10, position: 'relative', backgroundColor: "#E6F0FF", padding: "20px", borderRadius: 2,  }}>
       <Swiper
         spaceBetween={16}
         slidesPerView={1}
