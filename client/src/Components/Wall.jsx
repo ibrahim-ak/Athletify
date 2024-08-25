@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-import NewsForm from '../NewsForm';
-import AnnouncementForm from '../AnnouncementForm';
-import News from './News';
-import Announcements from '../Announcements';
-import StaticNavBar from '../StaticNavBar';
+import NewsForm from './NewsForm';
+import AnnouncementForm from './AnnouncementForm';
+import News from './AcademySite/News';
+import Announcements from './Announcements';
+import StaticNavBar from './StaticNavBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ function Wall() {
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/academy/academy-wall");
+        navigate("/wall");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -35,7 +35,7 @@ function Wall() {
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/academy/academy-wall");
+        navigate("/wall");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -50,6 +50,7 @@ function Wall() {
 
   return (
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
 
       <Box
         sx={{
@@ -72,14 +73,12 @@ function Wall() {
           }}
         >
           <AnnouncementForm onSubmitt={createAnnouncement} errors={errors} />
-          
-          <h1 style={{ margin: "0 20px", color: "#1d4f67" ,fontWeight:'500'}}>Add News & Announcments.</h1>
-        
+          <h1 style={{ margin: "0 20px", color: "#1d4f67" }}>Stay Updated!</h1>
           <NewsForm onSubmit={createNews} errors={errors} />
         </Box>
       </Box>
 
-      <News width="1000px" /> 
+      <News />
       <Announcements  />
     </Box>
   );

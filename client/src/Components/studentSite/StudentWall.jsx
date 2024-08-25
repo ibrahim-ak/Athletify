@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Footer from '../Footer';
-import News from '../News';
+import News from '../AcademySite/News';
 import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -92,13 +92,14 @@ function StudentWall() {
 
             {/* Main content section */}
         </Box>
-        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: 'rgb(250 132 25)'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
+        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: '#33678f', fontWeight:'450'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
 
       <StudentsNews />
 
       <StudentSiteAnnouncements  />
       
     </Box>
+    <Divider></Divider>
     <Footer />
 
     </>

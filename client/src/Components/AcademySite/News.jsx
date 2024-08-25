@@ -122,7 +122,7 @@ function News() {
                   position: 'absolute',
                   top: '16px',
                   right: '16px',
-                  backgroundColor: 'rgba(255, 0, 0, 0.7)',  // Red background
+                  backgroundColor: '#fb841a',  // Red background
                   color: 'white',
                   '&:hover': {
                     backgroundColor: 'rgba(255, 0, 0, 0.9)', // Darker red on hover
