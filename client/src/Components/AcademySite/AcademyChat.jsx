@@ -36,6 +36,7 @@ function AcademyChat() {
 
   useEffect(() => {
     getTime();
+    console.log(username)
   }, [trainingTimes]);
 
   const getTime = () => {
@@ -47,7 +48,7 @@ function AcademyChat() {
 
   useEffect(() => {
     getStudents();
-  },[] );
+  }, []);
 
   const getStudents = () => {
     axios.get('http://localhost:8000/api/student/group/' + id)
@@ -56,10 +57,10 @@ function AcademyChat() {
         console.log(res.data.student);
       });
   };
-  
- 
 
-  
+
+
+
 
   useEffect(() => {
     // Initialize the socket connection
@@ -127,7 +128,7 @@ function AcademyChat() {
   return (
     <>
       {/* <StaticNavBar /> */}
-      <Grid container spacing={8} sx={{ padding: 2, height: '90vh', width: '200vh', marginTop:'-30px'}}>
+      <Grid container spacing={8} sx={{ padding: 2, height: '90vh', width: '200vh', marginTop: '-30px' }}>
         {/* Left Column - User Input and Students List */}
         <Grid item xs={3} sx={{ height: '100%', }}>
           <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column', marginLeft: '60px' }}>
@@ -152,16 +153,16 @@ function AcademyChat() {
         <Grid item xs={6} sx={{ height: '100%' }}>
           <Paper elevation={3} sx={{ padding: 2, height: '100%', display: 'flex', flexDirection: 'column' }}>
 
-           
 
-              <Typography variant="h6" sx={{ marginBottom: 2 }}>
-                Group Name
 
-              </Typography>
+            <Typography variant="h6" sx={{ marginBottom: 2 }}>
+              Group Name
 
-              
+            </Typography>
 
-        
+
+
+
 
             <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: 1, borderRadius: 2, border: '1px solid #ccc' }}>
               <List>
@@ -211,24 +212,24 @@ function AcademyChat() {
 
         {/* Right Column - Time Schedule */}
         <Grid item xs={3} sx={{ height: '100%' }}>
-          <Paper elevation={3} sx={{ padding: 4, height: '100%', display: 'flex', flexDirection: 'column'}}>
-            <Box sx={{ marginBottom:4 }}>
+          <Paper elevation={3} sx={{ padding: 4, height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ marginBottom: 4 }}>
 
-            <Typography variant="h6">Time Schedule<IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft:'35px', cursor:'pointer'}} onClick={handleOpenDialog}>
+              <Typography variant="h6">Time Schedule<IconButton sx={{ color: 'rgb(250, 132, 25)', marginLeft: '35px', cursor: 'pointer' }} onClick={handleOpenDialog}>
                 <UpdateIcon />
               </IconButton>
               </Typography>
             </Box>
-            
+
             <Typography variant="body1" sx={{ marginTop: 2, overflowY: 'auto', flexGrow: 1 }}>
-  {trainingTimess.map((time, index) => (
-    <span key={index}>
-      <strong>{time.day}</strong> {/* Bold the day for emphasis */}
-      <div>{`${time.start} - ${time.end}`}</div> {/* Place the time range on a new line */}
-      <br />
-    </span>
-  ))}
-</Typography>
+              {trainingTimess.map((time, index) => (
+                <span key={index}>
+                  <strong>{time.day}</strong> {/* Bold the day for emphasis */}
+                  <div>{`${time.start} - ${time.end}`}</div> {/* Place the time range on a new line */}
+                  <br />
+                </span>
+              ))}
+            </Typography>
           </Paper>
         </Grid>
       </Grid>

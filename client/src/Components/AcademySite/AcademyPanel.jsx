@@ -11,6 +11,10 @@ const AcademyPanel = () => {
   useEffect(() => {
     fetchStudents();
   }, []);
+  useEffect(() => {
+    console.log("AcademyPanel re-rendered with students:", students);
+}, [students]);
+
 
   const fetchStudents = async () => {
     const academy = localStorage.getItem('id');
@@ -30,8 +34,11 @@ const AcademyPanel = () => {
   };
 
   const handleCreateStudent = (newStudent) => {
-    setStudents(prevStudents => [...prevStudents, newStudent]); // Ensure prevStudents is iterable
+    if (newStudent && newStudent._id) {
+        setStudents(prevStudents => [...prevStudents, newStudent]);
+    }
 };
+
 
 
   const removeFromDom = id => {
