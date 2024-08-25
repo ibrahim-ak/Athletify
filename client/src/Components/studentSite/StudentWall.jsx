@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-// import { Box } from '@mui/material';
+
+ import { Box } from '@mui/material';
+
 
 import Footer from '../Footer';
 import News from '../AcademySite/News';
@@ -7,7 +9,7 @@ import Announcements from '../Announcements';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import StudentSiteAnnouncements from './StudentSiteAnnouncements'
-import { Box, Grid, Typography, Paper, Container, Divider } from '@mui/material';
+import {Grid, Typography, Paper, Container, Divider , Box} from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -18,6 +20,7 @@ import StudentsNews from './StudentNews';
 function StudentWall() {
   const [errors, setErrors] = useState([]);
   const [academy, setThisAcademy] = useState()
+  const [thisacademy, setThissAcademy] = useState({})
   const navigate = useNavigate();
   const studentgroup = localStorage.getItem('group');
 
@@ -26,14 +29,25 @@ function StudentWall() {
     // console.log("the academy id " + academy)
   }, []);
   const fetchgroup = () => {
-    // console.log("announcements of " + studentgroup)
     axios.get(`http://localhost:8000/api/group/${studentgroup}`)
       .then(res => {
-        setThisAcademy(res.data.group.Academy);
-        // console.log(res.data.group.Academy)
+        // First, set the academy using the data from the first request
+        const academy = res.data.group.Academy;
+        setThisAcademy(academy);
+        console.log(academy)
+        console.log(studentgroup)
+        // Then, make the second axios request using the academy value
+        return axios.get(`http://localhost:8000/api/academy/${academy}`);
+      })
+      .then(response => {
+        // Handle the second response data
+        setThissAcademy(response.data.academy);
+        console.log(response.data.academy);
       })
       .catch(err => console.error(err));
   };
+  
+  
 
   return (
     <>
@@ -80,7 +94,7 @@ function StudentWall() {
                     
                 />
                 <Box>
-                  <h1 style={{marginLeft:'20px', fontWeight:'450', color:'rgb(250 132 25)'}}>Welcome 'Student'!</h1>
+                  <h1 style={{marginLeft:'20px', fontWeight:'450', color:'rgb(250 132 25)'}}>Welcome {localStorage.getItem('username')}!</h1>
                   <h4 style={{marginLeft:'25px', color:'rgb(250 132 25)', fontWeight:'400'}}>Contact Us:</h4>
                 <Box
                     sx={{
@@ -93,13 +107,13 @@ function StudentWall() {
                         backgroundColor:'#ffffff45'
                     }}>
                   <Typography variant="body1" sx={{ fontSize: '16px', marginBottom: '10px' }}>
-                                <strong>Phone:</strong> +1 (123) 456-7890
+                                <strong>Phone:</strong> {thisacademy.phone}
                             </Typography>
                             <Typography variant="body1" sx={{ fontSize: '16px', marginBottom: '10px' }}>
-                                <strong>Email:</strong> contact@athletify.com
+                                <strong>Email:</strong> {thisacademy.email}
                             </Typography>
                             <Typography variant="body1" sx={{ fontSize: '16px', marginBottom: '10px' }}>
-                                <strong>Location:</strong> 1234 Sports Avenue, Fitness City, FC 56789
+                                <strong>Location:</strong> {thisacademy.address}
                             </Typography>
                             <FacebookIcon sx={{ color: '#3b5998', fontSize: '30px', marginRight: '10px', cursor: 'pointer' }} />
                                 <TwitterIcon sx={{ color: '#1da1f2', fontSize: '30px', marginRight: '10px', cursor: 'pointer' }} />
@@ -111,7 +125,8 @@ function StudentWall() {
 
             {/* Main content section */}
         </Box>
-        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: '#33678f', fontWeight:'450'  }}>What's Happening at AcademyName? <br/> Achievements, Events, and More!</h1>
+        <h1 style={{ textAlign: 'center', marginTop:'30px',  backgroundColor:'#ffffff87', color: 'rgb(250 132 25)'  }}>What's Happening at {thisacademy.username}? <br/> Achievements, Events, and More!</h1>
+
 
 
 

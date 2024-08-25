@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Grid, Typography, Paper, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import axios from 'axios';
 
-const StudentForm = ({ onCreate }) => {
+const UpdateStudentForm = ({ studentId, onUpdate }) => {
   const [formData, setFormData] = useState({
     username: '',
     phone: '',
-    password: '',
-    confirmPassword: '',
     gender: '',
     age: '',
     group: ''
@@ -16,26 +14,37 @@ const StudentForm = ({ onCreate }) => {
   const [errors, setErrors] = useState({});
   const [allGroups, setAllGroups] = useState([]);
 
-  useEffect((e) => {
-    e
-    const academy = localStorage.getItem('id')
-    const fetchGroups = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/group/academy/${academy}`);
-        const groups = response.data.groups || [];
-        setAllGroups(groups);
-        if (groups.length > 0 && !formData.group) {
-          setFormData(prevFormData => ({
-            ...prevFormData,
-            group: groups[0]._id
-          }));
-        }
-      } catch (error) {
-        console.error("Error fetching groups:", error);
-      }
+  useEffect(() => {
+    // Fetch student data
+    const fetchStudentData = () => {
+      axios.get(`http://localhost:8000/api/student/${studentId}`)
+        .then(response => {
+          const student = response.data.student;
+          setFormData({
+            username: student.username || '',
+            phone: student.phone || '',
+            gender: student.gender || '',
+            age: student.age || '',
+            group: student.group || ''
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching student data:", error);
+        });
     };
 
-    fetchGroups();
+    fetchStudentData(); // Initial fetch
+  }, [studentId]); // Trigger when studentId changes
+
+  useEffect(() => {
+    // Fetch all groups
+    axios.get('http://localhost:8000/api/groups') // Adjust the API endpoint as needed
+      .then(response => {
+        setAllGroups(response.data.groups || []);
+      })
+      .catch(error => {
+        console.error("Error fetching groups:", error);
+      });
   }, []);
 
   const handleChange = (e) => {
@@ -46,69 +55,42 @@ const StudentForm = ({ onCreate }) => {
     }));
   };
 
-  const handleRadioChange = (e) => {
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      gender: e.target.value
-    }));
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.username) newErrors.username = 'Username is required';
-    if (!formData.phone) newErrors.phone = 'Phone number is required';
-    if (!formData.password) newErrors.password = 'Password is required';
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
-    if (!formData.gender) newErrors.gender = 'Gender is required';
-    if (!formData.age) newErrors.age = 'Age is required';
-    if (!formData.group) newErrors.group = 'Group is required';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = (e) => {
-    // e.preventDefault(); // Prevent form from refreshing the page
+    // e.preventDefault(); // Prevent the default form submission
 
-    // Validate form data before making the request
-    if (!validate()) return;
-
-    // Send form data to the server
-    axios.post('http://localhost:8000/api/student', formData)
-        .then(response => {
-            console.log('Student created:', response.data);
-
-            // Update parent component's state
-            onCreate(response.data.student);
-
-            // Reset form data and errors
+    // Update student data
+    axios.patch(`http://localhost:8000/api/student/${studentId}`, formData)
+      .then(response => {
+        onUpdate(response.data.student); // Update the parent component with new data
+        
+        // Fetch the updated data to display it without refresh
+        axios.get(`http://localhost:8000/api/student/${studentId}`)
+          .then(updatedResponse => {
             setFormData({
-                username: '',
-                phone: '',
-                password: '',
-                confirmPassword: '',
-                gender: '',
-                age: '',
-                group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
+              username: updatedResponse.data.student.username || '',
+              phone: updatedResponse.data.student.phone || '',
+              gender: updatedResponse.data.student.gender || '',
+              age: updatedResponse.data.student.age || '',
+              group: updatedResponse.data.student.group || ''
             });
-            setErrors({});
-        })
-        .catch(error => {
-            console.error("Error creating student:", error);
-            if (error.response) {
-                // Display server-side validation error messages
-                setErrors(error.response.data.errors || {});
-            } else {
-                // Display general error message
-                setErrors({ form: 'An unexpected error occurred. Please try again.' });
-            }
-        });
-};
+          })
+          .catch(fetchError => {
+            console.error("Error fetching updated student data:", fetchError);
+          });
+
+      })
+      .catch(error => {
+        console.error("Error updating student data:", error);
+        if (error.response) {
+          setErrors(error.response.data.errors || {});
+        }
+      });
+  };
 
   return (
     <Paper style={{ padding: 16 }}>
       <Typography variant="h6" gutterBottom sx={{ color: '#1d4f67' }}>
-        Register Student
+        Update Student
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -137,37 +119,11 @@ const StudentForm = ({ onCreate }) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              fullWidth
-              required
-              error={!!errors.password}
-              helperText={errors.password}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Confirm Password"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              fullWidth
-              required
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword}
-            />
-          </Grid>
-          <Grid item xs={12}>
             <Typography variant="body1">Gender</Typography>
             <RadioGroup
               name="gender"
               value={formData.gender}
-              onChange={handleRadioChange}
+              onChange={handleChange}
               row
             >
               <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -223,7 +179,7 @@ const StudentForm = ({ onCreate }) => {
               variant="contained" 
               sx={{ backgroundColor: '#ff6f31', color: '#fff' }} 
             >
-              Register Student
+              Update Student
             </Button>
           </Grid>
         </Grid>
@@ -233,5 +189,4 @@ const StudentForm = ({ onCreate }) => {
   );
 };
 
-export default StudentForm;
- 
+export default UpdateStudentForm;

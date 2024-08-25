@@ -13,7 +13,7 @@ const AdminPanelParent = () => {
     <ProtectedRoutes roleRequired="academy">
 
     <div>
-      <StaticNavBar tab1={'Home'} tab2={'Students'} tab3={'Groups'}/>
+      <StaticNavBar tab1={'Home'} link1={'/academy/academy-wall'} tab2={'Students'} link2={'/academy/academy-students'} tab3={'Groups'} link3={'/academy/academy-groups'}/>
       <Routes>
         <Route path="/" element={<Navigate to="academy-wall" replace />} /> {/* Redirect /admin to /admin/admin-panel */}
         <Route path="academy-wall" element={<Wall/>} />

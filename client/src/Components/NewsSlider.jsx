@@ -73,6 +73,7 @@ function NewsSlider() {
                   overflow: 'hidden',
                   backgroundColor: '#f9f9f9',
                   position: 'relative',
+                  marginLeft:'230px'
                 }}
               >
                 <CardMedia
