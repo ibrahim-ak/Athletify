@@ -23,9 +23,7 @@ function logout() {
     <AppBar   position='static' sx={{ backgroundColor: '#1d4f67' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-          <Typography variant="h6" component="div">
-            MyLogo
-          </Typography>
+        <img src="\src\media\logo8-removebg-preview.png" alt="Logo" style={{ height: '60px', margin: '5px' }} />
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, gap: 2 }}>
