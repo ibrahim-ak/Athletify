@@ -16,9 +16,9 @@ const StudentForm = ({ onCreate }) => {
   const [errors, setErrors] = useState({});
   const [allGroups, setAllGroups] = useState([]);
 
-  useEffect((e) => {
-    e
-    const academy = localStorage.getItem('id')
+  useEffect(() => {
+    const academy = localStorage.getItem('id');
+
     const fetchGroups = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/group/academy/${academy}`);
@@ -37,6 +37,7 @@ const StudentForm = ({ onCreate }) => {
 
     fetchGroups();
   }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,42 +69,36 @@ const StudentForm = ({ onCreate }) => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault(); // Prevent form from refreshing the page
+    // e.preventDefault(); // Ensure the form doesn't refresh the page
 
-    // Validate form data before making the request
-    if (!validate()) return;
+    if (!validate()) return; // Stop if validation fails
 
-    // Send form data to the server
     axios.post('http://localhost:8000/api/student', formData)
-        .then(response => {
-            console.log('Student created:', response.data);
-
-            // Update parent component's state
-            onCreate(response.data.student);
-
-            // Reset form data and errors
-            setFormData({
-                username: '',
-                phone: '',
-                password: '',
-                confirmPassword: '',
-                gender: '',
-                age: '',
-                group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset group to first option if available
-            });
-            setErrors({});
-        })
-        .catch(error => {
-            console.error("Error creating student:", error);
-            if (error.response) {
-                // Display server-side validation error messages
-                setErrors(error.response.data.errors || {});
-            } else {
-                // Display general error message
-                setErrors({ form: 'An unexpected error occurred. Please try again.' });
-            }
+      .then(response => {
+        console.log('Student created:', response.data);
+        onCreate(response.data.student);
+        // Reset form data and errors
+        setFormData({
+          username: '',
+          phone: '',
+          password: '',
+          confirmPassword: '',
+          gender: '',
+          age: '',
+          group: allGroups.length > 0 ? allGroups[0]._id : '' // Reset to the first group if available
         });
-};
+        setErrors({});
+      })
+      .catch(error => {
+        console.error("Error creating student:", error);
+        if (error.response) {
+          setErrors(error.response.data.errors || {});
+        } else {
+          setErrors({ form: 'An unexpected error occurred. Please try again.' });
+        }
+      });
+  };
+
 
   return (
     <Paper style={{ padding: 16 }}>
@@ -218,10 +213,10 @@ const StudentForm = ({ onCreate }) => {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Button 
-              type="submit" 
-              variant="contained" 
-              sx={{ backgroundColor: '#ff6f31', color: '#fff' }} 
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ backgroundColor: '#ff6f31', color: '#fff' }}
             >
               Register Student
             </Button>
@@ -234,4 +229,3 @@ const StudentForm = ({ onCreate }) => {
 };
 
 export default StudentForm;
- 

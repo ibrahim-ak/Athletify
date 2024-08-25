@@ -7,6 +7,9 @@ import axios from 'axios';
 const AdminDashboard = () => {
   const [academies, setAcademies] = useState([]);
   const [studentCounts, setStudentCounts] = useState([]);
+  const [totalstudents, setTotalStudents] = useState(0);
+  const [totalnews, setTotalnews] = useState(0);
+  const [newsCounts, setNewsCounts] = useState([]);
 
   // Fetch academies data
   useEffect(() => {
@@ -18,10 +21,37 @@ const AdminDashboard = () => {
         console.error(err);
       });
   }, []);
-
+  useEffect(() => {
+     axios.get("http://localhost:8000/api/students")
+       .then((res) => {
+          const allstudents = res.data.students;
+         setTotalStudents(allstudents.length);
+       })
+       .catch((err) => {
+         console.error(err);
+       });
+   }, []);
+  useEffect(() => {
+     axios.get("http://localhost:8000/api/news")
+       .then((res) => {
+          const allnewssss = res.data.news;
+          setTotalnews(allnewssss.length);
+       })
+       .catch((err) => {
+         console.error(err);
+       });
+   }, []);
   // Extract labels and ids
   const labels = academies.map((academy) => academy.username);
   const academieslist = academies.map((academy) => academy._id);
+
+  // Fetch students and news when academies are loaded
+  useEffect(() => {
+    if (academies.length > 0) {
+      fetchStudents();
+      fetchNews();
+    }
+  }, [academies]);
 
   // Define fetchStudents function
   const fetchStudents = async () => {
@@ -36,7 +66,8 @@ const AdminDashboard = () => {
             });
 
             const allStudents = await Promise.all(studentPromises);
-            const mergedStudents = allStudents.flat(); // Flatten the array of arrays
+            const mergedStudents = allStudents.flat(); 
+            // Flatten the array of arrays
             return mergedStudents.length; // Return the count of students
           } catch (error) {
             console.error(`Error fetching students for academy ${ac}:`, error);
@@ -53,12 +84,33 @@ const AdminDashboard = () => {
     }
   };
 
-  // Fetch students when academies are loaded
-  useEffect(() => {
-    if (academieslist.length > 0) {
-      fetchStudents();
+  // Define fetchNews function
+  const fetchNews = async () => {
+    try {
+      const newscounts = await Promise.all(
+        academieslist.map(async (ac) => {
+          try {
+            const response = await axios.get(`http://localhost:8000/api/news/academy/${ac}`);
+            if (response.data && Array.isArray(response.data.news)) {
+              return response.data.news.length; // Return the count of news for each academy
+            } else {
+              console.error(`Unexpected response format for academy ${ac}:`, response.data);
+              return 0;
+            }
+          } catch (error) {
+            console.error(`Error fetching news for academy ${ac}:`, error);
+            return 0; // Return 0 if there's an error for a particular academy
+          }
+        })
+      );
+
+      // Update state with news counts
+      setNewsCounts(newscounts);
+
+    } catch (error) {
+      console.error("Error fetching news:", error);
     }
-  }, [academieslist]);
+  };
 
   // Chart data
   const academyNewsData = {
@@ -66,13 +118,13 @@ const AdminDashboard = () => {
     datasets: [
       {
         label: 'Number of News',
-        data: [40, 50, 30], // Replace with real data
+        data: newsCounts, // Use newsCounts state here
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
+          ' #e1b419 ',
+          '#a3a3a3',
+          'ff6f31',
           '#FFCE11',
-          '#FFCE22',
+          '#FFCE56',
         ],
       },
     ],
@@ -85,16 +137,16 @@ const AdminDashboard = () => {
         label: 'Total Number of Students',
         data: studentCounts, // Use studentCounts state here
         backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          'Green',
+          ' #e1b419 ',
+          '#a3a3a3',
+          'ff6f31',
           '#FFCE11',
           '#FFCE56',
         ],
         hoverBackgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          'Green',
+          ' #e1b419 ',
+          '#a3a3a3',
+          'ff6f31',
           '#FFCE11',
           '#FFCE56',
         ],
@@ -111,9 +163,9 @@ const AdminDashboard = () => {
   };
 
   return (
-    <Grid container spacing={4} style={{ padding: '20px', marginTop: '20px' }}>
+    <Grid container spacing={7} style={{ padding: '20px', marginTop: '50px' ,marginLeft:"70px" }}>
       {/* Chart for Number of News by Academy */}
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <Card style={{ padding: '20px', backgroundColor: '#f0f4f7', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
           <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold', color: '#333' }}>
             News by Academy
@@ -125,7 +177,7 @@ const AdminDashboard = () => {
       </Grid>
 
       {/* Pie Chart for Total Number of Students by Academy */}
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <Card style={{ padding: '20px', backgroundColor: '#f0f4f7', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
           <Typography variant="h6" gutterBottom style={{ fontWeight: 'bold', color: '#333' }}>
             Total Number of Students by Academy
@@ -137,21 +189,21 @@ const AdminDashboard = () => {
       </Grid>
 
       {/* Card 1 */}
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <Card style={{ padding: '20px', backgroundColor: '#ffffff', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>Card 1</Typography>
+          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>All News </Typography>
           <Typography variant="body1" style={{ color: '#555' }}>
-            Content for the first card goes here. You can use this space to display additional information.
+          Total news articles across all academies : <span style={{color:"#fa8419" , fontWeight:"bold"}}> {totalnews}</span>
           </Typography>
         </Card>
       </Grid>
 
       {/* Card 2 */}
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={5}>
         <Card style={{ padding: '20px', backgroundColor: '#ffffff', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
-          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>Card 2</Typography>
+          <Typography variant="h6" style={{ fontWeight: 'bold', color: '#333' }}>Students</Typography>
           <Typography variant="body1" style={{ color: '#555' }}>
-            Content for the second card goes here. This card can also be used for any relevant details.
+          Total number of students across all academies:<span style={{color:"#fa8419" , fontWeight:"bold"}}>  {totalstudents}</span>
           </Typography>
         </Card>
       </Grid>
