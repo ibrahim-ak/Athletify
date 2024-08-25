@@ -87,7 +87,7 @@ function Navbar() {
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
           <Typography variant="h6" component="div">
-            MyLogo
+          <img src="\src\media\logo8-removebg-preview.png" alt="Logo" style={{ height: '60px', margin: '0px' }} />
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
