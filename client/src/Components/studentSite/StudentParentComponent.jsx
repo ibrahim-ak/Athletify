@@ -10,7 +10,7 @@ const StudentParentComponent = () => {
   return (
     <ProtectedRoute roleRequired="student">
       <div>
-        <StaticNavBar tab2={'Home'} link2={"/student/student-wall"} tab3={'Groups'} link3={`/student/student-chat/${thisGroup}`}/>      
+        <StaticNavBar tab2={'Home'} link2={"/student/student-wall"} tab3={'My Group'} link3={`/student/student-chat/${thisGroup}`}/>      
         <Routes>
           <Route path="/" element={<Navigate to="student-wall" replace />} />
           <Route path="student-wall" element={<StudentWall />} />
