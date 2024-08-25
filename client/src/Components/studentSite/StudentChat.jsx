@@ -75,7 +75,7 @@ function StudentChat() {
 
   useEffect(() => {
     // Initialize the socket connection
-    const socketIo = io('http://192.168.28.165:8000');
+    const socketIo = io(':8000');
     setSocket(socketIo);
 
     // Cleanup the socket connection on component unmount
