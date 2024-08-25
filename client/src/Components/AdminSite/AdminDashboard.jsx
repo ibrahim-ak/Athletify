@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Grid, Paper, Typography } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import { Box, Grid, Paper, Typography } from '@mui/material';
 import { Pie } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import StaticNavBar from '../StaticNavBar';
