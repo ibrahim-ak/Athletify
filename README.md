@@ -8,9 +8,6 @@ Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
 
 Include screenshots of your project. You can add the ones you just uploaded like this:
 
-![Screenshot1](path_to_image/screenshot-1724584601776.png)
-![Screenshot2](path_to_image/screenshot-1724584662880.png)
-
 ## 📚 Background
 
 In today's fast-paced world, managing athletic academies efficiently and effectively is crucial for ensuring that both administrators and students can focus on what matters most: training and development. **Athletify** is a comprehensive platform designed specifically for owners and administrators of athletic academies. It streamlines processes such as tracking students, scheduling, and financial management, allowing for a more organized and productive environment.
