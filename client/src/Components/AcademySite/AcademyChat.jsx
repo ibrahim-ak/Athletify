@@ -13,6 +13,7 @@ function AcademyChat() {
   const [username, setUsername] = useState(localStorage.getItem('username'));
   const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
+  const [thisGroup, setGroup] = useState('');
   const [messages, setMessages] = useState([]);
   const [studentsList, setStudentsList] = useState([]);
   const { id } = useParams(); // Extract the room ID from the URL
@@ -43,6 +44,17 @@ function AcademyChat() {
     axios.get('http://localhost:8000/api/group/' + id)
       .then(res => {
         setTrainingTimess(res.data.group.trainingTimes);
+      });
+  };
+
+  useEffect(() => {
+    getgroup();
+  }, []);
+
+  const getgroup = () => {
+    axios.get('http://localhost:8000/api/group/' + id)
+      .then(res => {
+        setGroup(res.data.group);
       });
   };
 
@@ -156,7 +168,7 @@ function AcademyChat() {
 
 
             <Typography variant="h6" sx={{ marginBottom: 2 }}>
-              Group Name
+            {thisGroup.Name}
 
             </Typography>
 
