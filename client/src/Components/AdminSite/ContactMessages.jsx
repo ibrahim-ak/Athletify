@@ -24,6 +24,7 @@ import AdminNav from '../AdminNav';
 
 // Styled component for dark navy icons
 const DarkNavyIcon = styled('i')({
+  
   color: '#1d4f67', // Dark navy color
   fontSize: '18px', // Adjust icon size if needed
   cursor: 'pointer',
@@ -78,7 +79,7 @@ const ContactMessages = () => {
   return (
     <>
       <AdminNav />
-      <div style={{ backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ backgroundColor: '#e6f0ff', minHeight: '65vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Container maxWidth="md">
           <Typography variant="h4" gutterBottom sx={{ color: '#1d4f67', textAlign: 'center' }}>
             Contact Messages

@@ -204,10 +204,14 @@ function AcademyChat() {
             </Box>
             
             <Typography variant="body1" sx={{ marginTop: 2, overflowY: 'auto', flexGrow: 1 }}>
-              {trainingTimess.map((time, index) => (
-                <span key={index}>{`${time.day} | ${time.start} - ${time.end}`}<br /></span>
-              ))}
-            </Typography>
+  {trainingTimess.map((time, index) => (
+    <span key={index}>
+      <strong>{time.day}</strong> {/* Bold the day for emphasis */}
+      <div>{`${time.start} - ${time.end}`}</div> {/* Place the time range on a new line */}
+      <br />
+    </span>
+  ))}
+</Typography>
           </Paper>
         </Grid>
       </Grid>
