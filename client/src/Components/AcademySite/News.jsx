@@ -49,7 +49,7 @@ function News({ width = '100%', academy}) {
           padding: '30px',
           backgroundColor: '#fff',
           borderRadius: '16px',
-          boxShadow: '0px 8px 24px #1d4f67',
+          // boxShadow: '0px 8px 24px #1d4f67',
           width: '1100px',  // Apply the width prop here
           margin: '0 auto',
         }}
@@ -65,7 +65,7 @@ function News({ width = '100%', academy}) {
                 marginBottom: '24px',
                 maxWidth: '100%',
                 height: '320px',
-                boxShadow: '0px 5px 20px #1d4f67',
+                boxShadow: '0px 4px 10px #1d4f67',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 backgroundColor: '#ffffff',

@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { EmojiPeople } from '@mui/icons-material'; 
+
 
 const AllGroupsCards = () => {
   const [groups, setGroups] = useState([]);
@@ -29,17 +31,23 @@ const AllGroupsCards = () => {
             <Link to={`/academy/academy-chat/${group._id}`} style={{ textDecoration: 'none' }}>
               <Card 
                 sx={{
+                  minHeight: '200px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   transition: 'transform 0.3s, box-shadow 0.3s',
                   '&:hover': {
                     transform: 'scale(1.05)',
                     boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
-                    backgroundColor: '#001f3f', // Dark navy color on hover
-                    color: 'white', // Text color on hover
+                    backgroundColor: '#001f3f',
+                    color: 'white',
                   }
                 }}
               >
-                <CardContent>
-                  <Typography variant="h6" component="div" align="center">
+                <CardContent sx={{ textAlign: 'center' }}>
+                  <EmojiPeople sx={{ fontSize: 40, marginBottom: '10px' }} /> {/* Fun icon */}
+                  <Typography variant="h6" component="div">
                     {group.Name}
                   </Typography>
                 </CardContent>
@@ -50,6 +58,7 @@ const AllGroupsCards = () => {
       </Grid>
     </div>
   );
+  
 };
 
 export default AllGroupsCards;
