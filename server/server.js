@@ -11,7 +11,7 @@ require('./config/mongoose.config'); // Ensure your Mongoose configuration is co
 
 // Configure CORS to allow external connections
 app.use(cors({
-     origin: ['http://192.168.28.165:3000', 'http://localhost:3000'],
+     origin: [ 'http://localhost:3000'],
      credentials: true
 }));
 
@@ -41,7 +41,7 @@ const server = app.listen(port, '0.0.0.0', () => {
 // Set up Socket.io with proper CORS settings
 const io = require('socket.io')(server, {
      cors: {
-          origin: ['http://192.168.28.165:3000', 'http://localhost:3000'],
+          origin: [ 'http://localhost:3000'],
           credentials: true
      }
 });
