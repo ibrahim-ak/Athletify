@@ -97,6 +97,7 @@ function NewsSlider() {
                     {news.title}
                   </Typography>
 
+
                   <Typography variant="body1" color="text.secondary" sx={{ marginTop: '8px', fontSize: '1.1rem' , textAlign: 'justify', color:'#1d4f67'}}>
   {news.content ? news.content.substring(0, 270) : 'No content available'}...  {/* Shorten the content */}
 
@@ -107,6 +108,7 @@ function NewsSlider() {
     Read more
   </Link>
 </Typography>
+
 
                 </CardContent>
               </Card>

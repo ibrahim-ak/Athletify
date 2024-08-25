@@ -5,9 +5,9 @@ import AllGroupsCards from '../group/AllGroupsCards';
 import { Container, Grid, Typography, Paper, Box } from '@mui/material';
 
 const AllGroupsComponent = () => {
+  
   return (
     <>
-      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
       <Box sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5', paddingTop: '64px' }}>
         {/* Ensure content is pushed below the navbar */}
         <Container>

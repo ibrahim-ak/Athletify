@@ -6,7 +6,7 @@ import AnnouncementIcon from '@mui/icons-material/Announcement';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-function Announcements() {
+function Announcements({academy}) {
   const [open, setOpen] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
 
@@ -15,20 +15,16 @@ function Announcements() {
   }, [announcements]);
 
   const fetchAnnouncements = () => {
-    axios.get('http://localhost:8000/api/announcements')
+    // console.log("announcements of " + academy)
+    axios.get(`http://localhost:8000/api/announcement/academy/${academy}`)
       .then(res => {
         setAnnouncements(res.data.announcements);
-      })
+// console.log(res.data)  
+    })
       .catch(err => console.error(err));
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:8000/api/announcement/${id}`)
-      .then(() => {
-        setAnnouncements(announcements.filter(announcement => announcement._id !== id));
-      })
-      .catch(err => console.error(err));
-  };
+  
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -59,7 +55,7 @@ function Announcements() {
         </Typography>
         <Divider sx={{ backgroundColor: '#fff' }} />
         <List>
-          {announcements.length > 0 ? (
+          {Array.isArray(announcements) && announcements.length > 0 ? (
             [...announcements].reverse().map((announcement, index) => (
               <ListItem key={index} sx={{ padding: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box

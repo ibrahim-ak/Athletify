@@ -7,5 +7,6 @@ module.exports = app => {
      app.post('/api/student', Studentcontroller.createStudent);
      app.delete('/api/student/:id', Studentcontroller.deleteAnExistingStudent);
      app.post('/api/login', logincontroller.login);
+     app.get('/api/student/group/:group', Studentcontroller.findStudentsbyGroup);
 
 }

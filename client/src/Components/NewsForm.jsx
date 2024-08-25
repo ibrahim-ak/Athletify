@@ -21,7 +21,7 @@ function NewsForm(props) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImageUrl] = useState('');
-  const [academy, setAcademyId] = useState('');
+  // const [academy, setAcademyId] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function NewsForm(props) {
     if (!title.trim()) newErrors.title = 'Title is required';
     if (!content.trim()) newErrors.content = 'Content is required';
     if (!image.trim() || !/^https?:\/\//i.test(image)) newErrors.image = 'A valid Image URL is required';
-    if (!academy.trim()) newErrors.academyId = 'Academy ID is required';
+    // if (!academy.trim()) newErrors.academyId = 'Academy ID is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -50,16 +50,16 @@ function NewsForm(props) {
     try {
       // const response = await axios.post('http://localhost:8000/api/news', );
       // console.log('News added:', response.data);
-      props.onSubmit({
+      props.onSubmit(
         title,
         content,
         image,
-        academy
-      });  // Call the onSubmit prop with the response data
+        // academy
+      );  // Call the onSubmit prop with the response data
       setTitle('');
       setContent('');
       setImageUrl('');
-      setAcademyId('');
+      // setAcademyId('');
       setErrors({});
       setOpen(false);
       navigate('/academy/academy-wall');  // Navigate to the news page or wherever appropriate
@@ -152,7 +152,7 @@ function NewsForm(props) {
               }}
               sx={{ mb: 2, borderRadius: '8px' }}
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               label="Academy ID"
               fullWidth
@@ -170,7 +170,7 @@ function NewsForm(props) {
                 ),
               }}
               sx={{ mb: 2, borderRadius: '8px' }}
-            />
+            /> */}
           </Box>
         </DialogContent>
         <DialogActions>

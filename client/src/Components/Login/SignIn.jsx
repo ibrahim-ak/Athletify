@@ -66,20 +66,25 @@ function SportsSignIn() {
       if (response.data.token) {
 
         localStorage.setItem('authToken', response.data.token);
-        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('username', response.data.userusername);
         localStorage.setItem('role', response.data.role);
         localStorage.setItem('id', response.data.userId);
+        localStorage.setItem('group', response.data.group);
       }
 
       console.log(localStorage.getItem('id'))
       console.log(localStorage.getItem('role'))
+      console.log(localStorage.getItem('username'))
+      console.log(localStorage.getItem('group'))
+      
+      
 
       if (response.data.role === 'student') {
         navigate('/student/student-wall');
       } else if (response.data.role === 'academy') {
         navigate('/academy/academy-wall');
       } else if (response.data.role === 'admin') {
-        navigate('/admin/admin-panel');
+        navigate('/admin');
       } else {
         alert('Invalid role');
       }

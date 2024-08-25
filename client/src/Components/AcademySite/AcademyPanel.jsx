@@ -13,9 +13,17 @@ const AcademyPanel = () => {
   }, []);
 
   const fetchStudents = async () => {
+    const academy = localStorage.getItem('id');
     try {
-      const response = await axios.get('http://localhost:8000/api/students');
-      setStudents(response.data.students);
+      const response = await axios.get(`http://localhost:8000/api/group/academy/${academy}`);
+      const studentPromises = response.data.groups.map(async (group) => {
+        const groupResponse = await axios.get(`http://localhost:8000/api/student/group/${group._id}`);
+        return groupResponse.data.student;
+      });
+      
+      const allStudents = await Promise.all(studentPromises);
+      const mergedStudents = allStudents.flat();  // Flatten the array of arrays
+      setStudents((prevStudents) => [...prevStudents, ...mergedStudents]);
     } catch (error) {
       console.error("Error fetching students:", error);
     }

@@ -16,7 +16,6 @@ import axios from 'axios';
 function AnnouncementForm(props) {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState('');
-  const [academyId, setAcademyId] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleClickOpen = () => {
@@ -30,7 +29,6 @@ function AnnouncementForm(props) {
   const validate = () => {
     const newErrors = {};
     if (!content.trim()) newErrors.content = 'Content is required';
-    if (!academyId.trim()) newErrors.academyId = 'Academy ID is required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -39,14 +37,9 @@ function AnnouncementForm(props) {
     e.preventDefault();
     console.log({
       Content: content, 
-      Academy: academyId 
-    });  // Log the data being submitted
-    props.onSubmitt({ 
-      Content: content, 
-      Academy: academyId 
-    });
+    });  
+    props.onSubmitt(content);
     setContent('');
-    setAcademyId('');
     setOpen(false);
   }
 
@@ -89,25 +82,6 @@ function AnnouncementForm(props) {
                 startAdornment: (
                   <InputAdornment position="start">
                     <AnnouncementIcon />
-                  </InputAdornment>
-                ),
-              }}
-              sx={{ mb: 2, borderRadius: '8px' }}
-            />
-            <TextField
-              margin="dense"
-              label="Academy ID"
-              fullWidth
-              variant="outlined"
-              value={academyId}
-              onChange={(e) => setAcademyId(e.target.value)}
-              required
-              error={!!errors.academyId}
-              helperText={errors.academyId}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SchoolIcon />
                   </InputAdornment>
                 ),
               }}

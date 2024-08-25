@@ -1,37 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
-import NewsForm from '../NewsForm';
-import AnnouncementForm from '../AnnouncementForm';
-import News from './News';
-import Announcements from '../Announcements';
-import StaticNavBar from '../StaticNavBar';
+import NewsForm from './NewsForm';
+import AnnouncementForm from './AnnouncementForm';
+import News from './AcademySite/News';
+import Announcements from './Announcements';
+import StaticNavBar from './StaticNavBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Wall() {
   const [errors, setErrors] = useState([]);
-  const [academy, setThisAcademy] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const academyId = localStorage.getItem('id');
-    setThisAcademy(academyId);
-    console.log("Academy ID:", academyId); // Add this line
-  }, []);
-
-
-  const createNews = (title, content, image) => {
-    axios.post('http://localhost:8000/api/news', {
-      title,
-      content,
-      image,
-      academy
-    }
-    )
+  const createNews = (newNews) => {
+    axios.post('http://localhost:8000/api/news', newNews)
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/academy/academy-wall");
+        navigate("/wall");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -44,15 +30,12 @@ function Wall() {
       });
   };
 
-  const createAnnouncement = (content) => {
-    axios.post('http://localhost:8000/api/announcement', {
-      Content: content,
-      Academy: academy
-    })
+  const createAnnouncement = (newAnnouncement) => {
+    axios.post('http://localhost:8000/api/announcement', newAnnouncement)
       .then(res => {
         console.log(res.data);
         setErrors([]);
-        navigate("/academy/academy-wall");
+        navigate("/wall");
       })
       .catch(err => {
         console.log(err.response.data);
@@ -67,6 +50,8 @@ function Wall() {
 
   return (
     <Box sx={{ backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+      <StaticNavBar tab1={'Home'} tab2={'Members'} tab3={'Groups'}/>
+
       <Box
         sx={{
           display: 'flex',
@@ -88,15 +73,13 @@ function Wall() {
           }}
         >
           <AnnouncementForm onSubmitt={createAnnouncement} errors={errors} />
-          
-          <h1 style={{ margin: "0 20px", color: "#1d4f67" ,fontWeight:'500'}}>Add News & Announcments.</h1>
-        
+          <h1 style={{ margin: "0 20px", color: "#1d4f67" }}>Stay Updated!</h1>
           <NewsForm onSubmit={createNews} errors={errors} />
         </Box>
       </Box>
 
-      {academy && <News width="1000px" academy={academy} />}
-      {academy && <Announcements academy={academy} />}
+      <News />
+      <Announcements  />
     </Box>
   );
 }
