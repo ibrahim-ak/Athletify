@@ -84,7 +84,7 @@ function SportsSignIn() {
       } else if (response.data.role === 'academy') {
         navigate('/academy/academy-wall');
       } else if (response.data.role === 'admin') {
-        navigate('/admin/admin-panel');
+        navigate('/admin');
       } else {
         alert('Invalid role');
       }

@@ -4,6 +4,7 @@ import ContactMessages from './ContactMessages';
 
 import AdminPanel from './AdminPanel';
 import ProtectedRoutes from '../ProtectedRoutes';
+import AdminDashboard from './AdminDashboard';
 
 const AdminPanelParent = () => {
   return (
@@ -12,9 +13,10 @@ const AdminPanelParent = () => {
     <div>
       <AdminNav />
       <Routes>
-        <Route path="/" element={<Navigate to="admin-panel" replace />} /> {/* Redirect /admin to /admin/admin-panel */}
+        <Route path="/" element={<Navigate to="admin-dashboard" replace />} /> {/* Redirect /admin to /admin/admin-panel */}
         <Route path="admin-panel" element={<AdminPanel />} />
         <Route path="admin-messages" element={<ContactMessages />} />
+        <Route path="admin-dashboard" element={<AdminDashboard />} />
       </Routes>
     </div>
     </ProtectedRoutes>
