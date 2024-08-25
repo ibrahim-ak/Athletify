@@ -56,3 +56,8 @@ module.exports.deleteAnExistingStudent = (req, res) => {
           });
 }
 
+module.exports.findStudentsbyGroup = (req, res) => {
+     Student.find({ group: req.params.group })
+         .then(student => res.json({ student }))
+         .catch(err => res.status(500).json(err));
+ };

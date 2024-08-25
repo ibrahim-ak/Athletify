@@ -202,11 +202,11 @@ function NewsSlider() {
                     {news.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{ marginTop: '8px', fontSize: '1rem' }}>
-  {news.content ? news.content.substring(0, 150) : 'No content available'}...  {/* Shorten the content */}
-  <Link href="#" sx={{ marginLeft: '8px', color: '#1d4f67', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '2rem' }}>
-    Read more
-  </Link>
-</Typography>
+                    {news.content ? news.content.substring(0, 150) : 'No content available'}...  {/* Shorten the content */}
+                    <Link href="#" sx={{ marginLeft: '8px', color: '#1d4f67', fontWeight: 'bold', fontSize: '0.9rem', marginTop: '2rem' }}>
+                      Read more
+                    </Link>
+                  </Typography>
 
                 </CardContent>
               </Card>

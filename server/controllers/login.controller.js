@@ -49,7 +49,7 @@ module.exports.login = async (req, res) => {
             role: userType,
             userId: user._id,
             userusername: user.username,
-            
+            group: user.group,
         });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
