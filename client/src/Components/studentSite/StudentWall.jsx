@@ -40,7 +40,7 @@ function StudentWall() {
             >
                 <Box
                     component="img"
-                    src="/src/media/images.png"
+                    src="/src/media/pngtree-volleyball-club-badge--logo-png-image_5138391.jpg"
                     alt="Academy Logo"
                     sx={{
                         width: '250px',

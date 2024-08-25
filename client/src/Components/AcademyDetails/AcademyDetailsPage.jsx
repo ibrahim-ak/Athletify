@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import Navbar from '../NavBar';
 import AcademyLandingPage from './AcademyLadingPage';
 import News from '../News';
 import { Box, Divider } from '@mui/material';
 
+
 function AcademyDetailsPage() {
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top of the page
+    }, []); // Run only on mount
     return (
         <div>
             <Navbar />
