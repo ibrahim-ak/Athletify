@@ -19,7 +19,7 @@ const AllGroupsCards = () => {
     };
 
     fetchGroups();
-  }, []);
+  }, [groups]);
 
   return (
     <div>
