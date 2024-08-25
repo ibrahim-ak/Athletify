@@ -11,6 +11,10 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { createTheme, ThemeProvider, keyframes } from '@mui/material/styles';
+import imageCopy3 from '/src/media/image copy 3.png'; // Adjust the path relative to your component file
+
+
+ 
 
 
 const theme = createTheme({
@@ -101,7 +105,7 @@ function SportsSignIn() {
         component="main"
         sx={{
           height: '100vh',
-          backgroundImage: 'url(https://png.pngtree.com/thumb_back/fw800/background/20230901/pngtree-an-image-of-sports-equipment-and-equipment-image_13168221.jpg)',
+          backgroundImage: `url(${imageCopy3})`, 
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           justifyContent: 'center',
