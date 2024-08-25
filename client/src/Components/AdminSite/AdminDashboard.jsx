@@ -7,6 +7,7 @@ import axios from 'axios';
 const AdminDashboard = () => {
   const [academies, setAcademies] = useState([]);
   const [studentCounts, setStudentCounts] = useState([]);
+  const [newsCounts, setNewsCounts] = useState([]);
 
   // Fetch academies data
   useEffect(() => {
@@ -22,6 +23,14 @@ const AdminDashboard = () => {
   // Extract labels and ids
   const labels = academies.map((academy) => academy.username);
   const academieslist = academies.map((academy) => academy._id);
+
+  // Fetch students and news when academies are loaded
+  useEffect(() => {
+    if (academies.length > 0) {
+      fetchStudents();
+      fetchNews();
+    }
+  }, [academies]);
 
   // Define fetchStudents function
   const fetchStudents = async () => {
@@ -53,12 +62,33 @@ const AdminDashboard = () => {
     }
   };
 
-  // Fetch students when academies are loaded
-  useEffect(() => {
-    if (academieslist.length > 0) {
-      fetchStudents();
+  // Define fetchNews function
+  const fetchNews = async () => {
+    try {
+      const newscounts = await Promise.all(
+        academieslist.map(async (ac) => {
+          try {
+            const response = await axios.get(`http://localhost:8000/api/news/academy/${ac}`);
+            if (response.data && Array.isArray(response.data.news)) {
+              return response.data.news.length; // Return the count of news for each academy
+            } else {
+              console.error(`Unexpected response format for academy ${ac}:`, response.data);
+              return 0;
+            }
+          } catch (error) {
+            console.error(`Error fetching news for academy ${ac}:`, error);
+            return 0; // Return 0 if there's an error for a particular academy
+          }
+        })
+      );
+
+      // Update state with news counts
+      setNewsCounts(newscounts);
+
+    } catch (error) {
+      console.error("Error fetching news:", error);
     }
-  }, [academieslist]);
+  };
 
   // Chart data
   const academyNewsData = {
@@ -66,7 +96,7 @@ const AdminDashboard = () => {
     datasets: [
       {
         label: 'Number of News',
-        data: [40, 50, 30], // Replace with real data
+        data: newsCounts, // Use newsCounts state here
         backgroundColor: [
           '#FF6384',
           '#36A2EB',

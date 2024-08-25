@@ -69,7 +69,7 @@ const StudentForm = ({ onCreate }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Ensure the form doesn't refresh the page
+    // e.preventDefault(); // Ensure the form doesn't refresh the page
 
     if (!validate()) return; // Stop if validation fails
 
