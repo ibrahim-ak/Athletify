@@ -15,9 +15,9 @@ Include screenshots of your project. You can add the ones you just uploaded like
 
 ## 📚 Background
 
-In today's fast-paced world, managing athletic academies efficiently and effectively is crucial for ensuring that both administrators and students can focus on what matters most: training and development. **Athletify** is a comprehensive platform designed specifically for owners and administrators of athletic academies. It streamlines processes such as tracking students, scheduling, and financial management, allowing for a more organized and productive environment.
+In today's fast-paced world, managing athletic academies efficiently and effectively is crucial for ensuring that both administrators and students can focus on what matters most: training and development. **Athletify** is a comprehensive platform designed specifically for owners and administrators of athletic academies. It streamlines processes such as tracking students, scheduling, allowing for a more organized and productive environment.
 
-The primary purpose of Athletify is to empower academy owners and sub-admins with the tools they need to efficiently manage their academies. This includes overseeing student information, organizing class schedules, monitoring announcements, and tracking payments. By centralizing these tasks in one easy-to-use platform, Athletify simplifies administrative work, reducing the time and effort required to maintain the smooth operation of the academy.
+The primary purpose of Athletify is to empower academy owners and sub-admins with the tools they need to efficiently manage their academies. This includes overseeing student information, organizing class schedules, monitoring announcements. By centralizing these tasks in one easy-to-use platform, Athletify simplifies administrative work, reducing the time and effort required to maintain the smooth operation of the academy.
 
 ---
 
@@ -25,24 +25,22 @@ The primary purpose of Athletify is to empower academy owners and sub-admins wit
 
 ### 🔐 Registration and Login
 - **Secure system for user registration and login.**
-  - New users can sign up with their email and password.
+  - New users can sign up with their username and password.
   - Existing users can log in.
-  - Password recovery is available.
   - Access is role-based, either for sub-admins or students.
 
 ### 💬 Synchronous Chatting
 - **Real-time chat feature for communication between sub-admins, students, and staff.**
-  - Supports individual and group chats.
-  - Notifications for new messages.
+  - Supports group chats.
 
 ### 🧑‍🎓 Adding Students
 - **Sub-admins can add new students by entering their details.**
-  - Assign students to classes or training groups.
+  - Assign students to groups.
   - Update student records as needed.
 
 ### 📰 Adding News
 - **Sub-admins can publish news articles and updates.**
-  - News is visible to all students and staff.
+  - News is visible to all students and acadmey.
   - Displayed in a dedicated section on the website.
 
 ### 📅 Training Schedules
