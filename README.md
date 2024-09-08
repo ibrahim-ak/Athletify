@@ -14,14 +14,6 @@ Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
 
 
 ---
-## Screenshots
-
-
-
-![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584498676.png)
-![Screenshot 2](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584601776.png)
-![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584662880.png)
-![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584736213.png)
 
 ## 📚 Background
 
@@ -76,3 +68,11 @@ The primary purpose of Athletify is to empower academy owners and sub-admins wit
   - Allow students to view and edit certain aspects of their profiles, such as contact information.
 ---
 
+## Screenshots
+
+
+
+![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584498676.png)
+![Screenshot 2](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584601776.png)
+![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584662880.png)
+![Screenshot 1](https://github.com/ibrahim-ak/Athletify/blob/master/screenshot-1724584736213.png)
