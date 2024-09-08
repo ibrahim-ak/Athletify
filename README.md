@@ -3,6 +3,16 @@
 **Contributors:**  
 Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
 
+## 🚀 Getting Started
+
+### 📦 Prerequisites
+
+- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) **Node.js**
+- ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) **MongoDB**
+- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) **Express.js**
+- ![React.js](https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=react&logoColor=black) **React.js**
+
+
 ---
 ## Screenshots
 
@@ -66,11 +76,3 @@ The primary purpose of Athletify is to empower academy owners and sub-admins wit
   - Allow students to view and edit certain aspects of their profiles, such as contact information.
 ---
 
-## 🚀 Getting Started
-
-### 📦 Prerequisites
-
-- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) **Node.js**
-- ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) **MongoDB**
-- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge) **Express.js**
-- ![React.js](https://img.shields.io/badge/React.js-61DAFB?style=for-the-badge&logo=react&logoColor=black) **React.js**
