@@ -1,5 +1,5 @@
 # 🏆 Athletify
-![Uploading ad1308d3-e204-46e5-b474-cb922295ce37-ezgif.com-video-to-gif-converter.gif…]
+![My GIF](https://github.com/username/repository/blob/main/path/to/your/image.gif?raw=true)
 
 **Contributors:**  
 Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
