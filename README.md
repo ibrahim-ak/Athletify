@@ -1,8 +1,16 @@
 # 🏆 Athletify
-![ad1308d3-e204-46e5-b474-cb922295ce37-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/b6e35f2b-9ae0-4c5e-a3a9-83e4e03e2bcb)
+<div style="text-align: center;">
+    <img src="https://github.com/user-attachments/assets/b6e35f2b-9ae0-4c5e-a3a9-83e4e03e2bcb" alt="GIF" />
+</div>
 
 **Contributors:**  
-Andree Ayyad, Ibraheem Khalil, Majed Al-Khaldi, Raghad AbuRahma
+| Name | Email | LinkedIn |
+|:---:|:---:|:---:|
+| [Andree Ayyad](https://github.com/andreeayyad23) | andreh.ayad@gmail.com | <a href="https://www.linkedin.com/in/andree-ayad-418459306/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn" width="52" /></a> |
+| [Ibraheem Khalil](https://github.com/ibrahim-ak) | ibrahim-kh-ps@outlook.com | <a href="https://www.linkedin.com/in/ibrahimkhalil94/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn" width="52" /></a> |
+| [Majed Al-Khaldi](https://github.com/majedkhaldi) | majed_khaldi@hotmail.com | <a href="https://www.linkedin.com/in/majed-alkhaldi/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn" width="52" /></a> |
+| [Raghad AbuRahma](https://github.com/RaghadAbuRahma) | raghad.sa201@gmail.com | <a href="https://www.linkedin.com/in/raghad-abu-rahma-7ab007302/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn" width="52" /></a> |
+
 
 ## 🚀 Getting Started
 
