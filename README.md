@@ -1,9 +1,9 @@
 # 🏆 Athletify
-<div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/b6e35f2b-9ae0-4c5e-a3a9-83e4e03e2bcb" alt="GIF" />
+<div style="text-align: center; marginbuttom: 12">
+    <img src="https://github.com/user-attachments/assets/b6e35f2b-9ae0-4c5e-a3a9-83e4e03e2bcb" alt="GIF" width="720" height="350"/>
 </div>
 
-**Contributors:**  
+## Contributors:  
 | Name | Email | LinkedIn |
 |:---:|:---:|:---:|
 | [Andree Ayyad](https://github.com/andreeayyad23) | andreh.ayad@gmail.com | <a href="https://www.linkedin.com/in/andree-ayad-418459306/"><img src="https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg" alt="LinkedIn" width="52" /></a> |
